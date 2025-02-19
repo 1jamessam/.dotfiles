@@ -5,3 +5,7 @@
 -- vim.keymap.set("n", "<C-l>", ":TmuxNavigateRight<CR>")
 -- vim.keymap.set("n", "<C-j>", ":TmuxNavigateDown<CR>")
 -- vim.keymap.set("n", "<C-k>", ":TmuxNavigateUp<CR>")
+
+vim.keymap.set("n", "<leader>dm", function()
+  require("dap-python").test_method()
+end, { desc = "Debug Test Method" })
