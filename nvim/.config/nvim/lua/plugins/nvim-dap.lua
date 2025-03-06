@@ -48,6 +48,10 @@ return {
 
       local opts = { noremap = true, silent = true }
 
+      vim.keymap.set("n", "<leader>dm", function()
+        dap_python.test_method()
+      end, { desc = "Debug Test Method" })
+
       -- Toggle breakpoint
       vim.keymap.set("n", "<leader>db", function()
         dap.toggle_breakpoint()
