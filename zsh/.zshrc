@@ -12,6 +12,7 @@ alias g='LC_ALL=en_US git'
 alias git='LC_ALL=en_US git'
 alias minikube='LC_ALL=en_US minikube'
 alias py='python'
+alias nj="NVIM_APPNAME=nvim-james nvim"
 
 # Zsh Completion System
 autoload -U compinit; compinit
