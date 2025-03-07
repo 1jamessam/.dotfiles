@@ -15,9 +15,13 @@ alias py='python'
 alias nj="NVIM_APPNAME=nvim-james nvim"
 alias l='ls -lah'
 
-# Zsh Completion System
+# Zsh
+## Zsh Completion System
 autoload -U compinit; compinit
 _comp_options+=(globdots) # with hidden files
+## Zsh config
+setopt interactivecomments
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
