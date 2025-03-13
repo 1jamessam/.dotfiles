@@ -1,3 +1,4 @@
+return {}
 -- -- OllamaList
 -- vim.api.nvim_create_user_command("OllamaList", function()
 --   local output = vim.fn.system("ollama list")
