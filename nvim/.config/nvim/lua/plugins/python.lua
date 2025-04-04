@@ -5,13 +5,15 @@ return {
       basedpyright = {
         settings = {
           basedpyright = {
-            analysis = {
-              diagnosticSeverityOverrides = {
-                reportUnusedCallResult = "none",
-                reportUnknownMemberType = "none",
-                reportAny = "none",
-              },
-            },
+            -- reportUnknownVariableType = "none",
+            -- analysis = {
+            --   diagnosticSeverityOverrides = {
+            --     reportUnusedCallResult = "none",
+            --     reportUnknownMemberType = "none",
+            --     reportAny = "none",
+            --     reportUnknownVariableType = "none",
+            --   },
+            -- },
           },
         },
       },

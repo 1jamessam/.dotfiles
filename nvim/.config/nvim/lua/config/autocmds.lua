@@ -3,10 +3,33 @@
 -- Add any additional autocmds here
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown",
+  pattern = "markdown,sql,Dockerfile",
   callback = function()
     vim.bo.shiftwidth = 4
     vim.bo.tabstop = 4
     vim.bo.expandtab = true
   end,
 })
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "sql",
+--   callback = function()
+--     vim.bo.shiftwidth = 4
+--     vim.bo.tabstop = 4
+--     vim.bo.expandtab = true
+--   end,
+-- })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "xml",
+  callback = function()
+    vim.bo.shiftwidth = 2
+    vim.bo.tabstop = 2
+    vim.bo.expandtab = true
+  end,
+})
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "docker-compose",
+--   callback = function ()
+-- })
