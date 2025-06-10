@@ -36,12 +36,14 @@ source ~/.zsh/zsh-completions/zsh-completions.plugin.zsh
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# UV python
-eval "$(uv generate-shell-completion zsh)"
-
 # Homebrew
 export PATH=/opt/homebrew/bin:$PATH
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
 export CFLAGS='-std=c++17'
+
+. "$HOME/.local/bin/env"
+
+# UV python
+eval "$(uv generate-shell-completion zsh)"
