@@ -9,13 +9,13 @@ alias pnvim='poetry run nvim'
 
 # RentSpree
 conn_dev_prefix="gcloud container clusters get-credentials data-dev-cluster --zone us-west1-a --project prj-data-dev-429603 && HTTPS_PROXY=\"http://localhost:8888\""
-alias conn-dev-prefix="${conn_dev_prefix}"
+alias prefix-dev="${conn_dev_prefix}"
 alias ssh-dev="gcloud compute ssh rentspree-us-west1-a-infra-non-prod-bastion-1 --tunnel-through-iap --project prj-infra-non-prod-429603 --zone us-west1-a -- -L8888:127.0.0.1:8888"
-alias conn-dev="${conn_dev_prefix} kubectl port-forward svc/dagster-service-dagit -n dagster 8080:80"
+alias pf-dev="${conn_dev_prefix} kubectl port-forward svc/dagster-service-dagit -n dagster 8080:80"
 alias k9s-dev="${conn_dev_prefix} k9s"
 #
 conn_prod_prefix="gcloud container clusters get-credentials data-prod-cluster --zone us-west1-a --project prj-data-prod-429603 && HTTPS_PROXY=\"http://localhost:8888\""
-alias conn-prod-prefix="${conn_prod_prefix}"
+alias prefix-prod="${conn_prod_prefix}"
 alias ssh-prod="gcloud compute ssh rentspree-us-west1-a-infra-prod-bastion-1 --tunnel-through-iap --project prj-infra-prod-429603 --zone us-west1-a -- -L8888:127.0.0.1:8888"
-alias conn-prod="${conn_prod_prefix} kubectl port-forward svc/dagster-service-dagit -n dagster 8080:80"
+alias pf-prod="${conn_prod_prefix} kubectl port-forward svc/dagster-service-dagit -n dagster 8080:80"
 alias k9s-prod="${conn_prod_prefix} k9s"
