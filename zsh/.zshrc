@@ -52,6 +52,10 @@ export CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/inclu
 # Helm
 eval "$(helm completion zsh)"
 
+# Gemini
+export GOOGLE_CLOUD_PROJECT="prj-rentspree-dev-429603"
+
+
 source ~/.zsh_aliases
 
 # QMK
