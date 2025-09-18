@@ -41,7 +41,7 @@ export PATH=/opt/homebrew/bin:$PATH
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
-export CFLAGS='-std=c++17'
+# export CFLAGS='-std=c++17'
 
 # UV python
 . "$HOME/.local/bin/env"
@@ -53,3 +53,6 @@ export CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/inclu
 eval "$(helm completion zsh)"
 
 source ~/.zsh_aliases
+
+# QMK
+export PATH="/Applications/ArmGNUToolchain/14.3.rel1/arm-none-eabi/bin:$PATH"
