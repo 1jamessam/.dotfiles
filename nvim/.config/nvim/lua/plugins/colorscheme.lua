@@ -50,10 +50,10 @@ return {
     specs = {
       {
         "akinsho/bufferline.nvim",
-        init = function()
-          local bufline = require("catppuccin.groups.integrations.bufferline")
-          function bufline.get()
-            return bufline.get_theme()
+        optional = true,
+        opts = function(_, opts)
+          if (vim.g.colors_name or ""):find("catppuccin") then
+            opts.highlights = require("catppuccin.special.bufferline").get_theme()
           end
         end,
       },
