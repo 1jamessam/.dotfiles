@@ -12,6 +12,7 @@ if vim.g.neovide then
   vim.g.neovide_remember_window_size = true
 end
 
+
 -- Dataform
 vim.filetype.add({
   extension = {
