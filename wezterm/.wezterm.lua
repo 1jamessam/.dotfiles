@@ -9,6 +9,7 @@ config.keys = {
 	{ key = "RightArrow", mods = "OPT", action = act.SendKey({ key = "f", mods = "ALT" }) },
 	{ key = "LeftArrow", mods = "CMD", action = act.SendKey({ key = "a", mods = "CTRL" }) },
 	{ key = "RightArrow", mods = "CMD", action = act.SendKey({ key = "e", mods = "CTRL" }) },
+	{ key = "f", mods = "SHIFT|CTRL", action = "ToggleFullScreen" },
 }
 config.window_background_opacity = 0.9
 config.macos_window_background_blur = 30
