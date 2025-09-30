@@ -1,11 +1,12 @@
+-- https://github.com/catppuccin/nvim
 return {
   {
     "catppuccin/nvim",
     lazy = true,
     name = "catppuccin",
     opts = {
-      flavour = "macchiato",
-      transparent_background = false,
+      flavour = "frappe",
+      transparent_background = true,
       term_colors = false,
       integrations = {
         aerial = true,
