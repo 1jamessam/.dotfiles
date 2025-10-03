@@ -10,6 +10,11 @@ config.keys = {
 	{ key = "LeftArrow", mods = "CMD", action = act.SendKey({ key = "a", mods = "CTRL" }) },
 	{ key = "RightArrow", mods = "CMD", action = act.SendKey({ key = "e", mods = "CTRL" }) },
 	{ key = "f", mods = "SHIFT|CTRL", action = "ToggleFullScreen" },
+	{
+		key = "w",
+		mods = "CMD",
+		action = wezterm.action.CloseCurrentPane({ confirm = false }),
+	},
 }
 config.window_background_opacity = 0.9
 config.macos_window_background_blur = 30
