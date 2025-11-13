@@ -1,3 +1,4 @@
+# zmodload zsh/zprof
 # Shell
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -38,7 +39,7 @@ export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
 export CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include" LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
 
 # Helm
-eval "$(helm completion zsh)"
+eval "$(helm completion zsh)" # 40ms
 
 # Gemini
 export GOOGLE_CLOUD_PROJECT="prj-rentspree-dev-429603"
@@ -51,7 +52,7 @@ source ~/.zsh_aliases
 ## pyenv 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+eval "$(pyenv init - zsh)" # 160ms
 
 # UV python
 source "$HOME/.local/bin/env"
@@ -65,6 +66,11 @@ fpath+=~/.zfunc
 # Personal
 
 ## QMK
+# https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
 export PATH="/Applications/ArmGNUToolchain/14.3.rel1/arm-none-eabi/bin:$PATH"
 
-###################################################################
+## WezTerm
+export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
+
+# ###################################################################
+# # zprof

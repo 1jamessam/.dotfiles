@@ -5,7 +5,7 @@ return {
     lazy = true,
     name = "catppuccin",
     opts = {
-      flavour = "macchiato",
+      flavour = "frappe",
       transparent_background = true,
       term_colors = false,
       integrations = {
