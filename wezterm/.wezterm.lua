@@ -4,6 +4,19 @@ local config = wezterm.config_builder()
 local act = wezterm.action
 
 config.color_scheme = "Catppuccin Frappe"
+config.window_background_opacity = 0.9
+config.macos_window_background_blur = 30
+config.native_macos_fullscreen_mode = true
+config.font = wezterm.font("JetBrainsMono Nerd Font")
+
+local function close_tab_with_optional_confirm(window, pane)
+	local proc = pane:get_foreground_process_name() or ""
+	if proc:match("n?vim$") then
+		window:perform_action(act.CloseCurrentTab({ confirm = true }), pane)
+	else
+		window:perform_action(act.CloseCurrentTab({ confirm = false }), pane)
+	end
+end
 
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
@@ -18,11 +31,9 @@ config.keys = {
 	{
 		key = "w",
 		mods = "CMD",
-		-- mods = "CTRL",
-		action = act.CloseCurrentPane({ confirm = false }),
+		action = wezterm.action_callback(close_tab_with_optional_confirm),
 	},
-	{ key = "|", mods = "SHIFT", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
-	-- === PANE NAVIGATION (Vim-style) ===
+	{ key = "|", mods = "LEADER", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 	{
 		key = "h",
 		mods = "LEADER",
@@ -44,9 +55,6 @@ config.keys = {
 		action = act.ActivatePaneDirection("Right"),
 	},
 }
-
-config.native_macos_fullscreen_mode = true
-config.font = wezterm.font("JetBrainsMono Nerd Font")
 
 -- smart_splits.apply_to_config(config, {
 -- 	direction_keys = { "h", "j", "k", "l" },
