@@ -1,0 +1,104 @@
+tap "armmbed/formulae"
+tap "derailed/k9s"
+tap "hashicorp/tap"
+tap "jesseduffield/lazygit"
+tap "lihaoyun6/tap"
+tap "osx-cross/arm"
+tap "osx-cross/avr"
+tap "qmk/qmk"
+# General-purpose data compression with high compression ratio
+brew "xz"
+# GitOps Continuous Delivery for Kubernetes
+brew "argocd"
+# Freely available high-quality data compressor
+brew "bzip2"
+# Container runtimes on MacOS (and Linux) with minimal setup
+brew "colima"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+# Docker CLI plugin for extended build capabilities with BuildKit
+brew "docker-buildx"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GNU compiler collection
+brew "gcc"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Interact with Google Gemini AI models from the command-line
+brew "gemini-cli"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# Post-modern modal text editor
+brew "helix"
+# Kubernetes package manager
+brew "helm"
+# Improved top (interactive process viewer)
+brew "htop"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Secure hashing function
+brew "libb2"
+# MCP server for databases
+brew "mcp-toolbox"
+# Run a Kubernetes cluster locally
+brew "minikube"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# No Nonsense Neovim Client in Rust
+brew "neovide"
+# Apache Parquet command-line tools and utilities
+brew "parquet-cli"
+# Python version management
+brew "pyenv"
+# Simple, correct PEP 517 build frontend
+brew "python-build"
+# Easily download, build, install, upgrade, and uninstall Python packages
+brew "python-setuptools"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
+# Tool Command Language
+brew "tcl-tk"
+# Tool Command Language
+brew "tcl-tk@8"
+# CLI tool to generate terraform files from existing infrastructure
+brew "terraformer"
+# Terminal multiplexer
+brew "tmux"
+# Parser generator tool
+brew "tree-sitter-cli"
+# Access X11 clipboards from the command-line
+brew "xclip"
+# Linter for YAML files
+brew "yamllint"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+# Pluggable terminal workspace, with terminal multiplexer as the base feature
+brew "zellij"
+# General-purpose lossless data-compression library
+brew "zlib"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "derailed/k9s/k9s"
+# Terraform
+brew "hashicorp/tap/terraform"
+# Quantum Mechanical Keyboard (QMK) Firmware
+brew "qmk/qmk/qmk"
+# Get the battery level of all your devices on your Mac.
+cask "airbattery"
+# OpenAI's coding agent that runs in your terminal
+cask "codex"
+# Colemak mod for more comfortable typing (DH variant)
+cask "colemak-dh"
+# Set of tools to manage resources and applications hosted on Google Cloud
+cask "gcloud-cli"
+# Toolbox companion for QMK Firmware
+cask "qmk-toolbox"
