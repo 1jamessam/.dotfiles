@@ -28,8 +28,3 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.expandtab = true
   end,
 })
-
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "docker-compose",
---   callback = function ()
--- })
