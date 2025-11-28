@@ -8,6 +8,7 @@ return {
         files = {
           hidden = true,
           ignored = true,
+          exclude = { ".mypy_cache", "__pycache__" },
         },
         explorer = {
           hidden = true,

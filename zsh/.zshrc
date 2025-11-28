@@ -72,5 +72,8 @@ export PATH="/Applications/ArmGNUToolchain/14.3.rel1/arm-none-eabi/bin:$PATH"
 ## WezTerm
 export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
 
+## Zoxide (better cd)
+eval "$(zoxide init zsh)"
+
 # ###################################################################
 # # zprof
