@@ -9,6 +9,7 @@ config.macos_window_background_blur = 30
 config.native_macos_fullscreen_mode = true
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 
+-- [[
 local function close_tab_with_optional_confirm(window, pane)
 	local proc = pane:get_foreground_process_name() or ""
 	if proc:match("n?vim$") then
@@ -17,6 +18,7 @@ local function close_tab_with_optional_confirm(window, pane)
 		window:perform_action(act.CloseCurrentTab({ confirm = false }), pane)
 	end
 end
+--]]
 
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
@@ -31,7 +33,8 @@ config.keys = {
 	{
 		key = "w",
 		mods = "CMD",
-		action = wezterm.action_callback(close_tab_with_optional_confirm),
+		-- action = wezterm.action_calab_with_optional_confirm),
+		action = act.CloseCurrentTab({ confirm = false }),
 	},
 	{ key = "|", mods = "LEADER", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 	{
