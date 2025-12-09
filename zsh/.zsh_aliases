@@ -8,6 +8,7 @@ alias l='ls -lah'
 alias pnvim='poetry run nvim'
 alias unvim='uv run nvim'
 alias tf='terraform'
+alias j='z'
 
 # RentSpree
 alias prefix-dev="gcloud container clusters get-credentials data-dev-cluster --zone us-west1-a --project prj-data-dev-429603 && HTTPS_PROXY=\"http://localhost:8888\""
@@ -21,3 +22,4 @@ alias pf-prod="prefix-prod kubectl port-forward svc/dagster-service-dagit -n dag
 alias k9s-prod="prefix-prod k9s"
 
 alias pf-dh="prefix-prod kubectl port-forward svc/data-production-rentspree-datahub-datahub-gms -n datahub 8080:8080"
+
