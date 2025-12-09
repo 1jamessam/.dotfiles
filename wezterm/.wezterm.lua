@@ -4,8 +4,8 @@ local config = wezterm.config_builder()
 local act = wezterm.action
 
 config.color_scheme = "Catppuccin Frappe"
-config.window_background_opacity = 0.9
-config.macos_window_background_blur = 30
+-- config.window_background_opacity = 0.9
+-- config.macos_window_background_blur = 30
 config.native_macos_fullscreen_mode = true
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 
