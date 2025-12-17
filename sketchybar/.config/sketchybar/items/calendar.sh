@@ -3,9 +3,10 @@
 calendar=(
   icon=cal
   icon.font="$FONT:Bold:14.0"
-  icon.padding_left=10
+  icon.padding_left=15
   icon.padding_right=10
   label.align=right
+  label.font.size=16
   label.padding_right=20
   update_freq=30
   script="$PLUGIN_DIR/calendar.sh"

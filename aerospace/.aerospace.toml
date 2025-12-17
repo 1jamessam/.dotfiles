@@ -114,13 +114,12 @@ preset = 'qwerty'
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 0
-inner.vertical = 0
-outer.left = 0
-outer.bottom = 0
-# outer.top = 0
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 10
+outer.bottom = 10
 outer.top = [{ monitor."built-in" = 10 }, { monitor."main" = 40 }, 50]
-outer.right = 0
+outer.right = 10
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -284,9 +283,17 @@ if.app-id = 'com.github.wez.wezterm'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.Safari.WebApp.F969EEAB-ACA7-44EF-A877-C3301F30B2E6'
+if.app-id = 'com.github.th-ch.youtube-music'
 run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
 run = 'move-node-to-workspace 9'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Passwords'
+run = ['layout floating']

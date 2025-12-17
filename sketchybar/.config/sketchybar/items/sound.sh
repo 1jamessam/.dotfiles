@@ -12,21 +12,12 @@ sound_level=(
   label.padding_right=10
   script="$PLUGIN_DIR/sound.sh"
 )
-sketchybar \
-  --add item sound_level right \
-  --set sound_level "${sound_level[@]}" \
-  --subscribe sound_level volume_change
 
 sound_icon=(
-  volume_alias
   icon.drawing=off
   label.drawing=off
   alias.color="$COLOR"
 )
-sketchybar \
-  --add alias "Control Center,Sound" right \
-  --rename "Control Center,Sound" sound_icon \
-  --set sound_icon "${sound_icon[@]}"
 
 status_bracket=(
   background.color="$BACKGROUND_1"
@@ -39,5 +30,12 @@ status_bracket=(
   padding_right=10
 )
 
-sketchybar --add bracket sound sound_level sound_icon \
+sketchybar \
+  --add item sound_level right \
+  --set sound_level "${sound_level[@]}" \
+  --subscribe sound_level volume_change \
+  --add alias "Control Center,Sound" right \
+  --rename "Control Center,Sound" sound_icon \
+  --set sound_icon "${sound_icon[@]}" \
+  --add bracket sound sound_level sound_icon \
   --set sound "${status_bracket[@]}"
