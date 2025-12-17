@@ -17,4 +17,8 @@ vim.filetype.add({
   extension = {
     sqlx = "sql",
   },
+  filename = {
+    sketchybarrc = "bash",
+    bordersrc = "bash",
+  },
 })
