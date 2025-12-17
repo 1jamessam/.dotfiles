@@ -1,16 +1,16 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# make sure it's executable with:
-# chmod +x ~/.config/sketchybar/plugins/aerospace.sh
-
-if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
-  sketchybar --set "$NAME" background.drawing=on
+if [ $SENDER = "aerospace_workspace_change" ]; then
+  if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
+    sketchybar --set $NAME background.color=0x88FF00FF background.border_width=2
+  else
+    sketchybar --set $NAME background.color=0x44FFFFFF background.border_width=0
+  fi
 else
-  sketchybar --set "$NAME" background.drawing=off
+  CURRENT_WORKSPACE=$(aerospace list-workspaces --focused)
+  if [ "$1" = "$CURRENT_WORKSPACE" ]; then
+    sketchybar --set $NAME background.color=0x88FF00FF background.border_width=2
+  else
+    sketchybar --set $NAME background.color=0x44FFFFFF background.border_width=0
+  fi
 fi
-
-# if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
-#   sketchybar --set "$NAME" background.color=0x88FF00FF label.shadow.drawing=on icon.shadow.drawing=on background.border_width=2
-# else
-#   sketchybar --set "$NAME" background.color=0x44FFFFFF label.shadow.drawing=off icon.shadow.drawing=off background.border_width=0
-# fi

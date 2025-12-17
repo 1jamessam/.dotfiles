@@ -5,6 +5,7 @@ return {
       ensure_installed = {
         "hcl",
         "terraform",
+        "python"
       },
     },
   },
