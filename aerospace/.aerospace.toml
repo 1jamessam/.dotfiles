@@ -61,7 +61,7 @@ persistent-workspaces = [
   "1",
   "2",
   "3",
-  "4",
+  # "4",
   # "5",
   # "6",
   # "7",
@@ -175,6 +175,8 @@ alt-shift-l = 'move right'
 alt-minus = 'resize smart -50'
 alt-equal = 'resize smart +50'
 
+alt-r = 'reload-config'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 alt-0 = 'workspace 0'
 alt-1 = 'workspace 1'
@@ -199,7 +201,7 @@ alt-n = 'workspace N'
 alt-o = 'workspace O'
 alt-p = 'workspace P'
 alt-q = 'workspace Q'
-alt-r = 'workspace R'
+# alt-r = 'workspace R'
 alt-s = 'workspace S'
 alt-t = 'workspace T'
 alt-u = 'workspace U'
