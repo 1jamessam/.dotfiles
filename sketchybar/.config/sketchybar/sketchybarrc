@@ -55,6 +55,7 @@ sketchybar --default "${defaults[@]}"
 # Left
 source "$ITEM_DIR/front_app.sh"
 source "$ITEM_DIR/aerospace.sh"
+# source "$ITEM_DIR/new_spaces.sh"
 
 # Right
 source "$ITEM_DIR/calendar.sh"

@@ -60,7 +60,7 @@ persistent-workspaces = [
   "0",
   "1",
   "2",
-  "3",
+  # "3",
   # "4",
   # "5",
   # "6",
@@ -114,12 +114,12 @@ preset = 'qwerty'
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 10
-inner.vertical = 10
-outer.left = 10
-outer.bottom = 10
+inner.horizontal = 20
+inner.vertical = 20
+outer.left = 20
+outer.bottom = 20
 outer.top = [{ monitor."built-in" = 10 }, { monitor."main" = 40 }, 50]
-outer.right = 10
+outer.right = 20
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -296,4 +296,16 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Passwords'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'jp.naver.line.mac'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Preview'
 run = ['layout floating']

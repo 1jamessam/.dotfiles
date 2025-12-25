@@ -40,15 +40,18 @@ for sid in $(aerospace list-workspaces --all); do
   sketchybar --set space.$sid label="$icon_strip"
 done
 
+space_separator=(
+  icon="􀆊"
+  icon.font="$FONT:Heavy:16.0"
+  icon.padding_left=4
+  padding_left=10
+  padding_right=15
+  label.drawing=off
+  background.drawing=off
+  script="$PLUGIN_DIR/space_windows.sh"
+)
 sketchybar --add item space_separator left \
-  --set space_separator icon="􀆊" \
-  icon.font="$FONT:Heavy:16.0" \
-  icon.padding_left=4 \
-  padding_left=10 \
-  padding_right=15 \
-  label.drawing=off \
-  background.drawing=off \
-  script="$PLUGIN_DIR/space_windows.sh" \
+  --set space_separator "${space_separator[@]}" \
   --subscribe space_separator aerospace_update_windows \
   --subscribe space_separator aerospace_workspace_change \
   --subscribe space_separator space_windows_change

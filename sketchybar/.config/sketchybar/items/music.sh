@@ -4,11 +4,13 @@ music=(
   script="$PLUGIN_DIR/youtube-music.sh"
   click_script="curl -s -X POST 0.0.0.0:26538/api/v1/toggle-play && $PLUGIN_DIR/youtube-music.sh"
   label.padding_right=8
-  label.font="Hack Nerd Font:Bold:17.0"
+  # label.font="Hack Nerd Font:Bold:17.0"
+  label.font.size=17
+  label.font.style=Bold
   padding_right=0
   icon=􁁒
   # Pinned it to the primary display since my other monitor is in vertical layout
-  # display=1
+  display=1
   label="Loading…"
   background.image.scale=0.9
   background.image.corner_radius=8
@@ -23,7 +25,8 @@ music=(
 )
 
 music_artwork=(
-  click_script="curl -s -X POST 0.0.0.0:26538/api/v1/toggle-play && $PLUGIN_DIR/youtube-music.sh"
+  # click_script="curl -s -X POST 0.0.0.0:26538/api/v1/toggle-play && $PLUGIN_DIR/youtube-music.sh"
+  click_script="curl -s -X POST 0.0.0.0:26538/api/v1/toggle-play"
   label.padding_right=8
   padding_right=16
   display=1
@@ -35,10 +38,16 @@ music_artwork=(
   background.color="$TRANSPARENT"
 )
 
+music_all=(
+  background.color="$BG1"
+)
+
 sketchybar \
   --add item music center \
   --set music "${music[@]}"
-
 sketchybar \
   --add item music-artwork center \
   --set music-artwork "${music_artwork[@]}"
+sketchybar \
+  --add bracket music-all music music-artwork \
+  --set music-all "${music_all[@]}"
