@@ -2,12 +2,14 @@
 
 COLOR="$PEACH"
 wifi=(
+  width=35
   alias.color="$COLOR"
   label.drawing=off
   icon.drawing=off
 )
 
 input_source=(
+  width=45
   alias.color="$COLOR"
   label.drawing=off
   icon.drawing=off
