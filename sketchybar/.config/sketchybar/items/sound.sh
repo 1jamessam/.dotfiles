@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COLOR="$CYAN"
+COLOR="$SAPPHIRE"
 
 sound_level=(
   icon.drawing=off
@@ -12,7 +12,8 @@ sound_level=(
 )
 
 sound_icon=(
-  icon.drawing=off
+  # icon.drawing=off
+  icon.padding_left=0
   label.drawing=off
   alias.color="$COLOR"
 )
@@ -31,9 +32,11 @@ status_bracket=(
 sketchybar \
   --add item sound_level right \
   --set sound_level "${sound_level[@]}" \
-  --subscribe sound_level volume_change \
+  --subscribe sound_level volume_change
+sketchybar \
   --add alias "Control Center,Sound" right \
   --rename "Control Center,Sound" sound_icon \
-  --set sound_icon "${sound_icon[@]}" \
+  --set sound_icon "${sound_icon[@]}"
+sketchybar \
   --add bracket sound sound_level sound_icon \
   --set sound "${status_bracket[@]}"

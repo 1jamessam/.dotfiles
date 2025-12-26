@@ -19,7 +19,7 @@
 export BLACK=0xff181926
 export WHITE=0xffcad3f5 #cad3f5
 export RED=0xffed8796
-export GREEN=0xffa6da95
+# export GREEN=0xffa6da95
 export BLUE=0xff8aadf4
 export YELLOW=0xffeed49f
 export ORANGE=0xfff5a97f
@@ -30,6 +30,21 @@ export TRANSPARENT=0x00000000
 export BG0=0x801e1e2e # #1e1e2e
 export BG1=0x801e1e2e # #1e1e2e
 export BG2=0x80494d64 # #494d64
+
+### Catppucin Frappé
+export MAUVE=0xffca9ee6 #8839ef
+export RED=0xffe78284 #e78284
+export YELLOW=0xffe5c890 #e5c890
+export GREEN=0xffa6d189 #a6d189
+export SAPPHIRE=0xff85c1dc #85c1dc
+export LAVENDER=0xffbabbf1 #babbf1
+export BLUE=0xff8caaee #8caaee
+export PEACH=0xffef9f76 #ef9f76
+export ROSE_WATER=0xfff4dbd6 #f4dbd6
+export SURFACE_0=0x80363a4f #363a4f
+
+export BG0=$SURFACE_0
+export BG1=$SURFACE_0
 
 
 # General bar colors
