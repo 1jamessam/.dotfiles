@@ -8,6 +8,7 @@ calendar=(
   label.align=right
   label.font.size=16
   label.padding_right=20
+  # label.font.style=Regular
   update_freq=30
   script="$PLUGIN_DIR/calendar.sh"
   background.color="$BG0"
