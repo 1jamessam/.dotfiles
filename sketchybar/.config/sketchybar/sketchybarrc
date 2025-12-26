@@ -1,7 +1,8 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 
-source "$CONFIG_DIR/icons.sh"  # Loads all defined icons
-source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+source "$CONFIG_DIR/icons.sh"
+source "$CONFIG_DIR/colors.sh"
 
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
 ITEM_DIR="$CONFIG_DIR/items"
@@ -57,14 +58,12 @@ sketchybar --default "${defaults[@]}"
 source "$ITEM_DIR/aerospace.sh"
 source "$ITEM_DIR/front_app.sh"
 
-
 # Right
 source "$ITEM_DIR/calendar.sh"
 source "$ITEM_DIR/sound.sh"
 source "$ITEM_DIR/battery.sh"
 source "$ITEM_DIR/statuses.sh"
 source "$ITEM_DIR/music.sh"
-
 
 sketchybar --hotload true
 

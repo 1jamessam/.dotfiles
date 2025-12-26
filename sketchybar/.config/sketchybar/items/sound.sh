@@ -1,13 +1,10 @@
 #!/bin/bash
 
-# sketchybar --add item volume right \
-#   --set volume script="$PLUGIN_DIR/volume.sh" \
-#   --subscribe volume volume_change
-
 COLOR="$CYAN"
 
 sound_level=(
   icon.drawing=off
+  # label.font.style=Bold
   label.color="$COLOR"
   label.padding_left=0
   label.padding_right=10

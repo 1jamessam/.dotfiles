@@ -16,6 +16,8 @@ space=(
   icon.drawing=off
 )
 
+sketchybar --add event aerospace_workspace_change
+
 for sid in $ALL_WORKSPACES; do
   sketchybar --add item space."$sid" left \
     --subscribe space."$sid" aerospace_workspace_change front_app_switched \
