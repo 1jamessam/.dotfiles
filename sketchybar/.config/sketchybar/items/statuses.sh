@@ -3,15 +3,21 @@
 # sketchybar --set wifi click_script="osascript -e 'tell application \"System Events\" to tell process \"Control Center\" to perform action \"AXPress\" of menu bar item 2 of menu bar 1'"
 wifi=(
   alias.color="$WHITE"
-  click_script
+  label.drawing=off
+  icon.drawing=off
+  icon.padding_left=0
+  icon.padding_right=0
 )
 
 input_source=(
   alias.color="$WHITE"
+  label.drawing=off
+  icon.drawing=off
+  icon.padding_left=0
+  icon.padding_right=0
 )
 
 status_bracket=(
-  # width=20
   background.color="$BACKGROUND_1"
   background.border_color="$TRANSPARENT"
   background.drawing=on

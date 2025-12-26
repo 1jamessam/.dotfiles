@@ -8,6 +8,7 @@ ITEM_DIR="$CONFIG_DIR/items"
 PADDINGS=3
 
 export FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+# export FONT="sketchy-app-font"
 
 bar=(
   height=40
@@ -53,9 +54,9 @@ defaults=(
 sketchybar --default "${defaults[@]}"
 
 # Left
-source "$ITEM_DIR/front_app.sh"
 source "$ITEM_DIR/aerospace.sh"
-# source "$ITEM_DIR/new_spaces.sh"
+source "$ITEM_DIR/front_app.sh"
+
 
 # Right
 source "$ITEM_DIR/calendar.sh"

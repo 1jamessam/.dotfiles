@@ -7,8 +7,9 @@
 COLOR="$CYAN"
 
 sound_level=(
+  icon.drawing=off
   label.color="$COLOR"
-  label.padding_left=-5
+  label.padding_left=0
   label.padding_right=10
   script="$PLUGIN_DIR/sound.sh"
 )
