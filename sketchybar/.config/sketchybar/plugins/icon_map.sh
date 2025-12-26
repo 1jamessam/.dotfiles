@@ -455,7 +455,7 @@ function icon_map() {
   "Tweetbot" | "Twitter")
     icon_result=":twitter:"
     ;;
-  "Neovide" | "MacVim" | "Vim" | "VimR")
+  "MacVim" | "Vim" | "VimR")
     icon_result=":vim:"
     ;;
   "Vivaldi")
