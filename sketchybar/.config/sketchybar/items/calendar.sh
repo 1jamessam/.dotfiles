@@ -1,11 +1,14 @@
 #!/bin/bash
 
+COLOR="$MAUVE"
 calendar=(
   icon=cal
+  icon.color="$COLOR"
   icon.font="$FONT:Bold:14.0"
-  icon.padding_left=15
+  icon.padding_left=10
   icon.padding_right=10
   label.align=right
+  label.color="$COLOR"
   label.font.size=16
   label.padding_right=20
   # label.font.style=Regular
