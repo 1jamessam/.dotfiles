@@ -31,7 +31,7 @@ export BG0=0x801e1e2e # #1e1e2e
 export BG1=0x801e1e2e # #1e1e2e
 export BG2=0x80494d64 # #494d64
 
-### Catppucin Frappé
+### Catppucin Frappé (https://catppuccin.com/palette)
 export MAUVE=0xffca9ee6 #8839ef
 export RED=0xffe78284 #e78284
 export YELLOW=0xffe5c890 #e5c890
@@ -41,10 +41,11 @@ export LAVENDER=0xffbabbf1 #babbf1
 export BLUE=0xff8caaee #8caaee
 export PEACH=0xffef9f76 #ef9f76
 export ROSE_WATER=0xfff4dbd6 #f4dbd6
-export SURFACE_0=0x80363a4f #363a4f
+export SURFACE_0=0xff363a4f #363a4f
+export BASE=0x9024273a #24273a
 
-export BG0=$SURFACE_0
-export BG1=$SURFACE_0
+export BG0=$BASE
+export BG1=$BASE
 
 
 # General bar colors
