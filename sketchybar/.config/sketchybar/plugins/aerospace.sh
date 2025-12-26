@@ -1,25 +1,29 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-source "$CONFIG_DIR/colors.sh"
+# Ensure it's executable:
+# chmod +x ~/.config/sketchybar/plugins/aerospace.sh
 
-ACTIVE_COLOR="$BLUE"
-INACTIVE_COLOR="$WHITE"
-INACTIVE_COLOR="0x44FFFFFF"
+# DEFAULT_ICONS=(":code:" ":discord:" ":spotify:" ":arc:")
+FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
 
-if [ $SENDER = "aerospace_workspace_change" ]; then
-  if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
-    # sketchybar --set $NAME background.color=0x88FF00FF background.border_width=2
-    sketchybar --set $NAME background.color=$ACTIVE_COLOR background.border_width=2
-  else
-    sketchybar --set $NAME background.color="$INACTIVE_COLOR" background.border_width=0
-    # sketchybar --set $NAME background.color=$WHITE background.border_width=0
-  fi
-else
-  CURRENT_WORKSPACE=$(aerospace list-workspaces --focused)
-  if [ "$1" = "$CURRENT_WORKSPACE" ]; then
-    # sketchybar --set $NAME background.color=0x88FF00FF background.border_width=2 # #FF00FF
-    sketchybar --set "$NAME" background.color="$ACTIVE_COLOR" background.border_width=2 # #FF00FF
-  else
-    sketchybar --set "$NAME" background.color="$INACTIVE_COLOR" background.border_width=0 #FFFFFF
-  fi
-fi
+update_workspace_icon() {
+    local workspace_id=$1
+
+    local APP_ICONS=$(aerospace list-windows --workspace $workspace_id |
+        awk -F '|' '{print $2}' |
+        while read -r app_name; do
+            $CONFIG_DIR/icon_map.sh "$app_name"
+        done | tr '\n' ' ')
+
+    if [ -z "$APP_ICONS" ]; then
+        APP_ICONS="⏺︎"
+    fi
+
+    if [ "$workspace_id" == "$FOCUSED_WORKSPACE" ]; then
+        sketchybar --set $NAME icon="$workspace_id" label="$APP_ICONS" background.drawing=on
+    else
+        sketchybar --set $NAME icon="$workspace_id" label="$APP_ICONS" background.drawing=off
+    fi
+}
+
+update_workspace_icon $1

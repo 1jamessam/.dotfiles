@@ -57,10 +57,10 @@ automatically-unhide-macos-hidden-apps = false
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
 persistent-workspaces = [
-  "0",
+  # "0",
   "1",
   "2",
-  # "3",
+  "3",
   # "4",
   # "5",
   # "6",

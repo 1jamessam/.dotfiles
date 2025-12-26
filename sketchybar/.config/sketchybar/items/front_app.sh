@@ -10,6 +10,12 @@ front_app=(
   padding_right=10
   padding_left=0
 )
+chevron=(
+  icon=
+  icon.font="Hack Nerd Font:Bold:17.0"
+  label.drawing=off
+)
+sketchybar --add item chevron left --set chevron "${chevron[@]}"
 
 sketchybar --add item front_app left \
   --set front_app "${front_app[@]}" \

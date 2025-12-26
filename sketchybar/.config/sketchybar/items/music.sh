@@ -12,8 +12,8 @@ music=(
   # Pinned it to the primary display since my other monitor is in vertical layout
   display=1
   label="Loading…"
-  background.image.scale=0.9
-  background.image.corner_radius=8
+  # background.image.scale=0.9
+  # background.image.corner_radius=8
   background.image.border_color="$TRANSPARENT"
   background.color="$TRANSPARENT"
   icon.padding_left=36

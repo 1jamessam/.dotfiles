@@ -506,6 +506,12 @@ function icon_map() {
   "Zulip")
     icon_result=":zulip:"
     ;;
+  "LINE")
+    icon_result=":line:"
+    ;;
+  "YouTube Music")
+    icon_result=":youtube_music:"
+    ;;
   *)
     icon_result=":default:"
     ;;
