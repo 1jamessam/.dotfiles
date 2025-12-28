@@ -33,12 +33,15 @@ export BG2=0x80494d64 # #494d64
 
 ### Catppucin Frappé (https://catppuccin.com/palette)
 export MAUVE=0xffca9ee6 #8839ef
-export RED=0xffe78284 #e78284
+export RED=0xffe#eebebe78284 #e78284
+export FLAMINGO=0xffeebebe #eebebe
 export YELLOW=0xffe5c890 #e5c890
 export GREEN=0xffa6d189 #a6d189
 export SAPPHIRE=0xff85c1dc #85c1dc
 export LAVENDER=0xffbabbf1 #babbf1
+export TEAL=0xff81c8be #81c8be
 export BLUE=0xff8caaee #8caaee
+export SKY=0xff99d1db #99d1db
 export PEACH=0xffef9f76 #ef9f76
 export ROSE_WATER=0xfff4dbd6 #f4dbd6
 export SURFACE_0=0xff363a4f #363a4f
