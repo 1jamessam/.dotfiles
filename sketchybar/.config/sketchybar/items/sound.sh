@@ -9,10 +9,11 @@ sound_level=(
   label.padding_left=0
   label.padding_right=10
   script="$PLUGIN_DIR/sound.sh"
+  icon.padding_left=-10
 )
 
 sound_icon=(
-  # icon.drawing=off
+  icon.drawing=on
   icon.padding_left=0
   label.drawing=off
   alias.color="$COLOR"
@@ -21,12 +22,10 @@ sound_icon=(
 status_bracket=(
   background.color="$BACKGROUND_1"
   background.border_color="$TRANSPARENT"
-  background.height=30
+  # background.height=30
   background.drawing=on
   background.padding_left=20
   background.padding_right=10
-  padding_left=20
-  padding_right=10
 )
 
 sketchybar \

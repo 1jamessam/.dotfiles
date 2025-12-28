@@ -13,7 +13,7 @@ fi
 COLOR=$WHITE
 case ${BATT_PERCENT} in
 [5-9][0-9] | 100)
-  COLOR=$BLUE
+  COLOR=$GREEN
   ;;
 [2-4][0-9])
   COLOR=$YELLOW
