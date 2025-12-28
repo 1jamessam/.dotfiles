@@ -1,8 +1,11 @@
 tap "armmbed/formulae"
 tap "derailed/k9s"
+tap "felixkratz/formulae"
 tap "hashicorp/tap"
+tap "heroku/brew"
 tap "jesseduffield/lazygit"
 tap "lihaoyun6/tap"
+tap "nikitabobko/tap"
 tap "osx-cross/arm"
 tap "osx-cross/avr"
 tap "qmk/qmk"
@@ -88,17 +91,29 @@ brew "zlib"
 brew "zoxide"
 # Kubernetes CLI To Manage Your Clusters In Style!
 brew "derailed/k9s/k9s"
+# A window border system for macOS
+brew "felixkratz/formulae/borders"
+# Custom macOS statusbar with shell plugin, interaction and graph support
+brew "felixkratz/formulae/sketchybar"
 # Terraform
 brew "hashicorp/tap/terraform"
+# Everything you need to get started with Heroku
+brew "heroku/brew/heroku"
 # Quantum Mechanical Keyboard (QMK) Firmware
 brew "qmk/qmk/qmk"
+# AeroSpace is an i3-like tiling window manager for macOS
+cask "aerospace"
 # Get the battery level of all your devices on your Mac.
 cask "airbattery"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
 # Colemak mod for more comfortable typing (DH variant)
 cask "colemak-dh"
+cask "font-hack-nerd-font"
+cask "font-sketchybar-app-font"
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "gcloud-cli"
+# Tool to control external monitor brightness & volume
+cask "monitorcontrol"
 # Toolbox companion for QMK Firmware
 cask "qmk-toolbox"
