@@ -20,6 +20,16 @@ autoload -U compinit; compinit
 _comp_options+=(globdots) # with hidden files
 ## Zsh config
 setopt interactivecomments
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
 
 ###################################################################
 
@@ -38,13 +48,8 @@ export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
 # export CFLAGS='-std=c++17'
 export CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include" LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
 
-# Helm
 eval "$(helm completion zsh)" # 40ms
-
-# Gemini
 export GOOGLE_CLOUD_PROJECT="prj-rentspree-dev-429603"
-
-# Aliases
 source ~/.zsh_aliases
 
 # Python ##########################################################

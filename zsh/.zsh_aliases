@@ -1,4 +1,3 @@
-
 alias g='LC_ALL=en_US git'
 alias git='LC_ALL=en_US git'
 alias minikube='LC_ALL=en_US minikube'
@@ -9,12 +8,14 @@ alias pnvim='poetry run nvim'
 alias unvim='uv run nvim'
 alias tf='terraform'
 alias j='z'
+alias ..='cd ..'
+alias ...='cd ../..'
 
 # RentSpree
 alias prefix-dev="gcloud container clusters get-credentials data-dev-cluster --zone us-west1-a --project prj-data-dev-429603 && HTTPS_PROXY=\"http://localhost:8888\""
 alias ssh-dev="gcloud compute ssh rentspree-us-west1-a-infra-non-prod-bastion-1 --tunnel-through-iap --project prj-infra-non-prod-429603 --zone us-west1-a -- -L8888:127.0.0.1:8888"
-alias pf-dev="prefix-dev kubectl port-forward svc/dagster-service-dagit -n dagster 8080:80"
-alias pf-new-dev="prefix-dev kubectl port-forward svc/data-dev-dagster-services-dagit -n dagster 8080:80"
+# alias pf-dev="prefix-dev kubectl port-forward svc/dagster-service-dagit -n dagster 8080:80"
+alias pf-dev="prefix-dev kubectl port-forward svc/data-dev-dagster-services-dagit -n dagster 8080:80"
 alias k9s-dev="prefix-dev k9s"
 
 alias prefix-prod="gcloud container clusters get-credentials data-prod-cluster --zone us-west1-a --project prj-data-prod-429603 && HTTPS_PROXY=\"http://localhost:8888\""
