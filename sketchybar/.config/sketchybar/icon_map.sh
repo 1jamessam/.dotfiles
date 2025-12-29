@@ -512,6 +512,9 @@ function icon_map() {
   "YouTube Music")
     icon_result=":youtube_music:"
     ;;
+  "ChatGPT")
+    icon_result=":chatgpt:"
+    ;;
   *)
     icon_result=":default:"
     ;;

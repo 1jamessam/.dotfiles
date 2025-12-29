@@ -12,5 +12,5 @@ if [ "$PAUSED" = true ]; then
 else
   ICON=􁁒
 fi
-sketchybar --set "$NAME" label="$CURRENT_SONG" icon="$ICON" drawing=on 
+sketchybar --set "$NAME" label="$CURRENT_SONG" icon="$ICON" drawing=on
 sketchybar --set "$NAME"-artwork background.image="$ARTWORK_LOCATION"
