@@ -280,11 +280,11 @@ run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace 3'
+run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.github.th-ch.youtube-music'
-run = 'move-node-to-workspace 4'
+run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
