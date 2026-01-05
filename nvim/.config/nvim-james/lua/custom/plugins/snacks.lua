@@ -14,7 +14,24 @@ return {
       enabled = true,
       timeout = 3000,
     },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      sources = {
+        explorer = {
+          hidden = true,
+          ignored = true,
+        },
+        grep = {
+          hidden = true,
+          ignored = true,
+        },
+        files = {
+          hidden = true,
+          ignored = true,
+          exclude = { '.mypy_cache', '__pycache__', '.venv' },
+        },
+      },
+    },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
