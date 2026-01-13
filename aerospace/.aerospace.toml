@@ -284,8 +284,12 @@ run = 'move-node-to-workspace 2'
 # run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
-if.app-id = 'com.github.th-ch.youtube-music'
+if.app-id = 'com.anthropic.claudefordesktop'
 run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.github.th-ch.youtube-music'
+run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
