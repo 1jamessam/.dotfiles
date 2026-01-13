@@ -8,12 +8,11 @@ config.font = wezterm.font("JetBrainsMono Nerd Font")
 
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
-	{ key = "Backspace", mods = "CMD", action = act.SendKey({ key = "U", mods = "CTRL" }) },
 	{ key = "Enter", mods = "SHIFT", action = act.SendString("\x1b\r") },
-	{ key = "LeftArrow", mods = "OPT", action = act.SendKey({ key = "b", mods = "ALT" }) },
-	{ key = "RightArrow", mods = "OPT", action = act.SendKey({ key = "f", mods = "ALT" }) },
-	{ key = "LeftArrow", mods = "CMD", action = act.SendKey({ key = "a", mods = "CTRL" }) },
-	{ key = "RightArrow", mods = "CMD", action = act.SendKey({ key = "e", mods = "CTRL" }) },
+	-- { key = "LeftArrow", mods = "OPT", action = act.SendKey({ key = "b", mods = "ALT" }) },
+	-- { key = "RightArrow", mods = "OPT", action = act.SendKey({ key = "f", mods = "ALT" }) },
+	-- { key = "LeftArrow", mods = "CMD", action = act.SendKey({ key = "a", mods = "CTRL" }) },
+	-- { key = "RightArrow", mods = "CMD", action = act.SendKey({ key = "e", mods = "CTRL" }) },
 	{ key = "f", mods = "SHIFT|CTRL", action = "ToggleFullScreen" },
 	{ key = "{", mods = "SHIFT|ALT", action = act.MoveTabRelative(-1) },
 	{ key = "}", mods = "SHIFT|ALT", action = act.MoveTabRelative(1) },
