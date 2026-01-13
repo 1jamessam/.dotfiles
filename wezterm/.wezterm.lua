@@ -5,6 +5,10 @@ local act = wezterm.action
 config.color_scheme = "Catppuccin Frappe"
 config.native_macos_fullscreen_mode = true
 config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font_size = 12
+config.window_decorations = "RESIZE"
+config.adjust_window_size_when_changing_font_size = false
+-- config.show_close_tab_button_in_tabs = false -- nightly build
 
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 
