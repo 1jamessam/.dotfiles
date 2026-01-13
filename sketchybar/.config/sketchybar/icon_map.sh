@@ -515,6 +515,18 @@ function icon_map() {
   "ChatGPT")
     icon_result=":chatgpt:"
     ;;
+  "Claude")
+    icon_result=":claude:"
+    ;;
+  "Calculator")
+    icon_result=":calculator:"
+    ;;
+  "Passwords")
+    icon_result=":passwords:"
+    ;;
+  "iTerm2")
+    icon_result=":iterm:"
+    ;;
   *)
     icon_result=":default:"
     ;;
