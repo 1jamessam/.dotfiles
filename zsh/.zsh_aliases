@@ -4,8 +4,6 @@ alias minikube='LC_ALL=en_US minikube'
 alias py='python'
 alias nj="NVIM_APPNAME=nvim-james nvim"
 alias l='ls -lah'
-alias pnvim='poetry run nvim'
-alias unvim='uv run nvim'
 alias tf='terraform'
 alias j='z'
 alias ..='cd ..'
@@ -14,15 +12,22 @@ alias ...='cd ../..'
 # RentSpree
 alias prefix-dev="gcloud container clusters get-credentials data-dev-cluster --zone us-west1-a --project prj-data-dev-429603 && HTTPS_PROXY=\"http://localhost:8888\""
 alias ssh-dev="gcloud compute ssh rentspree-us-west1-a-infra-non-prod-bastion-1 --tunnel-through-iap --project prj-infra-non-prod-429603 --zone us-west1-a -- -L8888:127.0.0.1:8888"
-# alias pf-dev="prefix-dev kubectl port-forward svc/dagster-service-dagit -n dagster 8080:80"
 alias pf-dev="prefix-dev kubectl port-forward svc/data-dev-dagster-services-dagster-webserver -n dagster 8080:80"
 alias k9s-dev="prefix-dev k9s"
 
 alias prefix-prod="gcloud container clusters get-credentials data-prod-cluster --zone us-west1-a --project prj-data-prod-429603 && HTTPS_PROXY=\"http://localhost:8888\""
 alias ssh-prod="gcloud compute ssh rentspree-us-west1-a-infra-prod-bastion-1 --tunnel-through-iap --project prj-infra-prod-429603 --zone us-west1-a -- -L8888:127.0.0.1:8888"
-# alias pf-prod="prefix-prod kubectl port-forward svc/dagster-service-dagit -n dagster 8080:80"
 alias pf-prod="prefix-prod kubectl port-forward svc/data-prod-dagster-services-dagster-webserver -n dagster 8080:80"
 alias k9s-prod="prefix-prod k9s"
 
 alias pf-dh="prefix-prod kubectl port-forward svc/data-production-rentspree-datahub-datahub-gms -n datahub 8080:8080"
 
+nvim() {
+  if [[ -f "poetry.lock" ]]; then
+    poetry run nvim "$@"
+  elif [[ -f "uv.lock" ]]; then
+    uv run nvim "$@"
+  else
+    command nvim "$@"
+  fi
+}
