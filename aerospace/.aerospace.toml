@@ -121,6 +121,13 @@ outer.bottom = 10
 outer.top = [{ monitor."built-in" = 10 }, { monitor."main" = 40 }, 50]
 outer.right = 10
 
+[workspace-to-monitor-force-assignment]
+1 = ['secondary', 'main']
+2 = 'main'
+3 = 'main'
+4 = 'main'
+5 = 'main'
+
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
@@ -275,13 +282,13 @@ if.app-id = 'com.tinyspeck.slackmacgap'
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
-# if.app-id = 'com.brave.Browser'
-if.app-id = ['com.brave.Browser', 'com.github.wez.wezterm']
+if.app-id = 'com.brave.Browser'
+# if.app-id = ['com.brave.Browser', 'com.github.wez.wezterm']
 run = 'move-node-to-workspace 2'
 
-# [[on-window-detected]]
-# if.app-id = 'com.github.wez.wezterm'
-# run = 'move-node-to-workspace 2'
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.anthropic.claudefordesktop'
@@ -293,6 +300,12 @@ run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
+# if.app-id = ['com.apple.Safari', 'com.google.Chrome']
+run = 'move-node-to-workspace 9'
+
+[[on-window-detected]]
+# if.app-id = 'com.apple.Safari'
+if.app-id = 'com.google.Chrome'
 run = 'move-node-to-workspace 9'
 
 [[on-window-detected]]
