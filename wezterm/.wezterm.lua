@@ -8,7 +8,7 @@ config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 12
 config.window_decorations = "RESIZE"
 config.adjust_window_size_when_changing_font_size = false
--- config.show_close_tab_button_in_tabs = false -- nightly build
+config.show_close_tab_button_in_tabs = false -- nightly build
 -- config.automatically_reload_config = false
 
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
@@ -26,11 +26,7 @@ end
 
 config.keys = {
   { key = "Enter", mods = "SHIFT", action = act.SendString("\x1b\r") },
-  {
-    key = "t",
-    mods = "CMD",
-    action = wezterm.action_callback(spawn_tab_after_current),
-  },
+  { key = "t", mods = "CMD", action = wezterm.action_callback(spawn_tab_after_current) },
   { key = "f", mods = "SHIFT|CTRL", action = "ToggleFullScreen" },
   { key = "{", mods = "SHIFT|ALT", action = act.MoveTabRelative(-1) },
   { key = "}", mods = "SHIFT|ALT", action = act.MoveTabRelative(1) },

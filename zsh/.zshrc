@@ -30,6 +30,12 @@ autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey -v
+function vi-yank-clipboard {
+  zle vi-yank
+  echo "$CUTBUFFER" | pbcopy
+}
+zle -N vi-yank-clipboard
+# bindkey 'y' vi-yank-clipboard
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 

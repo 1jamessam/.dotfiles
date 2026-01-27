@@ -306,8 +306,9 @@ run = 'move-node-to-workspace 9'
 [[on-window-detected]]
 # if.app-id = 'com.apple.Safari'
 if.app-id = 'com.google.Chrome'
-run = 'move-node-to-workspace 9'
+# run = 'move-node-to-workspace 9'
+run = 'layout floating'
 
 [[on-window-detected]]
 check-further-callbacks = true
-run = 'layout floating'
+run = ['layout floating', 'move-node-to-workspace 9']

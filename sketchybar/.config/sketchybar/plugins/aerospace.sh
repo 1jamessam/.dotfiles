@@ -16,10 +16,14 @@ update_workspace_icon() {
     APP_ICONS="⏺︎"
   fi
 
+  common=(
+    label="$APP_ICONS"
+    icon="$workspace_id"
+  )
   if [ "$workspace_id" == "$FOCUSED_WORKSPACE" ]; then
-    sketchybar --set "$NAME" label="$APP_ICONS" background.drawing=on
+    sketchybar --set "$NAME" "${common[@]}" background.drawing=on
   else
-    sketchybar --set "$NAME" label="$APP_ICONS" background.drawing=off
+    sketchybar --set "$NAME" "${common[@]}" background.drawing=off
   fi
 }
 

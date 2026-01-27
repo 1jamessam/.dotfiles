@@ -35,3 +35,6 @@ sketchybar \
 sketchybar \
   --add bracket statuses wifi input_source \
   --set statuses "${status_bracket[@]}"
+
+# sketchybar --query default_menu_items
+
