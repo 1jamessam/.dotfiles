@@ -4,6 +4,7 @@ Migrate the pyproject.toml file from Poetry 1.4.2 format to Poetry 2.2.1 format 
 
 - **Python version**: Upgrade to Python 3.13
 - **Poetry version**: Upgrade to 2.2.1
+- **functions-framework**: Upgrade to version 3.10 or newer
 - **All dependencies**: Update to latest versions compatible with Python 3.13
 
 ## Key Changes Required
@@ -105,21 +106,30 @@ priority = "explicit"
 
 After applying all changes to `pyproject.toml`, verify that all dependencies support Python 3.13:
 
+1. make sure master or main branch is up to date
+1. Move the changes to a new branch named `feature/upgrade-python`
+1. Update all python and poetry references to be version 3.13 and 2.2.1 respectively in github workflow files
+1. Update Python version
+
+    ```bash
+    poetry env use 3.13
+    ```
+
 1. **Update the lock file**:
 
    ```bash
    poetry lock
    ```
 
-2. **Test the installation**:
+1. **Test the installation**:
 
    ```bash
    poetry install
    ```
 
-3. **Troubleshooting**: If `poetry install` fails, check error message and verify package supports Python 3.13 on PyPI
+1. **Troubleshooting**: If `poetry install` fails, check error message and verify package supports Python 3.13 on PyPI
 
-4. **Codebase validation**:
+1. **Codebase validation**:
 
   ```bash
   make ci-test
