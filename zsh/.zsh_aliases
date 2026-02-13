@@ -21,7 +21,10 @@ alias pf-prod="prefix-prod kubectl port-forward svc/REDACTED-SERVICE -n dagster 
 alias k9s-prod="prefix-prod k9s"
 alias pf-dh="prefix-prod kubectl port-forward svc/REDACTED-SERVICE -n datahub 8080:8080"
 
+alias gsutil='gsutil -o "GSUtil:parallel_process_count=1"'
+
 alias cn="caffeinate"
+alias cl="claude"
 
 nv() {
   if [[ -f "poetry.lock" ]]; then

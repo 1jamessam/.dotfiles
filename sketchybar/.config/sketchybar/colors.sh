@@ -33,7 +33,7 @@ export BG2=0x80494d64 # #494d64
 
 ### Catppucin Frappé (https://catppuccin.com/palette)
 export MAUVE=0xffca9ee6 #8839ef
-export RED=0xffe#eebebe78284 #e78284
+export RED=0xffe78284 #e78284
 export FLAMINGO=0xffeebebe #eebebe
 export YELLOW=0xffe5c890 #e5c890
 export GREEN=0xffa6d189 #a6d189
