@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "$CONFIG_DIR/colors.sh"
+
 FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
 
 update_workspace_icon() {
@@ -12,18 +14,20 @@ update_workspace_icon() {
       "$CONFIG_DIR/icon_map.sh" "$app_name"
     done | tr '\n' ' ' | sed 's/ *$//')
 
-  if [ -z "$APP_ICONS" ]; then
-    APP_ICONS="⏺︎"
-  fi
-
   common=(
     label="$APP_ICONS"
     icon="$workspace_id"
   )
   if [ "$workspace_id" == "$FOCUSED_WORKSPACE" ]; then
-    sketchybar --set "$NAME" "${common[@]}" background.drawing=on
+    sketchybar --set "$NAME" "${common[@]}" \
+      background.drawing=on \
+      icon.color="$WHITE" \
+      label.color="$WHITE"
   else
-    sketchybar --set "$NAME" "${common[@]}" background.drawing=off
+    sketchybar --set "$NAME" "${common[@]}" \
+      background.drawing=off \
+      icon.color="$GREY" \
+      label.color="$GREY"
   fi
 }
 

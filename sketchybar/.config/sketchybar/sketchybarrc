@@ -6,23 +6,20 @@ source "$CONFIG_DIR/colors.sh"
 
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
 ITEM_DIR="$CONFIG_DIR/items"
-PADDINGS=3
-
 export FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
-# export FONT="sketchy-app-font"
 
 bar=(
-  height=40
+  height=44
   color="$TRANSPARENT"
-  border_width=2
+  border_width=0
   border_color="$TRANSPARENT"
   shadow=off
   position=top
   sticky=on
-  padding_right=10
-  padding_left=10
+  padding_right=8
+  padding_left=8
   y_offset=0
-  margin=-2
+  margin=8
   topmost=window
 )
 sketchybar --bar "${bar[@]}"
@@ -32,17 +29,17 @@ defaults=(
   updates=when_shown
   icon.font="$FONT:Bold:14.0"
   icon.color="$ICON_COLOR"
-  icon.padding_left="$PADDINGS"
-  icon.padding_right="$PADDINGS"
+  icon.padding_left=4
+  icon.padding_right=4
   label.font="$FONT:Semibold:13.0"
   label.color="$LABEL_COLOR"
-  label.padding_left="$PADDINGS"
-  label.padding_right="$PADDINGS"
-  padding_right="$PADDINGS"
-  padding_left="$PADDINGS"
-  background.height=30
-  background.corner_radius=18
-  background.border_width=2
+  label.padding_left=4
+  label.padding_right=4
+  padding_right=2
+  padding_left=2
+  background.height=28
+  background.corner_radius=8
+  background.border_width=0
   popup.background.border_width=2
   popup.background.corner_radius=9
   popup.background.border_color="$POPUP_BORDER_COLOR"
