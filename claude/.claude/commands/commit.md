@@ -1,5 +1,5 @@
 ---
-model: claude-3-5-haiku-20241022
+model: claude-haiku-4-5-20251001
 description: Create a git commit with auto-generated message
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git commit:*)
 ---

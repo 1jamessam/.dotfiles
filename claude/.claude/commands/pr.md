@@ -1,5 +1,5 @@
 ---
-model: claude-3-5-haiku-20241022
+model: claude-sonnet-4-5-20250929
 description: Create a GitHub pull request
 allowed-tools: Bash(git *), Bash(gh pr create:*)
 argument-hint: [base-branch]
