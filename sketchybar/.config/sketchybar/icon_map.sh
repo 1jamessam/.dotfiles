@@ -527,6 +527,9 @@ function icon_map() {
   "iTerm2")
     icon_result=":iterm:"
     ;;
+  "Postman")
+    icon_result=":postman:"
+    ;;
   *)
     icon_result=":default:"
     ;;

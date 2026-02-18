@@ -303,6 +303,10 @@ if.app-id = 'com.github.th-ch.youtube-music'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
+if.app-id = 'com.postmanlabs.mac'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
 if.app-id = 'com.apple.Safari'
 # if.app-id = ['com.apple.Safari', 'com.google.Chrome']
 run = 'move-node-to-workspace 8'
