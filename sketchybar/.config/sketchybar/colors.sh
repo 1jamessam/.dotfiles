@@ -45,7 +45,7 @@ export SKY=0xff99d1db #99d1db
 export PEACH=0xffef9f76 #ef9f76
 export ROSE_WATER=0xfff4dbd6 #f4dbd6
 export SURFACE_0=0xff363a4f #363a4f
-export BASE=0x9024273a #24273a
+export BASE=0xff24273a #24273a
 
 export BG0=$BASE
 export BG1=$BASE

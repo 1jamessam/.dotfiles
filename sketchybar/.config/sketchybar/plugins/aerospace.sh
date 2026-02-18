@@ -12,7 +12,7 @@ update_workspace_icon() {
     awk -F '|' '{print $2}' |
     while read -r app_name; do
       "$CONFIG_DIR/icon_map.sh" "$app_name"
-    done | tr '\n' ' ' | sed 's/ *$//')
+    done | tr -d '\n')
 
   common=(
     label="$APP_ICONS"
@@ -21,11 +21,14 @@ update_workspace_icon() {
   if [ "$workspace_id" == "$FOCUSED_WORKSPACE" ]; then
     sketchybar --set "$NAME" "${common[@]}" \
       background.drawing=on \
-      icon.color="$WHITE" \
-      label.color="$WHITE"
+      background.color="$LAVENDER" \
+      background.border_width=0 \
+      icon.color="$BLACK" \
+      label.color="$BLACK"
   else
     sketchybar --set "$NAME" "${common[@]}" \
       background.drawing=off \
+      background.border_width=0 \
       icon.color="$GREY" \
       label.color="$GREY"
   fi
