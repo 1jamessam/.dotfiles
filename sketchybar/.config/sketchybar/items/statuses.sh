@@ -16,8 +16,9 @@ input_source=(
 )
 
 status_bracket=(
-  background.color="$BACKGROUND_1"
-  background.border_color="$TRANSPARENT"
+  background.color="$BASE"
+  background.corner_radius=10
+  background.height=30
   background.drawing=on
 )
 

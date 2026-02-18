@@ -2,14 +2,12 @@
 
 front_app=(
   label.font="$FONT:Bold:16.0"
-  label.padding_left=5
   label.drawing=off
   icon.background.drawing=on
   display=active
   script="$PLUGIN_DIR/front_app.sh"
-  click_script="open -a 'Mission Control'"
-  padding_right=10
-  padding_left=10
+  background.drawing=off
+  padding_left=6
 )
 chevron=(
   icon=

@@ -4,19 +4,18 @@ COLOR="$MAUVE"
 calendar=(
   icon=cal
   icon.color="$COLOR"
-  icon.font="$FONT:Bold:14.0"
+  icon.font="$FONT:Bold:13.0"
   icon.padding_left=10
-  icon.padding_right=10
-  label.align=right
-  label.color="$COLOR"
-  label.font.size=16
-  label.padding_right=20
-  # label.font.style=Regular
+  icon.padding_right=2
+  label.color="$WHITE"
+  label.font="$FONT:Bold:13.0"
+  label.padding_right=10
   update_freq=30
   script="$PLUGIN_DIR/calendar.sh"
-  background.color="$BG0"
-  background.border_color="$TRANSPARENT"
+  background.color="$BASE"
+  background.corner_radius=10
   background.height=30
+  background.drawing=on
 )
 
 sketchybar --add item calendar right \

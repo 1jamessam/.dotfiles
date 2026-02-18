@@ -38,7 +38,10 @@ music_artwork=(
 )
 
 music_all=(
-  background.color="$BG1"
+  background.color="$BASE"
+  background.corner_radius=10
+  background.height=30
+  background.drawing=on
 )
 
 sketchybar \

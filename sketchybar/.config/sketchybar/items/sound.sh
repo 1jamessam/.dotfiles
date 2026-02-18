@@ -20,12 +20,10 @@ sound_icon=(
 )
 
 status_bracket=(
-  background.color="$BACKGROUND_1"
-  background.border_color="$TRANSPARENT"
-  # background.height=30
+  background.color="$BASE"
+  background.corner_radius=10
+  background.height=30
   background.drawing=on
-  background.padding_left=20
-  background.padding_right=10
 )
 
 sketchybar \
