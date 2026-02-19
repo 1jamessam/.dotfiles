@@ -7,12 +7,13 @@ front_app=(
   display=active
   script="$PLUGIN_DIR/front_app.sh"
   background.drawing=off
-  padding_left=6
+  padding_left=4
 )
 chevron=(
   icon=
   icon.font="Hack Nerd Font:Bold:17.0"
   label.drawing=off
+  padding_left=6
 )
 sketchybar --add item chevron left --set chevron "${chevron[@]}"
 

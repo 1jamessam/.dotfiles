@@ -4,7 +4,7 @@ ALL_WORKSPACES=$(aerospace list-workspaces --all)
 
 space=(
   # background.color=0x40ffffff
-  background.color=$BASE
+  background.color="$BASE"
   background.corner_radius=8
   background.height=26
   background.drawing=off
