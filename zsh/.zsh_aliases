@@ -10,12 +10,14 @@ alias ..='cd ..'
 alias ...='cd ../..'
 
 # RentSpree
-alias prefix-dev="gcloud container clusters get-credentials REDACTED-CLUSTER --zone us-west1-a --project REDACTED-PROJECT && HTTPS_PROXY=\"http://localhost:8888\""
+# alias prefix-dev="gcloud container clusters get-credentials REDACTED-CLUSTER --zone us-west1-a --project REDACTED-PROJECT && HTTPS_PROXY=\"http://localhost:8888\""
+alias prefix-dev="HTTPS_PROXY=\"http://localhost:8888\""
 alias ssh-dev="gcloud compute ssh REDACTED-BASTION --tunnel-through-iap --project REDACTED-PROJECT --zone us-west1-a -- -L8888:127.0.0.1:8888"
 alias pf-dev="prefix-dev kubectl port-forward svc/REDACTED-SERVICE -n dagster 8080:80"
 alias k9s-dev="prefix-dev k9s"
 
-alias prefix-prod="gcloud container clusters get-credentials REDACTED-CLUSTER --zone us-west1-a --project REDACTED-PROJECT && HTTPS_PROXY=\"http://localhost:8888\""
+# alias prefix-prod="gcloud container clusters get-credentials REDACTED-CLUSTER --zone us-west1-a --project REDACTED-PROJECT && HTTPS_PROXY=\"http://localhost:8888\""
+alias prefix-prod="HTTPS_PROXY=\"http://localhost:8888\""
 alias ssh-prod="gcloud compute ssh REDACTED-BASTION --tunnel-through-iap --project REDACTED-PROJECT --zone us-west1-a -- -L8888:127.0.0.1:8888"
 alias pf-prod="prefix-prod kubectl port-forward svc/REDACTED-SERVICE -n dagster 8081:80"
 alias k9s-prod="prefix-prod k9s"
