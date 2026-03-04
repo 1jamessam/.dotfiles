@@ -27,6 +27,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -51,6 +61,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -79,6 +99,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -103,6 +133,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -131,6 +171,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -155,6 +205,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -183,6 +243,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -207,6 +277,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -235,6 +315,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -259,6 +349,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -290,6 +390,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -317,6 +427,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -348,6 +468,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -372,6 +502,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -400,6 +540,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -424,6 +574,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -452,6 +612,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -476,6 +646,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -504,6 +684,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -528,6 +718,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -556,6 +756,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -580,6 +790,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -608,6 +828,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -632,6 +862,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -660,6 +900,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -684,6 +934,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -712,6 +972,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -736,6 +1006,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -764,6 +1044,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -788,6 +1078,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -816,6 +1116,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -842,6 +1152,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -866,6 +1186,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -895,6 +1225,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -934,6 +1274,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -964,6 +1314,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -998,6 +1358,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1025,6 +1395,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1059,6 +1439,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1086,6 +1476,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1120,6 +1520,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1150,6 +1560,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1184,6 +1604,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1214,6 +1644,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1248,6 +1688,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1278,6 +1728,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1312,6 +1772,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1339,6 +1809,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1370,6 +1850,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1397,6 +1887,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1428,6 +1928,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1455,6 +1965,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1486,6 +2006,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1513,6 +2043,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1547,6 +2087,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1574,6 +2124,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1608,6 +2168,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1640,6 +2210,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1669,6 +2249,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1696,6 +2286,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1730,6 +2330,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1762,6 +2372,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1789,6 +2409,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1823,6 +2453,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1853,6 +2493,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
@@ -1887,6 +2537,16 @@
                   "language": "^th$"
                 }
               ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
+                }
+              ]
             }
           ]
         },
@@ -1917,6 +2577,16 @@
               "input_sources": [
                 {
                   "language": "^th$"
+                }
+              ]
+            },
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1240,
+                  "product_id": 60205,
+                  "description": "Lily58 Pro (CHECK AND REPLACE these IDs via Karabiner EventViewer → Devices)"
                 }
               ]
             }
