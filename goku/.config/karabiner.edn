@@ -1,0 +1,105 @@
+{
+ ;; ============================================================
+ ;; Manoonchai on Colemak-DH (via Thai Kedmanee)
+ ;; ============================================================
+ ;; Only active on Lily58 Pro + Thai input source
+ ;; Install: brew install yqrashawn/goku/goku
+ ;; Place at: ~/.config/karabiner.edn
+ ;; Run: goku (or brew services start goku for auto-reload)
+ ;; ============================================================
+
+ ;; --- Device & Input Source Conditions ---
+ :devices {:lily58 [{:vendor_id 1240 :product_id 60205}]}
+ :input-sources {:th {:language "^th$"}}
+
+ ;; --- Manoonchai Layout Reference ---
+ ;; Unshifted:
+ ;;   ใ  ต  ห  ล  ส    ป  ั  ก  ิ  บ  ็  ฬ  ฯ
+ ;;   ง  เ  ร  น  ม    อ  า  ่  ้  ว  ื
+ ;;   ุ  ไ  ท  ย  จ    ค  ี  ด  ะ  ู
+ ;; Shifted:
+ ;;   ฒ  ฏ  ซ  ญ  ฟ    ฉ  ึ  ธ  ฐ  ฎ  ฆ  ฑ  ฌ
+ ;;   ษ  ถ  แ  ช  พ    ผ  ำ  ข  โ  ภ  "
+ ;;   ฤ  ฝ  ๆ  ณ  ๊    ๋  ์  ศ  ฮ  ?
+
+ :main [
+
+  ;; ─── Unshifted Layer ───────────────────────────────────────
+  {:des "Manoonchai: unshifted (Colemak-DH → Kedmanee, Thai+Lily58)"
+   :rules [
+    [:q :period [:th :lily58]]  ;; q              → ใ
+    [:w :9 [:th :lily58]]  ;; w              → ต
+    [:f :s [:th :lily58]]  ;; e              → ห
+    [:p :close_bracket [:th :lily58]]  ;; r              → ล
+    [:b :l [:th :lily58]]  ;; t              → ส
+    [:j :x [:th :lily58]]  ;; y              → ป
+    [:l :y [:th :lily58]]  ;; u              → ั
+    [:u :d [:th :lily58]]  ;; i              → ก
+    [:y :b [:th :lily58]]  ;; o              → ิ
+    [:semicolon :open_bracket [:th :lily58]]  ;; p              → บ
+    [:open_bracket :!Sh [:th :lily58]]  ;; open_bracket   → ็
+    [:close_bracket :!Speriod [:th :lily58]]  ;; close_bracket  → ฬ
+    [:backslash :!So [:th :lily58]]  ;; backslash      → ฯ
+    [:a :quote [:th :lily58]]  ;; a              → ง
+    [:r :g [:th :lily58]]  ;; s              → เ
+    [:s :i [:th :lily58]]  ;; d              → ร
+    [:t :o [:th :lily58]]  ;; f              → น
+    [:g :comma [:th :lily58]]  ;; g              → ม
+    [:m :v [:th :lily58]]  ;; h              → อ
+    [:n :k [:th :lily58]]  ;; j              → า
+    [:e :j [:th :lily58]]  ;; k              → ่
+    [:i :h [:th :lily58]]  ;; l              → ้
+    [:o :semicolon [:th :lily58]]  ;; semicolon      → ว
+    [:quote :n [:th :lily58]]  ;; quote          → ื
+    [:z :6 [:th :lily58]]  ;; z              → ุ
+    [:x :w [:th :lily58]]  ;; x              → ไ
+    [:c :m [:th :lily58]]  ;; c              → ท
+    [:d :p [:th :lily58]]  ;; v              → ย
+    [:v :0 [:th :lily58]]  ;; b              → จ
+    [:k :8 [:th :lily58]]  ;; n              → ค
+    [:h :u [:th :lily58]]  ;; m              → ี
+    [:comma :f [:th :lily58]]  ;; comma          → ด
+    [:period :t [:th :lily58]]  ;; period         → ะ
+    [:slash :!S6 [:th :lily58]]  ;; slash          → ู
+  ]}
+
+  ;; ─── Shifted Layer ─────────────────────────────────────────
+  {:des "Manoonchai: shifted (Colemak-DH → Kedmanee, Thai+Lily58)"
+   :rules [
+    [:!Sq :!Scomma [:th :lily58]]  ;; shift+q          → ฒ
+    [:!Sw :!Sd [:th :lily58]]  ;; shift+w          → ฏ
+    [:!Sf :!Ssemicolon [:th :lily58]]  ;; shift+e          → ซ
+    [:!Sb :a [:th :lily58]]  ;; shift+t          → ฟ
+    [:!Sj :!Sc [:th :lily58]]  ;; shift+y          → ฉ
+    [:!Sl :7 [:th :lily58]]  ;; shift+u          → ึ
+    [:!Su :!St [:th :lily58]]  ;; shift+i          → ธ
+    [:!Sy :!Sopen_bracket [:th :lily58]]  ;; shift+o          → ฐ
+    [:!Ssemicolon :!Se [:th :lily58]]  ;; shift+p          → ฎ
+    [:!Sopen_bracket :!Ss [:th :lily58]]  ;; shift+open_bracket → ฆ
+    [:!Sclose_bracket :!Sr [:th :lily58]]  ;; shift+close_bracket → ฑ
+    [:!Sbackslash :!Sg [:th :lily58]]  ;; shift+backslash  → ฌ
+    [:!Sa :!Sk [:th :lily58]]  ;; shift+a          → ษ
+    [:!Sr :5 [:th :lily58]]  ;; shift+s          → ถ
+    [:!Ss :c [:th :lily58]]  ;; shift+d          → แ
+    [:!St :equal_sign [:th :lily58]]  ;; shift+f          → ช
+    [:!Sg :r [:th :lily58]]  ;; shift+g          → พ
+    [:!Sm :z [:th :lily58]]  ;; shift+h          → ผ
+    [:!Sn :e [:th :lily58]]  ;; shift+j          → ำ
+    [:!Se :hyphen [:th :lily58]]  ;; shift+k          → ข
+    [:!Si :!Sf [:th :lily58]]  ;; shift+l          → โ
+    [:!So :4 [:th :lily58]]  ;; shift+semicolon  → ภ
+    [:!Squote :!Sw [:th :lily58]]  ;; shift+quote      → "
+    [:!Sz :!Sa [:th :lily58]]  ;; shift+z          → ฤ
+    [:!Sx :slash [:th :lily58]]  ;; shift+x          → ฝ
+    [:!Sc :q [:th :lily58]]  ;; shift+c          → ๆ
+    [:!Sd :!Si [:th :lily58]]  ;; shift+v          → ณ
+    [:!Sv :!Su [:th :lily58]]  ;; shift+b          → ๊
+    [:!Sk "osascript -e 'tell application \"System Events\" to keystroke \"๋\" '" [:th :lily58]]  ;; shift+n          → ๋ (mai tri via osascript)
+    [:!Sh :!Sn [:th :lily58]]  ;; shift+m          → ์
+    [:!Scomma :!Sl [:th :lily58]]  ;; shift+comma      → ศ
+    [:!Speriod :!Sv [:th :lily58]]  ;; shift+period     → ฮ
+    [:!Sslash :!Sm [:th :lily58]]  ;; shift+slash      → ?
+  ]}
+
+ ] ;; end :main
+}
