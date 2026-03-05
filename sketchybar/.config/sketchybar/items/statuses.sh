@@ -36,7 +36,7 @@ sketchybar \
 #   --subscribe input_source input_change system_woke
 
 sketchybar \
-  --add bracket statuses wifi battery sound_level sound_icon calendar \
+  --add bracket statuses wifi battery sound_level sound_icon \
   --set statuses "${status_bracket[@]}"
 
 # sketchybar --query default_menu_items
