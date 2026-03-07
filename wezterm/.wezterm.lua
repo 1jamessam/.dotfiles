@@ -2,7 +2,8 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local act = wezterm.action
 
-config.color_scheme = "Catppuccin Frappe"
+-- config.color_scheme = "Catppuccin Frappe"
+config.color_scheme = 'Kanagawa (Gogh)'
 config.native_macos_fullscreen_mode = true
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 12
