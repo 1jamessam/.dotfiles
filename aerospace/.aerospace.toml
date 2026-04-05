@@ -219,6 +219,9 @@ alt-9 = 'workspace 9'
 
 alt-q = 'exec-and-forget open -a /Applications/Brave\ Browser.app'
 alt-w = 'exec-and-forget open -a /Applications/WezTerm.app'
+alt-e = 'exec-and-forget open -a /Applications/Claude.app'
+alt-p = 'exec-and-forget open -a /Applications/Postman.app'
+alt-y = 'exec-and-forget open -a /Applications/YouTube Music.app'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-0 = 'move-node-to-workspace 0'
@@ -267,10 +270,7 @@ alt-shift-semicolon = 'mode service'
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
-f = [
-  'layout floating tiling',
-  'mode main',
-] # Toggle between floating and tiling layout
+f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
@@ -287,7 +287,6 @@ run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-# if.app-id = ['com.brave.Browser', 'com.github.wez.wezterm']
 run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
@@ -299,24 +298,33 @@ if.app-id = 'com.anthropic.claudefordesktop'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
+if.app-id = 'com.postmanlabs.mac'
+run = 'move-node-to-workspace 3'
+
+# [[on-window-detected]]
+# if.app-id = 'com.postmanlabs.mac'
+# run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
 if.app-id = 'com.github.th-ch.youtube-music'
 run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
-if.app-id = 'com.postmanlabs.mac'
-run = 'move-node-to-workspace 3'
+if.app-id = 'com.apple.Safari'
+run = 'move-node-to-workspace 8'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.Safari'
-# if.app-id = ['com.apple.Safari', 'com.google.Chrome']
+if.app-id = 'com.google.Chrome'
 run = 'move-node-to-workspace 8'
+
 
 [[on-window-detected]]
 # if.app-id = 'com.apple.Safari'
-if.app-id = 'com.google.Chrome'
-run = 'move-node-to-workspace 8'
-# run = 'layout floating'
+if.app-id = 'org.jkiss.dbeaver.core.product'
+run = 'layout floating'
+
 
 [[on-window-detected]]
 check-further-callbacks = true
-run = ['layout floating', 'move-node-to-workspace 9']
+run = ['layout floating']
+# run = ['layout floating', 'move-node-to-workspace 9']
