@@ -10,10 +10,22 @@ alias ..='cd ..'
 alias ...='cd ../..'
 
 alias cn="caffeinate"
-alias cl="claude"
+alias cl="CLAUDE_CODE_NO_FLICKER=1 claude"
 
 # Source work-specific aliases if available (not tracked in public dotfiles)
 [[ -f ~/.zsh_aliases_work ]] && source ~/.zsh_aliases_work
+
+kill-dagster() {
+  local pids=$(lsof -ti :${1:-3000} | while read pid; do
+    ps -p "$pid" -o pid=,command= | grep -q dagster && echo "$pid"
+  done)
+  if [ -z "$pids" ]; then
+    echo "No dagster processes found on port ${1:-3000}"
+  else
+    echo "$pids" | xargs kill
+    echo "Killed dagster PIDs: $pids"
+  fi
+}
 
 nv() {
   if [[ -f "poetry.lock" ]]; then
