@@ -2,10 +2,15 @@
 
 COLOR="$PEACH"
 wifi=(
-  width=45
   alias.color="$COLOR"
+  # background.color="$WHITE"
   label.drawing=off
   icon.drawing=off
+  padding_right=0
+  icon.padding_left=0
+  icon.padding_right=0
+  label.padding_left=0
+  label.padding_right=0
 )
 
 input_source=(
@@ -35,8 +40,6 @@ sketchybar \
 #   --set input_source "${input_source[@]}" \
 #   --subscribe input_source input_change system_woke
 
-sketchybar \
-  --add bracket statuses wifi battery sound_level sound_icon \
-  --set statuses "${status_bracket[@]}"
+## bracket is created in cpu.sh (sourced after this file)
 
 # sketchybar --query default_menu_items
