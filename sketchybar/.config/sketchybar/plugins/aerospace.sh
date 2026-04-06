@@ -2,36 +2,43 @@
 
 source "$CONFIG_DIR/colors.sh"
 
-FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
+# Source only the icon_map function
+eval "$(sed -n '/^function icon_map/,/^}/p' "$CONFIG_DIR/icon_map.sh")"
 
-update_workspace_icon() {
-  local workspace_id=$1
+if [ -z "$FOCUSED_WORKSPACE" ]; then
+  FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
+fi
 
-  local APP_ICONS
-  APP_ICONS=$(aerospace list-windows --workspace "$workspace_id" |
-    awk -F '|' '{print $2}' |
-    while read -r app_name; do
-      "$CONFIG_DIR/icon_map.sh" "$app_name"
-    done | tr -d '\n')
+# Build icon strings per workspace using simple variables
+ALL_WINDOWS=$(aerospace list-windows --all --format '%{app-name}|%{workspace}')
+ALL_WORKSPACES=$(aerospace list-workspaces --all)
 
-  common=(
-    label="$APP_ICONS"
-    icon="$workspace_id"
-  )
-  if [ "$workspace_id" == "$FOCUSED_WORKSPACE" ]; then
-    sketchybar --set "$NAME" "${common[@]}" \
-      background.drawing=on \
-      background.color="$LAVENDER" \
-      background.border_width=0 \
-      icon.color="$BLACK" \
-      label.color="$BLACK"
+args=()
+for sid in $ALL_WORKSPACES; do
+  icons=""
+  while IFS='|' read -r app_name workspace_id; do
+    app_name="${app_name## }"; app_name="${app_name%% }"
+    workspace_id="${workspace_id## }"; workspace_id="${workspace_id%% }"
+    if [ "$workspace_id" = "$sid" ]; then
+      icon_map "$app_name"
+      icons+="$icon_result"
+    fi
+  done <<< "$ALL_WINDOWS"
+
+  if [ "$sid" = "$FOCUSED_WORKSPACE" ]; then
+    args+=(--set space."$sid"
+      icon="$sid" label="$icons"
+      background.drawing=on background.border_width=0
+      --animate tanh 15 --set space."$sid"
+      background.color="$LAVENDER" icon.color="$BLACK" label.color="$BLACK")
   else
-    sketchybar --set "$NAME" "${common[@]}" \
-      background.drawing=off \
-      background.border_width=0 \
-      icon.color="$GREY" \
-      label.color="$GREY"
+    args+=(--set space."$sid"
+      icon="$sid" label="$icons"
+      background.border_width=0
+      --animate tanh 15 --set space."$sid"
+      background.color="$BASE" icon.color="$GREY" label.color="$GREY"
+      background.drawing=off)
   fi
-}
+done
 
-update_workspace_icon "$1"
+sketchybar "${args[@]}"

@@ -24,12 +24,21 @@ space=(
 sketchybar --add event aerospace_workspace_change
 
 SPACE_ITEMS=()
+FIRST=true
 for sid in $ALL_WORKSPACES; do
   sketchybar --add item space."$sid" left \
-    --subscribe space."$sid" aerospace_workspace_change front_app_switched \
     --set space."$sid" "${space[@]}" \
-    script="$CONFIG_DIR/plugins/aerospace.sh $sid" \
     click_script="aerospace workspace $sid"
+
+  # Only the first space item runs the script for all spaces
+  if $FIRST; then
+    sketchybar --set space."$sid" \
+      updates=on \
+      script="$CONFIG_DIR/plugins/aerospace.sh" \
+      --subscribe space."$sid" aerospace_workspace_change front_app_switched
+    FIRST=false
+  fi
+
   SPACE_ITEMS+=(space."$sid")
 done
 
