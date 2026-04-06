@@ -1,5 +1,4 @@
 ---
-model: claude-sonnet-4-5-20250929
 description: Create a GitHub pull request
 allowed-tools: Bash(git *), Bash(gh pr create:*)
 argument-hint: [base-branch]
@@ -34,8 +33,8 @@ Format the PR body as:
 
 ### Solutions
 
-> Describe what the merge request does and why it is necessary.
+> Describe what the pull request does and why it is necessary.
 
 ### Changes
 
-> Describe the changes included in the merge request.
+> Describe the changes included in the pull request.
