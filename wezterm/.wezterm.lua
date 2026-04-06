@@ -3,7 +3,7 @@ local config = wezterm.config_builder()
 local act = wezterm.action
 
 -- config.color_scheme = "Catppuccin Frappe"
-config.color_scheme = 'Kanagawa (Gogh)'
+config.color_scheme = "Kanagawa (Gogh)"
 config.native_macos_fullscreen_mode = true
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 12
@@ -29,9 +29,15 @@ config.keys = {
   { key = "Enter", mods = "SHIFT", action = act.SendString("\x1b\r") },
   { key = "t", mods = "CMD", action = wezterm.action_callback(spawn_tab_after_current) },
   { key = "f", mods = "SHIFT|CTRL", action = "ToggleFullScreen" },
+  { key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
+  { key = "LeftArrow", mods = "CMD|ALT", action = act.ActivateTabRelative(-1) },
+  { key = "RightArrow", mods = "CMD|ALT", action = act.ActivateTabRelative(1) },
+  -- keychron keyboard
   { key = "{", mods = "SHIFT|ALT", action = act.MoveTabRelative(-1) },
   { key = "}", mods = "SHIFT|ALT", action = act.MoveTabRelative(1) },
-  { key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
+  -- lily58 pro keyboard
+  { key = "{", mods = "SHIFT|CMD|CTRL", action = act.MoveTabRelative(-1) },
+  { key = "}", mods = "SHIFT|CMD|CTRL", action = act.MoveTabRelative(1) },
 }
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
