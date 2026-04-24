@@ -3,10 +3,11 @@
 source "$CONFIG_DIR/icons.sh"
 source "$CONFIG_DIR/colors.sh"
 
-BATT_PERCENT=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
-CHARGING="$(pmset -g batt | grep 'AC Power')"
+BATT_PERCENT=${BATTERY_PERCENTAGE:-}
+BATT_PERCENT=${BATT_PERCENT%%%}
+BATT_STATE=${BATTERY_STATE:-}
 
-if [ "$BATT_PERCENT" = "" ]; then
+if [ -z "$BATT_PERCENT" ]; then
   exit 0
 fi
 
@@ -26,7 +27,7 @@ case ${BATT_PERCENT} in
   ;;
 esac
 
-if [[ "$CHARGING" != "" ]]; then
+if [[ "$BATT_STATE" == "charging" || "$BATT_STATE" == "charged" || "$BATT_STATE" == "full" ]]; then
   COLOR=$GREEN
 fi
 

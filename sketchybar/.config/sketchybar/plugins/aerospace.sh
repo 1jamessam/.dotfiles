@@ -2,8 +2,7 @@
 
 source "$CONFIG_DIR/colors.sh"
 
-# Source only the icon_map function
-eval "$(sed -n '/^function icon_map/,/^}/p' "$CONFIG_DIR/icon_map.sh")"
+source "$CONFIG_DIR/icon_map.sh"
 
 if [ -z "$FOCUSED_WORKSPACE" ]; then
   FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)

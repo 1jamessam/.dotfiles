@@ -10,12 +10,10 @@ battery=(
   # background.corner_radius=10
   # background.height=30
   # background.drawing=on
-  update_freq=120
-  updates=on
 )
 
 sketchybar \
   --add alias "Control Center,Battery" right \
   --rename "Control Center,Battery" battery \
   --set battery "${battery[@]}" \
-  --subscribe battery power_source_change
+  --subscribe battery system_stats power_source_change

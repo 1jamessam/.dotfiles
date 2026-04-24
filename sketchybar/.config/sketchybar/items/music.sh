@@ -18,7 +18,7 @@ music=(
   icon.padding_left=36
   icon.padding_right=8
   label.align=left
-  update_freq=10
+  update_freq=30
   label.max_chars=40
   scroll_texts=on
 )

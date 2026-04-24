@@ -51,6 +51,11 @@ defaults=(
 
 sketchybar --default "${defaults[@]}"
 
+# Register system_stats event and start stats provider
+sketchybar --add event system_stats
+killall stats_provider 2>/dev/null
+stats_provider --cpu usage --battery percentage state --interval 10 &
+
 # Left
 source "$ITEM_DIR/aerospace.sh"
 source "$ITEM_DIR/front_app.sh"

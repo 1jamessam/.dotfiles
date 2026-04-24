@@ -1,11 +1,13 @@
 #!/bin/bash
 
-CPU=$(top -l 1 -n 0 | awk '/CPU usage/ {
-  user = $3; sys = $5
-  gsub(/%/, "", user); gsub(/%/, "", sys)
-  printf "%.0f", user + sys
-}')
-PERCENT=$(echo "$CPU / 100" | bc -l)
+CPU=${CPU_USAGE:-0}
+CPU=${CPU%%%}
+
+if [ -z "$CPU" ] || [ "$CPU" = "0" ]; then
+  exit 0
+fi
+
+PERCENT=$(awk -v c="$CPU" 'BEGIN{printf "%.2f", c/100}')
 
 sketchybar --set "$NAME" label="${CPU}%" \
   --push "$NAME" "$PERCENT"
