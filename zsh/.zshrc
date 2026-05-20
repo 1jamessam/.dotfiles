@@ -109,3 +109,17 @@ if [[ ! -f ~/.zsh/_zoxide_init || ~/.zsh/_zoxide_init -ot $(command -v zoxide) ]
   zoxide init zsh > ~/.zsh/_zoxide_init
 fi
 source ~/.zsh/_zoxide_init
+
+# Added by dbt installer
+export PATH="$PATH:/Users/tanapats.jclocal/.local/bin"
+
+# dbt aliases
+alias dbtf=/Users/tanapats.jclocal/.local/bin/dbt
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	command rm -f -- "$tmp"
+}

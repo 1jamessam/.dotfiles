@@ -4,6 +4,9 @@ return {
     dependencies = { "folke/snacks.nvim" },
     config = true,
     opts = {
+      terminal = {
+        split_width_percentage = 0.4,
+      },
       diff_opts = {
         layout = "vertical",
         keep_terminal_focus = true,
