@@ -72,3 +72,12 @@ sketchybar --hotload true
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
+
+# Re-attach Control Center aliases after login race; without this the right
+# side sometimes renders empty until `brew services restart sketchybar`.
+(
+  sleep 5
+  sketchybar --set battery    alias.name="Control Center,Battery" \
+             --set sound_icon alias.name="Control Center,Sound" \
+             --set wifi       alias.name="Control Center,WiFi"
+) &
