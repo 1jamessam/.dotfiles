@@ -57,6 +57,12 @@ killall stats_provider 2>/dev/null
 stats_provider --cpu usage --battery percentage state --interval 10 &
 
 # Left
+# Wait briefly for aerospace daemon; otherwise list-workspaces returns empty
+# and no workspace items get added to the bar.
+for _ in $(seq 1 20); do
+  [ -n "$(aerospace list-workspaces --all 2>/dev/null)" ] && break
+  sleep 0.25
+done
 source "$ITEM_DIR/aerospace.sh"
 source "$ITEM_DIR/front_app.sh"
 
