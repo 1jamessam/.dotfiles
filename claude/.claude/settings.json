@@ -57,6 +57,29 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/tanapats.jclocal/.claude/hooks/notify.sh complete",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt|idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/tanapats.jclocal/.claude/hooks/notify.sh waiting",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {
