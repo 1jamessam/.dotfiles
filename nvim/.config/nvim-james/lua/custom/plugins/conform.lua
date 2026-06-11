@@ -1,15 +1,13 @@
 return { -- Autoformat
-  'stevearc/conform.nvim',
-  event = { 'BufWritePre' },
-  cmd = { 'ConformInfo' },
+  "stevearc/conform.nvim",
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
   keys = {
     {
-      '<leader>f',
-      function()
-        require('conform').format { async = true, lsp_format = 'fallback' }
-      end,
-      mode = '',
-      desc = '[F]ormat buffer',
+      "<leader>f",
+      function() require("conform").format { async = true, lsp_format = "fallback" } end,
+      mode = "",
+      desc = "[F]ormat buffer",
     },
   },
   opts = {
@@ -24,13 +22,16 @@ return { -- Autoformat
       else
         return {
           timeout_ms = 500,
-          lsp_format = 'fallback',
+          lsp_format = "fallback",
         }
       end
     end,
     formatters_by_ft = {
-      lua = { 'stylua' },
-      sql = { 'sqlfmt' },
+      lua = { "stylua" },
+      sql = { "sqlfmt" },
+      json = { "prettier" },
+      sqlx = { "sqlfluff" },
+      js = { "prettierd" },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
