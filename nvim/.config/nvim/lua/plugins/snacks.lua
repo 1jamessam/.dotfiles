@@ -1,5 +1,18 @@
 return {
   "folke/snacks.nvim",
+  init = function()
+    vim.api.nvim_create_autocmd("StdinReadPre", {
+      callback = function() vim.g.started_with_stdin = true end,
+    })
+    vim.api.nvim_create_autocmd("VimEnter", {
+      callback = function()
+        if vim.fn.argc() > 0 or vim.g.started_with_stdin then
+          return
+        end
+        Snacks.explorer()
+      end,
+    })
+  end,
   opts = {
     picker = {
       sources = {
