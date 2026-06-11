@@ -1,3 +1,91 @@
 {
-  "model": "sonnet"
+  "permissions": {
+    "allow": [
+      "Read(~/Developer/**)",
+      "Read(~/.dotfiles/**)",
+      "Bash(gh api:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh run list:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(bq query:*)",
+      "Bash(bq ls:*)",
+      "Bash(bq show:*)",
+      "Bash(gcloud logging read:*)",
+      "Bash(gcloud config list:*)",
+      "Bash(kubectl get:*)",
+      "Bash(kubectl describe:*)",
+      "Bash(kubectl logs:*)",
+      "Bash(helm list:*)",
+      "Bash(helm status:*)",
+      "Bash(terraform plan:*)",
+      "Bash(terraform validate:*)",
+      "Bash(terraform fmt:*)",
+      "Bash(dagster asset list:*)",
+      "Bash(dataform compile:*)"
+    ],
+    "deny": [
+      "Bash(terraform apply:*)",
+      "Bash(terraform destroy:*)",
+      "Bash(kubectl delete:*)",
+      "Bash(helm uninstall:*)",
+      "Bash(helm delete:*)",
+      "Bash(bq rm:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(gh pr merge:*)",
+      "Read(**/.env)",
+      "Read(**/credentials.json)",
+      "Read(**/service-account*.json)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/tanapats.jclocal/.claude/hooks/sync-obsidian-memory.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "andrej-karpathy-skills@karpathy-skills": true,
+    "lua-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "dagster": {
+      "source": {
+        "source": "github",
+        "repo": "dagster-io/skills"
+      }
+    },
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills"
+      }
+    }
+  },
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "autoDreamEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
 }
