@@ -4,6 +4,10 @@ return {
     formatters_by_ft = {
       sql = { "sqlfmt" },
       -- sql = { "sqlfluff" },
+      javascript = { "prettierd" },
+      javascriptreact = { "prettierd" },
+      typescript = { "prettierd" },
+      typescriptreact = { "prettierd" },
     },
     linters_by_ft = {
       sql = { "sqlfluff" },
