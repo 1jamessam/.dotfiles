@@ -88,12 +88,12 @@ preset = 'qwerty'
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 15
-inner.vertical = 15
-outer.left = 15
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 10
 outer.bottom = 10
 outer.top = [{ monitor."built-in" = 10 }, { monitor."main" = 40 }, 50]
-outer.right = 15
+outer.right = 10
 
 [workspace-to-monitor-force-assignment]
 # 1 = ['secondary', 'main']
@@ -165,13 +165,14 @@ alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
 alt-4 = 'workspace 4'
 alt-5 = 'workspace 5'
-# alt-6 = 'workspace 6'
+alt-6 = 'workspace 6'
 # alt-7 = 'workspace 7'
 # alt-8 = 'workspace 8'
 # alt-9 = 'workspace 9'
 
 alt-q = 'exec-and-forget open -a /Applications/Brave\ Browser.app'
 alt-w = 'exec-and-forget open -a /Applications/WezTerm.app'
+alt-d = 'exec-and-forget open -a /Applications/Visual\ Studio\ Code.app/'
 alt-e = 'exec-and-forget open -a /Applications/Claude.app'
 alt-p = 'exec-and-forget open -a /Applications/Postman.app'
 alt-y = 'exec-and-forget open -a /Applications/YouTube\ Music.app'
@@ -183,7 +184,7 @@ alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
 alt-shift-4 = 'move-node-to-workspace 4'
 alt-shift-5 = 'move-node-to-workspace 5'
-# alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-6 = 'move-node-to-workspace 6'
 # alt-shift-7 = 'move-node-to-workspace 7'
 # alt-shift-8 = 'move-node-to-workspace 8'
 # alt-shift-9 = 'move-node-to-workspace 9'
@@ -228,24 +229,32 @@ if.app-id = 'com.github.wez.wezterm'
 run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.cmuxterm.app'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
 if.app-id = 'com.anthropic.claudefordesktop'
-run = 'move-node-to-workspace 3'
-
-[[on-window-detected]]
-if.app-id = 'com.postmanlabs.mac'
-run = 'move-node-to-workspace 3'
-
-[[on-window-detected]]
-if.app-id = 'com.github.th-ch.youtube-music'
 run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.Safari'
+if.app-id = 'com.postmanlabs.mac'
+run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-id = 'com.github.th-ch.youtube-music'
 run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
+if.app-id = 'com.apple.Safari'
+run = 'move-node-to-workspace 6'
+
+[[on-window-detected]]
 if.app-id = 'com.google.Chrome'
-run = 'move-node-to-workspace 5'
+run = 'move-node-to-workspace 6'
 
 [[on-window-detected]]
 if.app-id = 'org.jkiss.dbeaver.core.product'
