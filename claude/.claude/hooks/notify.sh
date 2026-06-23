@@ -16,14 +16,48 @@ title="Claude Code"
 # Skip the notification when this Claude tab is already in view: WezTerm is the
 # frontmost app AND its focused pane is the one Claude runs in. Anything else
 # (background tab, WezTerm not frontmost) still notifies.
+#
+# Matching by $WEZTERM_PANE alone is unreliable: when Claude runs under nvim
+# (e.g. claudecode.nvim) the inherited pane id can be stale or wrong. So we also
+# match by tty -- nvim's controlling tty equals the WezTerm pane's tty_name, and
+# nvim is one of our process ancestors, so we walk the ancestry looking for it.
 tab_in_view() {
-  [ -n "$WEZTERM_PANE" ] || return 1
   command -v wezterm >/dev/null 2>&1 || return 1
+  command -v jq >/dev/null 2>&1 || return 1
+
+  # WezTerm must be the frontmost macOS app.
   local front
   front=$(lsappinfo info -only name "$(lsappinfo front)" 2>/dev/null)
   case "$front" in *WezTerm*) ;; *) return 1 ;; esac
-  wezterm cli list-clients --format json 2>/dev/null \
-    | jq -e --argjson p "$WEZTERM_PANE" 'any(.[]; .focused_pane_id == $p)' >/dev/null 2>&1
+
+  # Focused pane id of every connected client (one per window).
+  local focused_panes
+  focused_panes=$(wezterm cli list-clients --format json 2>/dev/null \
+    | jq -r '.[].focused_pane_id' 2>/dev/null)
+  [ -n "$focused_panes" ] || return 1
+
+  # Fast path: Claude runs directly in a focused pane.
+  if [ -n "$WEZTERM_PANE" ] && printf '%s\n' "$focused_panes" | grep -qx "$WEZTERM_PANE"; then
+    return 0
+  fi
+
+  # ttys of those focused panes (e.g. /dev/ttys017).
+  local focused_ttys
+  focused_ttys=$(wezterm cli list --format json 2>/dev/null | jq -r \
+    --argjson p "[$(printf '%s' "$focused_panes" | paste -sd, -)]" \
+    '.[] | select(.pane_id as $id | $p | index($id)) | .tty_name' 2>/dev/null)
+  [ -n "$focused_ttys" ] || return 1
+
+  # Walk our ancestry; the host nvim's tty matches the focused pane's tty.
+  local pid=$$ ppid tty
+  for _ in $(seq 1 20); do
+    read -r ppid tty < <(ps -o ppid=,tty= -p "$pid" 2>/dev/null)
+    [ -n "$tty" ] && [ "$tty" != "??" ] \
+      && printf '%s\n' "$focused_ttys" | grep -qx "/dev/$tty" && return 0
+    case "$ppid" in ""|0|1) break ;; esac
+    pid=$ppid
+  done
+  return 1
 }
 
 if tab_in_view; then
