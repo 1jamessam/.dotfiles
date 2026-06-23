@@ -4,6 +4,16 @@ return {
     vim.api.nvim_create_autocmd("StdinReadPre", {
       callback = function() vim.g.started_with_stdin = true end,
     })
+    -- snacks dims files under dot-dirs (e.g. .github/) as "hidden" and untracked
+    -- files, both linked to NonText (grey). Make hidden files read normally and
+    -- untracked files green; keep genuinely ignored files dim. Re-apply on every
+    -- colorscheme load so it survives theme switches.
+    local function fix_snacks_hl()
+      vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "SnacksPickerFile" })
+      vim.api.nvim_set_hl(0, "SnacksPickerGitStatusUntracked", { link = "Added" })
+    end
+    vim.api.nvim_create_autocmd("ColorScheme", { callback = fix_snacks_hl })
+    fix_snacks_hl()
     vim.api.nvim_create_autocmd("VimEnter", {
       callback = function()
         if vim.fn.argc() > 0 or vim.g.started_with_stdin then
