@@ -34,3 +34,12 @@ vim.filetype.add({
     [".sqlfluff"] = "dosini",
   },
 })
+
+-- Prepend a shellcheck directive to new .env files so SC2034 (unused variable)
+-- doesn't fire on plain assignments.
+vim.api.nvim_create_autocmd("BufNewFile", {
+  pattern = { "*.env", ".env", ".env.*" },
+  callback = function()
+    vim.api.nvim_buf_set_lines(0, 0, 0, false, { "# shellcheck disable=SC2034", "" })
+  end,
+})
