@@ -67,8 +67,8 @@ return {
     -- { "<leader>/", LazyVim.pick("grep"), desc = "Grep (Root Dir)" },
     { "<leader>/", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-    -- { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
-    { "<leader><space>", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
+    { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+    -- { "<leader><space>", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
     { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
     -- find
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
