@@ -108,12 +108,14 @@
       }
     }
   },
+  "effortLevel": "high",
+  "tui": "fullscreen",
   "voice": {
     "enabled": true,
     "mode": "hold"
   },
   "autoDreamEnabled": true,
+  "skipWorkflowUsageWarning": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
-  "tui": "fullscreen"
+  "voiceEnabled": true
 }
