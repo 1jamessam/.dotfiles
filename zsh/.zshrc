@@ -1,6 +1,9 @@
 # zmodload zsh/zprof
 # Shell
 
+# Dedupe PATH entries (keeps first occurrence)
+typeset -U path PATH
+
 # Homebrew
 export PATH=/opt/homebrew/bin:$PATH
 
@@ -39,12 +42,7 @@ autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey -v
-function vi-yank-clipboard {
-  zle vi-yank
-  echo "$CUTBUFFER" | pbcopy
-}
-zle -N vi-yank-clipboard
-# bindkey 'y' vi-yank-clipboard
+# bindkey 'y' vi-yank-clipboard  # defined in ~/.zsh/functions.zsh
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
@@ -73,53 +71,15 @@ source ~/.zsh/_helm_completion
 export GOOGLE_CLOUD_PROJECT="prj-rentspree-dev-429603"
 source ~/.zsh_aliases
 
-# Python ##########################################################
-
-## pyenv (lazy-loaded)
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="$PYENV_ROOT/shims:$PATH"
-pyenv() {
-  unfunction pyenv
-  eval "$(command pyenv init - zsh)"
-  pyenv "$@"
-}
-
-# UV python
-source "$HOME/.local/bin/env"
-# UV completions — cached to avoid subshell
-if [[ ! -f ~/.zsh/_uv_completion || ~/.zsh/_uv_completion -ot $(command -v uv) ]]; then
-  uv generate-shell-completion zsh > ~/.zsh/_uv_completion
-fi
-source ~/.zsh/_uv_completion
+# Modular config (order-independent pieces) ########################
+for f in functions python paths; do source ~/.zsh/$f.zsh; done
 
 ###################################################################
 
 # Personal
-
-## QMK
-# https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
-export PATH="/Applications/ArmGNUToolchain/14.3.rel1/arm-none-eabi/bin:$PATH"
-
-## WezTerm
-export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
 
 ## Zoxide (better cd) — must be last, cached to avoid subshell
 if [[ ! -f ~/.zsh/_zoxide_init || ~/.zsh/_zoxide_init -ot $(command -v zoxide) ]]; then
   zoxide init zsh > ~/.zsh/_zoxide_init
 fi
 source ~/.zsh/_zoxide_init
-
-# Added by dbt installer
-export PATH="$PATH:/Users/tanapats.jclocal/.local/bin"
-
-# dbt aliases
-alias dbtf=/Users/tanapats.jclocal/.local/bin/dbt
-
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	command yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
-	command rm -f -- "$tmp"
-}
