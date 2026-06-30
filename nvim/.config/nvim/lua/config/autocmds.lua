@@ -35,6 +35,19 @@ vim.filetype.add({
   },
 })
 
+-- nvim-treesitter's `main` branch starts the highlighter once via a FileType
+-- autocmd and never re-attaches it. terraform_fmt on save (auto-save + conform)
+-- rewrites the buffer and can drop the HCL highlighter, leaving the file
+-- unhighlighted until a reload. Re-start it on save if it died.
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*.tf", "*.tfvars", "*.hcl" },
+  callback = function(ev)
+    if not vim.treesitter.highlighter.active[ev.buf] then
+      pcall(vim.treesitter.start, ev.buf)
+    end
+  end,
+})
+
 -- Prepend a shellcheck directive to new .env files so SC2034 (unused variable)
 -- doesn't fire on plain assignments.
 vim.api.nvim_create_autocmd("BufNewFile", {
