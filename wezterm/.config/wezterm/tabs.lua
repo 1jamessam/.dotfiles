@@ -8,7 +8,8 @@ function M.apply(_)
 
     -- Resolve the tab's display title
     local title = pane.title
-    if (pane.foreground_process_name:match("([^/]+)$") or "") == "nvim" then
+    local process = pane.foreground_process_name:match("([^/]+)$") or ""
+    if process == "nvim" or process == "uv" then
       local cwd = pane.current_working_dir
       if cwd then
         local dir = cwd.file_path:match("([^/]+)/?$") or cwd.file_path
