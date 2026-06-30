@@ -3,6 +3,13 @@ return {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
     config = true,
+    -- Neovim's built-in :terminal (libvterm) doesn't support synchronized output
+    -- (DEC mode 2026), so Claude's incremental cursor-positioned updates garble
+    -- in the split. Full-repaint redraws the whole screen each frame instead,
+    -- which renders cleanly without relying on synchronized output.
+    init = function()
+      vim.env.CLAUDE_CODE_ALT_SCREEN_FULL_REPAINT = "1"
+    end,
     opts = {
       terminal = {
         split_width_percentage = 0.4,
