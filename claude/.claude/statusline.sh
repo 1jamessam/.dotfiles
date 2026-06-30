@@ -68,22 +68,11 @@ fi
 # Effort level
 [ -n "$effort" ] && parts+=("$(printf '%beffort:%s%b' "$MAG" "$effort" "$RST")")
 
-# Thinking / fast-mode flags
-flags=""
-[ "$thinking" = "true" ] && flags+="thinking"
-[ "$fast" = "true" ] && {
-  [ -n "$flags" ] && flags+=" "
-  flags+="fast"
-}
-[ -n "$flags" ] && parts+=("$(printf '%b%s%b' "$DIM" "$flags" "$RST")")
+# Fast-mode flag
+[ "$fast" = "true" ] && parts+=("$(printf '%bfast%b' "$DIM" "$RST")")
 
 # Cost
 [ -n "$cost" ] && parts+=("$(printf '%b$%.2f%b' "$DIM" "$cost" "$RST")")
-
-# Lines changed
-if [ -n "$added" ] || [ -n "$removed" ]; then
-  parts+=("$(printf '%b+%s%b%b/%b%b-%s%b' "$GREEN" "${added:-0}" "$RST" "$DIM" "$RST" "$RED" "${removed:-0}" "$RST")")
-fi
 
 # Rate limits (5h / 7d usage)
 if [ -n "$r5" ] || [ -n "$r7" ]; then
