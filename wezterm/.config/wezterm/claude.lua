@@ -12,26 +12,33 @@ local M = {}
 local wezterm_bin = (wezterm.executable_dir and wezterm.executable_dir .. "/wezterm")
   or "/Applications/WezTerm.app/Contents/MacOS/wezterm"
 
--- The Claude Code CLI titles its pane "✳ Claude Code".
-local function title_is_claude(pane)
-  local ok, title = pcall(function()
-    return pane:get_title()
+-- Basename of a pane's foreground process (e.g. "nvim"), or nil if unavailable.
+local function foreground(pane)
+  local ok, name = pcall(function()
+    return pane:get_foreground_process_name()
   end)
-  return ok and type(title) == "string" and title:find("Claude") ~= nil
+  if ok and type(name) == "string" then
+    return name:match("[^/\\]+$")
+  end
 end
 
--- Identify the Claude pane and its sibling (the editor) in the active tab, plus
--- whether the editor is currently zoomed (i.e. Claude is hidden).
+-- Identify the editor and Claude panes in the active tab, plus whether the editor
+-- is currently zoomed (i.e. Claude is hidden). We anchor on the *editor*: it runs
+-- nvim, whose process name is stable. The Claude pane is simply the other one.
+-- (Don't identify Claude by its title -- the CLI sets the title to the current task
+-- summary, e.g. "✳ Review the PR", so a title-based match is intermittent. Nor by
+-- its foreground process, which becomes bash/python/etc. while a tool runs -- which
+-- is exactly when you'd want to hide it.)
 local function claude_and_editor(window)
   local claude_id, editor_id, editor_zoomed
   for _, item in ipairs(window:mux_window():tabs_with_info()) do
     if item.is_active then
       for _, pi in ipairs(item.tab:panes_with_info()) do
-        if title_is_claude(pi.pane) then
-          claude_id = pi.pane:pane_id()
-        elseif not editor_id then
+        if not editor_id and foreground(pi.pane) == "nvim" then
           editor_id = pi.pane:pane_id()
           editor_zoomed = pi.is_zoomed
+        else
+          claude_id = pi.pane:pane_id()
         end
       end
     end
