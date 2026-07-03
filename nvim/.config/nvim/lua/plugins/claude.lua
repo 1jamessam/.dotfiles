@@ -1,30 +1,31 @@
 return {
   {
     "coder/claudecode.nvim",
-    dependencies = { "folke/snacks.nvim" },
-    config = true,
-    -- Neovim's built-in :terminal (libvterm) doesn't support synchronized output
-    -- (DEC mode 2026), so Claude's incremental cursor-positioned updates garble
-    -- in the split. Full-repaint redraws the whole screen each frame instead,
-    -- which renders cleanly without relying on synchronized output.
-    init = function()
-      vim.env.CLAUDE_CODE_ALT_SCREEN_FULL_REPAINT = "1"
+    -- Claude runs in a WezTerm split pane (see lua/claude_wezterm.lua), not an
+    -- in-editor terminal, so the snacks/native terminal providers are unused.
+    -- claudecode still owns the IDE side: the WebSocket server, the lockfile, and
+    -- the selection/diff/diagnostics integration all live in Neovim regardless of
+    -- where the CLI window is.
+    opts = function()
+      -- Drop the cached module so `:Lazy reload claudecode.nvim` picks up edits to
+      -- lua/claude_wezterm.lua (a plain require would hand back the stale copy).
+      package.loaded["claude_wezterm"] = nil
+      return {
+        terminal = {
+          provider = require("claude_wezterm"),
+          split_side = "right",
+          split_width_percentage = 0.4,
+        },
+        diff_opts = {
+          layout = "vertical",
+          open_in_new_tab = true,
+        },
+      }
     end,
-    opts = {
-      terminal = {
-        split_width_percentage = 0.4,
-      },
-      diff_opts = {
-        layout = "vertical",
-        keep_terminal_focus = true,
-        open_in_new_tab = true,
-        -- hide_terminal_in_new_tab = true,
-      },
-    },
     keys = {
       { "<C-'>", "<cmd>ClaudeCode<cr>", mode = { "n", "t" }, desc = "Toggle Claude" },
       { "<leader>a", nil, desc = "AI/Claude Code" },
-      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Open/focus Claude" },
       { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
       { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
       { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
