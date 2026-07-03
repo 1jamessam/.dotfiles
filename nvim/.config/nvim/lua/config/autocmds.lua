@@ -23,18 +23,24 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.filetype.add({
   filename = {
     [".sqlfluff"] = "dosini",
+    ["Corefile"] = "corefile",
   },
 })
 
--- nvim-treesitter's `main` branch starts the highlighter once via a FileType
--- autocmd and never re-attaches it. terraform_fmt on save (auto-save + conform)
--- rewrites the buffer and can drop the HCL highlighter, leaving the file
--- unhighlighted until a reload. Re-start it on save if it died.
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = { "*.tf", "*.tfvars", "*.hcl" },
-  callback = function(ev)
-    if not vim.treesitter.highlighter.active[ev.buf] then
-      pcall(vim.treesitter.start, ev.buf)
-    end
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "corefile",
+  callback = function()
+    vim.bo.shiftwidth = 4
+    vim.bo.tabstop = 4
+    vim.bo.expandtab = true
+  end,
+})
+
+-- Prepend a shellcheck directive to new .env files so SC2034 (unused variable)
+-- doesn't fire on plain assignments.
+vim.api.nvim_create_autocmd("BufNewFile", {
+  pattern = { "*.env", ".env", ".env.*" },
+  callback = function()
+    vim.api.nvim_buf_set_lines(0, 0, 0, false, { "# shellcheck disable=SC2034", "" })
   end,
 })
