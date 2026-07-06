@@ -83,3 +83,6 @@ if [[ ! -f ~/.zsh/_zoxide_init || ~/.zsh/_zoxide_init -ot $(command -v zoxide) ]
   zoxide init zsh > ~/.zsh/_zoxide_init
 fi
 source ~/.zsh/_zoxide_init
+
+# To customize prompt, run `p10k configure` or edit ~/.dotfiles/zsh/.p10k.zsh.
+[[ ! -f ~/.dotfiles/zsh/.p10k.zsh ]] || source ~/.dotfiles/zsh/.p10k.zsh
