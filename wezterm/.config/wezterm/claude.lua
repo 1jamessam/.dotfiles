@@ -3,6 +3,7 @@
 -- nvim/.config/nvim/lua/claude_wezterm.lua, which spawns/reveals the pane.
 local wezterm = require("wezterm")
 local act = wezterm.action
+local editor = require("editor")
 
 local M = {}
 
@@ -12,31 +13,9 @@ local M = {}
 local wezterm_bin = (wezterm.executable_dir and wezterm.executable_dir .. "/wezterm")
   or "/Applications/WezTerm.app/Contents/MacOS/wezterm"
 
--- Basename of a pane's foreground process (e.g. "nvim"), or nil if unavailable.
-local function foreground(pane)
-  local ok, name = pcall(function()
-    return pane:get_foreground_process_name()
-  end)
-  if ok and type(name) == "string" then
-    return name:match("[^/\\]+$")
-  end
-end
-
--- Is this pane the editor? Anchor on the IS_NVIM user var that smart-splits.nvim sets
--- (see nav.lua) -- it stays true even while Neovim runs a foreground subprocess
--- (`:terminal`, `:!uv ...`), whereas get_foreground_process_name() then reports the
--- child (uv/caffeinate/etc.) and the process-name check misses. Fall back to the
--- process name for when smart-splits hasn't loaded yet.
-local function is_editor(pane)
-  if pane:get_user_vars().IS_NVIM == "true" then
-    return true
-  end
-  return foreground(pane) == "nvim"
-end
-
 -- Identify the editor and Claude panes in the active tab, plus whether the editor
 -- is currently zoomed (i.e. Claude is hidden). We anchor on the *editor* (see
--- is_editor); the Claude pane is simply the other one.
+-- editor.is_editor); the Claude pane is simply the other one.
 -- (Don't identify Claude by its title -- the CLI sets the title to the current task
 -- summary, e.g. "✳ Review the PR", so a title-based match is intermittent. Nor by
 -- its foreground process, which becomes bash/python/etc. while a tool runs -- which
@@ -46,7 +25,7 @@ local function claude_and_editor(window)
   for _, item in ipairs(window:mux_window():tabs_with_info()) do
     if item.is_active then
       for _, pi in ipairs(item.tab:panes_with_info()) do
-        if not editor_id and is_editor(pi.pane) then
+        if not editor_id and editor.is_editor(pi.pane) then
           editor_id = pi.pane:pane_id()
           editor_zoomed = pi.is_zoomed
         else

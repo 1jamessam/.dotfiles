@@ -5,7 +5,11 @@ return {
   -- <C-hjkl> should move a Neovim split or a WezTerm pane. It has to be active from
   -- the start for that handshake to work.
   lazy = false,
-  opts = {},
+  -- at_edge = "stop": at an outermost split, moving further is a no-op instead of
+  -- wrapping to the opposite edge -- so <C-h> from the leftmost (editor) split won't
+  -- jump across to the Claude pane on the right. Mirrors the WezTerm-side guard in
+  -- wezterm/.config/wezterm/nav.lua.
+  opts = { at_edge = "stop" },
   keys = {
     { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Move to left split/pane" },
     { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Move to below split/pane" },

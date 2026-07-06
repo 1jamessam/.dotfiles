@@ -4,27 +4,55 @@
 -- the edge into the adjacent WezTerm pane. Otherwise move the WezTerm pane directly.
 local wezterm = require("wezterm")
 local act = wezterm.action
+local editor = require("editor")
 
 local M = {}
 
-local function is_vim(pane)
-  -- Fast path: smart-splits.nvim sets this user var while loaded.
-  if pane:get_user_vars().IS_NVIM == "true" then
-    return true
-  end
-  -- Fallback (slower, but keeps <C-hjkl> working inside Neovim even when
-  -- smart-splits isn't loaded yet): match the foreground process name.
-  local ok, name = pcall(function()
-    return pane:get_foreground_process_name()
-  end)
-  if not ok or type(name) ~= "string" then
+local direction_keys = { h = "Left", j = "Down", k = "Up", l = "Right" }
+
+-- Is there a WezTerm pane adjacent to the active one in `dir`? ActivatePaneDirection
+-- otherwise wraps to the opposite edge, so at the rightmost (Claude) pane a <C-l>
+-- would cycle back to the editor. Compare cell rects: require a pane on the correct
+-- side plus overlap on the perpendicular axis so a diagonal pane doesn't count.
+-- NOTE: this is the WezTerm-side twin of pick_nav() in
+-- nvim/.config/nvim/lua/plugins/snacks.lua -- same "nearest neighbour in direction X
+-- with perpendicular overlap" test, against WezTerm panes instead of Neovim windows.
+-- Fix edge-case bugs in both.
+---@param win any WezTerm window
+---@param dir "Left"|"Down"|"Up"|"Right"
+local function has_neighbor(win, dir)
+  local tab = win:active_tab()
+  if not tab then
     return false
   end
-  name = name:gsub("(.*[/\\])(.*)", "%2")
-  return name == "nvim" or name == "vim"
+  local infos = tab:panes_with_info()
+  local active
+  for _, p in ipairs(infos) do
+    if p.is_active then
+      active = p
+      break
+    end
+  end
+  if not active then
+    return false
+  end
+  for _, p in ipairs(infos) do
+    if not p.is_active then
+      local horiz_overlap = p.left < active.left + active.width and active.left < p.left + p.width
+      local vert_overlap = p.top < active.top + active.height and active.top < p.top + p.height
+      if dir == "Left" and p.left < active.left and vert_overlap then
+        return true
+      elseif dir == "Right" and p.left > active.left and vert_overlap then
+        return true
+      elseif dir == "Up" and p.top < active.top and horiz_overlap then
+        return true
+      elseif dir == "Down" and p.top > active.top and horiz_overlap then
+        return true
+      end
+    end
+  end
+  return false
 end
-
-local direction_keys = { h = "Left", j = "Down", k = "Up", l = "Right" }
 
 -- Return a <C-key> keybinding that navigates to the Neovim split or WezTerm pane in
 -- the key's direction.
@@ -34,10 +62,11 @@ function M.split_nav(key)
     key = key,
     mods = "CTRL",
     action = wezterm.action_callback(function(win, pane)
-      if is_vim(pane) then
+      local dir = direction_keys[key]
+      if editor.is_editor(pane) then
         win:perform_action(act.SendKey({ key = key, mods = "CTRL" }), pane)
-      else
-        win:perform_action(act.ActivatePaneDirection(direction_keys[key]), pane)
+      elseif has_neighbor(win, dir) then
+        win:perform_action(act.ActivatePaneDirection(dir), pane)
       end
     end),
   }

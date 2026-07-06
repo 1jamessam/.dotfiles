@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local editor = require("editor")
 
 local M = {}
 
@@ -10,7 +11,11 @@ function M.apply(_)
     -- -- and for the Claude pane too, so toggling Claude's visibility (which shifts
     -- focus between panes) never changes the tab title.
     local title = pane.title
-    local process = pane.foreground_process_name:match("([^/]+)$") or ""
+    local process = editor.basename(pane.foreground_process_name) or ""
+    -- The Claude pane runs a plain shell (no nvim process, no IS_NVIM var here in the
+    -- tab-title context), so match it by title as a best-effort fallback. This is only
+    -- cosmetic; claude.lua deliberately avoids title-matching for the actual pane
+    -- targeting because the CLI rewrites the title to its current task.
     if process == "nvim" or process == "uv" or pane.title:find("Claude") then
       local cwd = pane.current_working_dir
       if cwd then
