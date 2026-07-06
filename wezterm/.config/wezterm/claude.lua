@@ -22,9 +22,21 @@ local function foreground(pane)
   end
 end
 
+-- Is this pane the editor? Anchor on the IS_NVIM user var that smart-splits.nvim sets
+-- (see nav.lua) -- it stays true even while Neovim runs a foreground subprocess
+-- (`:terminal`, `:!uv ...`), whereas get_foreground_process_name() then reports the
+-- child (uv/caffeinate/etc.) and the process-name check misses. Fall back to the
+-- process name for when smart-splits hasn't loaded yet.
+local function is_editor(pane)
+  if pane:get_user_vars().IS_NVIM == "true" then
+    return true
+  end
+  return foreground(pane) == "nvim"
+end
+
 -- Identify the editor and Claude panes in the active tab, plus whether the editor
--- is currently zoomed (i.e. Claude is hidden). We anchor on the *editor*: it runs
--- nvim, whose process name is stable. The Claude pane is simply the other one.
+-- is currently zoomed (i.e. Claude is hidden). We anchor on the *editor* (see
+-- is_editor); the Claude pane is simply the other one.
 -- (Don't identify Claude by its title -- the CLI sets the title to the current task
 -- summary, e.g. "✳ Review the PR", so a title-based match is intermittent. Nor by
 -- its foreground process, which becomes bash/python/etc. while a tool runs -- which
@@ -34,7 +46,7 @@ local function claude_and_editor(window)
   for _, item in ipairs(window:mux_window():tabs_with_info()) do
     if item.is_active then
       for _, pi in ipairs(item.tab:panes_with_info()) do
-        if not editor_id and foreground(pi.pane) == "nvim" then
+        if not editor_id and is_editor(pi.pane) then
           editor_id = pi.pane:pane_id()
           editor_zoomed = pi.is_zoomed
         else
