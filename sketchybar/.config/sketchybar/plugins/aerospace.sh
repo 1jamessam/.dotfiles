@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
 source "$CONFIG_DIR/colors.sh"
-
-# Cache/state files MUST live outside $CONFIG_DIR: sketchybar's `--hotload true`
-# reloads the whole bar on any file change in the config dir, so writing caches
-# there would make every workspace switch trigger a reload (flicker). Use tmp.
-STATE_DIR="${TMPDIR:-/tmp}/sketchybar_aerospace"
+source "$CONFIG_DIR/aerospace_lib.sh"
 mkdir -p "$STATE_DIR"
 
 [ -z "$FOCUSED_WORKSPACE" ] && FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
@@ -21,13 +17,8 @@ if [ "$SENDER" = "aerospace_workspace_change" ]; then
   [ "$PREV" = "$FOCUSED_WORKSPACE" ] && exit 0
   printf '%s' "$FOCUSED_WORKSPACE" > "$STATE_DIR/focused"
 
-  focused=(background.drawing=on background.border_width=0
-    background.color="$LAVENDER" icon.color="$BLACK" label.color="$BLACK")
-  unfocused=(background.drawing=off background.border_width=0
-    background.color="$BASE" icon.color="$GREY" label.color="$GREY")
-
-  args=(--set space."$FOCUSED_WORKSPACE" "${focused[@]}")
-  [ -n "$PREV" ] && args+=(--set space."$PREV" "${unfocused[@]}")
+  args=(--set space."$FOCUSED_WORKSPACE" "${aerospace_focused[@]}")
+  [ -n "$PREV" ] && args+=(--set space."$PREV" "${aerospace_unfocused[@]}")
   sketchybar "${args[@]}"
   exit 0
 fi

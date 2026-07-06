@@ -11,15 +11,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "sql",
---   callback = function()
---     vim.bo.shiftwidth = 4
---     vim.bo.tabstop = 4
---     vim.bo.expandtab = true
---   end,
--- })
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "xml",
   callback = function()

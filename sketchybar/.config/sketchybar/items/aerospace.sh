@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# State/cache files live OUTSIDE $CONFIG_DIR — sketchybar's --hotload reloads the
-# bar on any change in the config dir. Must match STATE_DIR in plugins/aerospace.sh.
-STATE_DIR="${TMPDIR:-/tmp}/sketchybar_aerospace"
+source "$CONFIG_DIR/aerospace_lib.sh"
 mkdir -p "$STATE_DIR"
 rm -f "$STATE_DIR/labels"                  # fresh icon cache on (re)load
 rmdir "$STATE_DIR/icons.lock" 2>/dev/null  # drop any stale lock
@@ -74,7 +72,5 @@ sketchybar --add item aerospace_icons left \
 FOCUSED=$(aerospace list-workspaces --focused)
 if [ -n "$FOCUSED" ]; then
   printf '%s' "$FOCUSED" > "$STATE_DIR/focused"
-  sketchybar --set space."$FOCUSED" \
-    background.drawing=on background.border_width=0 \
-    background.color="$LAVENDER" icon.color="$BLACK" label.color="$BLACK"
+  sketchybar --set space."$FOCUSED" "${aerospace_focused[@]}"
 fi

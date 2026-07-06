@@ -8,10 +8,12 @@ j() { printf '%s' "$input" | jq -r "$1 // empty" 2>/dev/null; }
 abbr() {
   awk -v n="$1" 'BEGIN{
     if (n=="") exit
-    if (n>=1000000) printf "%.1fM", n/1000000
-    else if (n>=1000) printf "%dk", n/1000
-    else printf "%d", n
-  }' | sed 's/\.0\([Mk]\)/\1/'
+    if (n>=1000000) s=sprintf("%.1fM", n/1000000)
+    else if (n>=1000) s=sprintf("%dk", n/1000)
+    else s=sprintf("%d", n)
+    sub(/\.0/, "", s)   # 1.0M -> 1M
+    printf "%s", s
+  }'
 }
 
 cwd=$(j '.workspace.current_dir'); [ -z "$cwd" ] && cwd=$(j '.cwd')
