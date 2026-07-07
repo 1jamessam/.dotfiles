@@ -9,6 +9,7 @@ local editor = require("editor")
 local M = {}
 
 local direction_keys = { h = "Left", j = "Down", k = "Up", l = "Right" }
+local edge_dirs = { left = "Left", down = "Down", up = "Up", right = "Right" }
 
 -- Is there a WezTerm pane adjacent to the active one in `dir`? ActivatePaneDirection
 -- otherwise wraps to the opposite edge, so at the rightmost (Claude) pane a <C-l>
@@ -53,6 +54,21 @@ local function has_neighbor(win, dir)
   end
   return false
 end
+
+-- Cross from Neovim into an adjacent WezTerm pane. When smart-splits.nvim can't move
+-- any further within Neovim (cursor already at the outermost split), it sets the
+-- SMART_SPLITS_NAV user var to the direction instead of shelling out to `wezterm cli`
+-- (~6 blocking subprocesses per hop). We do the hop natively here -- in-process and
+-- instant -- reusing has_neighbor so it still stops at the edge instead of wrapping.
+wezterm.on("user-var-changed", function(win, pane, name, value)
+  if name ~= "SMART_SPLITS_NAV" then
+    return
+  end
+  local dir = edge_dirs[value]
+  if dir and has_neighbor(win, dir) then
+    win:perform_action(act.ActivatePaneDirection(dir), pane)
+  end
+end)
 
 -- Return a <C-key> keybinding that navigates to the Neovim split or WezTerm pane in
 -- the key's direction.

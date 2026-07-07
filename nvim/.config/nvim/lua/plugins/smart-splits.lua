@@ -5,11 +5,20 @@ return {
   -- <C-hjkl> should move a Neovim split or a WezTerm pane. It has to be active from
   -- the start for that handshake to work.
   lazy = false,
-  -- at_edge = "stop": at an outermost split, moving further is a no-op instead of
-  -- wrapping to the opposite edge -- so <C-h> from the leftmost (editor) split won't
-  -- jump across to the Claude pane on the right. Mirrors the WezTerm-side guard in
-  -- wezterm/.config/wezterm/nav.lua.
-  opts = { at_edge = "stop" },
+  -- multiplexer_integration = false: don't let smart-splits cross into WezTerm panes by
+  -- shelling out to `wezterm cli` -- a single edge hop spawns ~6 blocking subprocesses on
+  -- the UI thread (visible lag switching Neovim -> Claude). Instead, at an outermost split
+  -- we set the SMART_SPLITS_NAV WezTerm user var and let wezterm/.config/wezterm/nav.lua
+  -- do the hop natively (in-process, instant). has_neighbor there provides the same
+  -- no-wrap guard the old at_edge = "stop" gave us: <C-h> from the leftmost split is a
+  -- no-op because there's no WezTerm pane on the left.
+  opts = {
+    multiplexer_integration = false,
+    at_edge = function(ctx)
+      local seq = string.format("\x1b]1337;SetUserVar=SMART_SPLITS_NAV=%s\a", vim.base64.encode(ctx.direction))
+      vim.api.nvim_chan_send(vim.v.stderr, seq)
+    end,
+  },
   keys = {
     { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Move to left split/pane" },
     { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Move to below split/pane" },
