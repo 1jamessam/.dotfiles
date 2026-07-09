@@ -19,10 +19,13 @@ return {
       vim.api.nvim_chan_send(vim.v.stderr, seq)
     end,
   },
+  -- mode n+i: without an insert-mode mapping, <C-hjkl> falls through to Neovim's
+  -- default and inserts the literal control char (e.g. <C-l> -> ^L) instead of
+  -- navigating. Crossing runs a wincmd, so you land in normal mode in the target.
   keys = {
-    { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Move to left split/pane" },
-    { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Move to below split/pane" },
-    { "<C-k>", function() require("smart-splits").move_cursor_up() end, desc = "Move to above split/pane" },
-    { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "Move to right split/pane" },
+    { "<C-h>", function() require("smart-splits").move_cursor_left() end, mode = { "n", "i" }, desc = "Move to left split/pane" },
+    { "<C-j>", function() require("smart-splits").move_cursor_down() end, mode = { "n", "i" }, desc = "Move to below split/pane" },
+    { "<C-k>", function() require("smart-splits").move_cursor_up() end, mode = { "n", "i" }, desc = "Move to above split/pane" },
+    { "<C-l>", function() require("smart-splits").move_cursor_right() end, mode = { "n", "i" }, desc = "Move to right split/pane" },
   },
 }
