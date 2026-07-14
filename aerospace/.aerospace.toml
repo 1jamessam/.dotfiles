@@ -175,6 +175,7 @@ alt-d = 'exec-and-forget open -a /Applications/Visual\ Studio\ Code.app/'
 alt-e = 'exec-and-forget open -a /Applications/Claude.app'
 alt-p = 'exec-and-forget open -a /Applications/Postman.app'
 alt-y = 'exec-and-forget open -a /Applications/YouTube\ Music.app'
+alt-f = 'exec-and-forget open -a /Applications/Feishin.app'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-0 = 'move-node-to-workspace 0'
@@ -221,7 +222,13 @@ run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = '- Work'
 run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+if.window-title-regex-substring = '- Personal'
+run = 'move-node-to-workspace 6'
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
@@ -245,6 +252,10 @@ run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'com.github.th-ch.youtube-music'
+run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+if.app-id = 'org.jeffvli.feishin'
 run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
