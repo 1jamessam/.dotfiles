@@ -50,43 +50,43 @@ if [ -n "$cwd" ]; then
     "$HOME") d="~" ;;
     "$HOME"/*) d="~${d#"$HOME"}" ;;
   esac
-  line1="$(printf '%b%b%s%b' "$B" "$BLUE" "$d" "$RST")"
+  line1="$(printf '📁 %b%b%s%b' "$B" "$BLUE" "$d" "$RST")"
 fi
 
-# Model
-[ -n "$model" ] && parts+=("$(printf '%b%s%b' "$CYAN" "$model" "$RST")")
+# Model (with effort level alongside)
+if [ -n "$model" ]; then
+  m="$(printf '🤖 %b%s%b' "$CYAN" "$model" "$RST")"
+  [ -n "$effort" ] && m+="$(printf ' %beffort:%s%b' "$MAG" "$effort" "$RST")"
+  parts+=("$m")
+fi
 
 # Context: "12% ctx (122k/1M)", colored by usage
 if [ -n "$used" ]; then
   c="$GREEN"
   awk "BEGIN{exit !($used >= 50 && $used < 80)}" && c="$YELLOW"
   awk "BEGIN{exit !($used >= 80)}" && c="$RED"
-  ctx="$(printf '%b%s%% ctx%b' "$c" "$used" "$RST")"
+  ctx="$(printf '🧠 %b%s%% ctx%b' "$c" "$used" "$RST")"
   if [ -n "$used_tok" ] && [ -n "$size_tok" ]; then
     ctx+="$(printf ' %b(%s/%s)%b' "$DIM" "$(abbr "$used_tok")" "$(abbr "$size_tok")" "$RST")"
   fi
   parts+=("$ctx")
 fi
 
-# Effort level
-[ -n "$effort" ] && parts+=("$(printf '%beffort:%s%b' "$MAG" "$effort" "$RST")")
-
 # Fast-mode flag
-[ "$fast" = "true" ] && parts+=("$(printf '%bfast%b' "$DIM" "$RST")")
+[ "$fast" = "true" ] && parts+=("$(printf '⚡%bfast%b' "$DIM" "$RST")")
 
 # Cost
-[ -n "$cost" ] && parts+=("$(printf '%b$%.2f%b' "$DIM" "$cost" "$RST")")
+[ -n "$cost" ] && parts+=("$(printf '💰%b$%.2f%b' "$DIM" "$cost" "$RST")")
 
 # Rate limits (5h / 7d usage)
 if [ -n "$r5" ] || [ -n "$r7" ]; then
-  parts+=("$(printf '%b5h:%s%% 7d:%s%%%b' "$DIM" "${r5:-0}" "${r7:-0}" "$RST")")
+  parts+=("$(printf '⏱️%b5h:%s%% 7d:%s%%%b' "$DIM" "${r5:-0}" "${r7:-0}" "$RST")")
 fi
 
-# Join the remaining metadata with a dim separator
-sep=$(printf ' %b·%b ' "$DIM" "$RST")
+# Join the remaining metadata — each segment's emoji acts as its delimiter
 out=""
 for p in "${parts[@]}"; do
-  [ -n "$out" ] && out+="$sep"
+  [ -n "$out" ] && out+="  "
   out+="$p"
 done
 
