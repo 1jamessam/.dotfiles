@@ -7,6 +7,7 @@
       "Bash(gh pr view:*)",
       "Bash(gh pr list:*)",
       "Bash(gh pr diff:*)",
+      "Bash(gh pr create:*)",
       "Bash(gh run view:*)",
       "Bash(gh run list:*)",
       "Bash(git status:*)",
@@ -92,7 +93,8 @@
     "clangd-lsp@claude-plugins-official": true,
     "andrej-karpathy-skills@karpathy-skills": true,
     "lua-lsp@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true
+    "swift-lsp@claude-plugins-official": true,
+    "data-analytics-plugins@rentspree-plugins": true
   },
   "extraKnownMarketplaces": {
     "dagster": {
@@ -106,6 +108,12 @@
         "source": "github",
         "repo": "forrestchang/andrej-karpathy-skills"
       }
+    },
+    "rentspree-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "rentspree/claude-plugins"
+      }
     }
   },
   "effortLevel": "high",
@@ -116,6 +124,8 @@
   },
   "autoDreamEnabled": true,
   "skipWorkflowUsageWarning": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true
 }
