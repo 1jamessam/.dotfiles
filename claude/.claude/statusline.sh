@@ -42,14 +42,15 @@ BLUE='\033[34m'
 
 parts=()
 
-# Current directory (abbreviate $HOME as ~), bold blue
+# Current directory (abbreviate $HOME as ~), bold blue — rendered on its own top line
+line1=""
 if [ -n "$cwd" ]; then
   d="$cwd"
   case "$d" in
     "$HOME") d="~" ;;
     "$HOME"/*) d="~${d#"$HOME"}" ;;
   esac
-  parts+=("$(printf '%b%b%s%b' "$B" "$BLUE" "$d" "$RST")")
+  line1="$(printf '%b%b%s%b' "$B" "$BLUE" "$d" "$RST")"
 fi
 
 # Model
@@ -81,11 +82,14 @@ if [ -n "$r5" ] || [ -n "$r7" ]; then
   parts+=("$(printf '%b5h:%s%% 7d:%s%%%b' "$DIM" "${r5:-0}" "${r7:-0}" "$RST")")
 fi
 
-# Join with a dim separator
-sep=$(printf ' %b|%b ' "$DIM" "$RST")
+# Join the remaining metadata with a dim separator
+sep=$(printf ' %b·%b ' "$DIM" "$RST")
 out=""
 for p in "${parts[@]}"; do
   [ -n "$out" ] && out+="$sep"
   out+="$p"
 done
+
+# Line 1: current path. Line 2: everything else.
+[ -n "$line1" ] && printf '%b\n' "$line1"
 printf '%b' "$out"
