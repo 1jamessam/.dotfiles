@@ -4,6 +4,17 @@
 # Dedupe PATH entries (keeps first occurrence)
 typeset -U path PATH
 
+# Regenerate a cached init/completion script only when it's missing or older
+# than its source binary, then source it. Avoids a subshell on every startup.
+cache_source() {
+  local cache=$1 bin=$2; shift 2
+  local binpath=$(command -v "$bin")
+  if [[ -n $binpath && ( ! -f $cache || $cache -ot $binpath ) ]]; then
+    "$@" > $cache
+  fi
+  [[ -f $cache ]] && source $cache
+}
+
 # Homebrew
 export PATH=/opt/homebrew/bin:$PATH
 
@@ -64,10 +75,7 @@ export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
 export CFLAGS="-I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/bzip2/include -I/opt/homebrew/opt/readline/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include" LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/zlib/lib -L/opt/homebrew/opt/bzip2/lib -L/opt/homebrew/opt/postgresql@15/lib"
 
 # Helm completions — cached to avoid ~40ms subshell
-if [[ ! -f ~/.zsh/_helm_completion || ~/.zsh/_helm_completion -ot $(command -v helm) ]]; then
-  helm completion zsh > ~/.zsh/_helm_completion
-fi
-source ~/.zsh/_helm_completion
+cache_source ~/.zsh/_helm_completion helm helm completion zsh
 export GOOGLE_CLOUD_PROJECT="prj-rentspree-dev-429603"
 source ~/.zsh_aliases
 
@@ -79,10 +87,4 @@ for f in functions python paths; do source ~/.zsh/$f.zsh; done
 # Personal
 
 ## Zoxide (better cd) — must be last, cached to avoid subshell
-if [[ ! -f ~/.zsh/_zoxide_init || ~/.zsh/_zoxide_init -ot $(command -v zoxide) ]]; then
-  zoxide init zsh > ~/.zsh/_zoxide_init
-fi
-source ~/.zsh/_zoxide_init
-
-# To customize prompt, run `p10k configure` or edit ~/.dotfiles/zsh/.p10k.zsh.
-[[ ! -f ~/.dotfiles/zsh/.p10k.zsh ]] || source ~/.dotfiles/zsh/.p10k.zsh
+cache_source ~/.zsh/_zoxide_init zoxide zoxide init zsh

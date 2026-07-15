@@ -13,7 +13,4 @@ pyenv() {
 # UV python
 source "$HOME/.local/bin/env"
 # UV completions — regenerate only when missing or older than the uv binary
-if [[ ! -f ~/.zsh/_uv_completion || ~/.zsh/_uv_completion -ot $(command -v uv) ]]; then
-  uv generate-shell-completion zsh > ~/.zsh/_uv_completion
-fi
-source ~/.zsh/_uv_completion
+cache_source ~/.zsh/_uv_completion uv uv generate-shell-completion zsh
