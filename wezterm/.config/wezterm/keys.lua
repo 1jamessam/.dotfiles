@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local claude = require("claude")
 local nav = require("nav")
+local panes = require("panes")
 
 local M = {}
 
@@ -26,6 +27,10 @@ function M.apply(config)
     -- Zoom the focused pane to fill the tab (tmux-style prefix+z); toggle to restore
     -- the split. Works on any pane; <C-'> is the Claude-specific hide/show.
     { key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
+    -- tmux-style break-pane / join-pane (see panes.lua): break the active pane out into
+    -- its own tab, or pull another pane into it as a split.
+    { key = "b", mods = "LEADER", action = wezterm.action_callback(panes.break_to_tab) },
+    { key = "j", mods = "LEADER", action = wezterm.action_callback(panes.join_pane) },
     -- Seamless Neovim-split / WezTerm-pane navigation (see nav.lua).
     nav.split_nav("h"),
     nav.split_nav("j"),
