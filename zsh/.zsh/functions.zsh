@@ -15,3 +15,13 @@ function y() {
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
 	command rm -f -- "$tmp"
 }
+
+# Fully relaunch sketchybar. Use this instead of `sketchybar --reload`: an
+# in-process reload races Control Center alias resolution, so the sound/battery/
+# wifi icons come up blank. A fresh process resolves them cleanly, like the old
+# `brew services restart sketchybar` did.
+function sbreload() {
+	pkill sketchybar 2>/dev/null
+	sketchybar >/dev/null 2>&1 &
+	disown
+}
