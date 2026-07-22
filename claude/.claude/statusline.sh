@@ -76,11 +76,14 @@ fi
 [ "$fast" = "true" ] && parts+=("$(printf '⚡%bfast%b' "$DIM" "$RST")")
 
 # Cost
-[ -n "$cost" ] && parts+=("$(printf '💰%b$%.2f%b' "$DIM" "$cost" "$RST")")
+[ -n "$cost" ] && parts+=("$(printf '💰 %b$%.2f%b' "$DIM" "$cost" "$RST")")
+
+# Round a number to a whole integer: 12.34 -> 12
+round0() { awk -v n="${1:-0}" 'BEGIN{ printf "%.0f", n }'; }
 
 # Rate limits (5h / 7d usage)
 if [ -n "$r5" ] || [ -n "$r7" ]; then
-  parts+=("$(printf '⏱️%b5h:%s%% 7d:%s%%%b' "$DIM" "${r5:-0}" "${r7:-0}" "$RST")")
+  parts+=("$(printf '⏱️%b5h:%s%% 7d:%s%%%b' "$DIM" "$(round0 "$r5")" "$(round0 "$r7")" "$RST")")
 fi
 
 # Join the remaining metadata — each segment's emoji acts as its delimiter

@@ -6,39 +6,53 @@ allowed-tools: Bash(gh:*), Bash(mkdir:*), Bash(date:*), Bash(python3:*), Write, 
 
 Generate a daily work summary for GitHub user `james-rsp` across the entire `rentspree` GitHub org.
 
-Determine today's date using `date +%Y-%m-%d`.
+## Report date (morning vs. afternoon)
+
+The date to report depends on the local time this command runs:
+
+- **Morning** (before 12:00 local) → report **yesterday's** activity. Running early usually means summing up the previous day's work before it's overwritten by fresh activity.
+- **Afternoon/evening** (12:00 local or later) → report **today's** activity.
+
+Every command below computes this itself with the snippet
+`H=$(date +%H); if [ "$H" -lt 12 ]; then D=$(date -v-1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi`
+so `$D` is the report date. Shell state does not persist between tool calls, so each command recomputes it. Use `$D` (not literally "today's date") everywhere — including the report title, filename, and any prose. When you print the header, note which day it is (e.g. "reporting yesterday" when running in the morning).
 
 ## Data Collection
 
 Run these in parallel:
 
-1. **PRs opened today**:
+1. **PRs opened on the report date**:
    ```
-   gh search prs --author james-rsp --owner rentspree --created ">=$(date +%Y-%m-%d)" --json repository,title,number,state,url --limit 50
-   ```
-
-2. **PRs merged today** (may have been opened earlier):
-   ```
-   gh api search/issues --method GET -f q="author:james-rsp org:rentspree is:pr is:merged merged:$(date +%Y-%m-%d)..$(date +%Y-%m-%d)" -f per_page=50 --jq '.items[] | {title, number, html_url, repository_url}'
+   H=$(date +%H); if [ "$H" -lt 12 ]; then D=$(date -v-1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi
+   gh search prs --author james-rsp --owner rentspree --created "$D..$D" --json repository,title,number,state,url --limit 50
    ```
 
-3. **Commits pushed today**:
+2. **PRs merged on the report date** (may have been opened earlier):
    ```
-   gh api search/commits --method GET -f q="author:james-rsp org:rentspree committer-date:$(date +%Y-%m-%d)..$(date +%Y-%m-%d)" -f per_page=50 --jq '.items[] | {message: .commit.message, repo: .repository.full_name, sha: .sha[:7], url: .html_url}'
+   H=$(date +%H); if [ "$H" -lt 12 ]; then D=$(date -v-1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi
+   gh api search/issues --method GET -f q="author:james-rsp org:rentspree is:pr is:merged merged:$D..$D" -f per_page=50 --jq '.items[] | {title, number, html_url, repository_url}'
    ```
 
-4. **Claude sessions active today**: scan the local Claude session logs for every user prompt sent today (the machine's local day), across all projects — including sessions started on earlier days that had activity today. Run:
+3. **Commits pushed on the report date**:
+   ```
+   H=$(date +%H); if [ "$H" -lt 12 ]; then D=$(date -v-1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi
+   gh api search/commits --method GET -f q="author:james-rsp org:rentspree committer-date:$D..$D" -f per_page=50 --jq '.items[] | {message: .commit.message, repo: .repository.full_name, sha: .sha[:7], url: .html_url}'
+   ```
+
+4. **Claude sessions active on the report date**: scan the local Claude session logs for every user prompt sent on the report date (the machine's local day, shifted to yesterday when running in the morning — same rule as above), across all projects — including sessions started on earlier days that had activity on that day. Run:
    ```
    python3 - <<'PY'
    import json, os, glob
    from datetime import datetime, timezone, timedelta
 
    ROOT = os.path.expanduser("~/.claude/projects")
-   # Local "today" -> UTC window. Session timestamps are UTC (ISO-8601 Z);
+   # Report-date -> UTC window. Session timestamps are UTC (ISO-8601 Z);
    # derive the window from the machine's local zone so this is not hardcoded.
+   # Morning (before 12:00 local) reports yesterday; afternoon reports today.
    local_tz = datetime.now().astimezone().tzinfo
    now_local = datetime.now(local_tz)
-   start_local = now_local.replace(hour=0, minute=0, second=0, microsecond=0)
+   day_offset = 1 if now_local.hour < 12 else 0
+   start_local = now_local.replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=day_offset)
    end_local = start_local + timedelta(days=1)
    START, END = start_local.astimezone(timezone.utc), end_local.astimezone(timezone.utc)
 
