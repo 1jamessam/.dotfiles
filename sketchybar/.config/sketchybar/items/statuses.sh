@@ -40,6 +40,8 @@ sketchybar \
 #   --set input_source "${input_source[@]}" \
 #   --subscribe input_source input_change system_woke
 
-## bracket is created in cpu.sh (sourced after this file)
+sketchybar \
+  --add bracket statuses wifi battery sound_level sound_icon \
+  --set statuses "${status_bracket[@]}"
 
 # sketchybar --query default_menu_items

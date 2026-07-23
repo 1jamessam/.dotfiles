@@ -54,7 +54,7 @@ sketchybar --default "${defaults[@]}"
 # Register system_stats event and start stats provider
 sketchybar --add event system_stats
 killall stats_provider 2>/dev/null
-stats_provider --cpu usage --battery percentage state --interval 10 &
+stats_provider --battery percentage state --interval 10 &
 
 # Left
 # Wait briefly for aerospace daemon; otherwise list-workspaces returns empty
@@ -71,7 +71,6 @@ source "$ITEM_DIR/calendar.sh"
 source "$ITEM_DIR/sound.sh"
 source "$ITEM_DIR/battery.sh"
 source "$ITEM_DIR/statuses.sh"
-source "$ITEM_DIR/cpu.sh"
 source "$ITEM_DIR/music.sh"
 
 sketchybar --hotload true
