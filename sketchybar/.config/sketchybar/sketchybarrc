@@ -58,11 +58,17 @@ stats_provider --cpu usage --memory ram_usage --battery percentage state --inter
 
 # Left
 # Wait briefly for aerospace daemon; otherwise list-workspaces returns empty
-# and no workspace items get added to the bar.
+# and no workspace items get added to the bar. Probe through aerospace_q so a daemon
+# that accepts the connection but never answers can't wedge login here forever; a
+# blocked probe just reads as "not ready", which the retry already handles. Short
+# timeout keeps the worst case near the intended ~5s rather than 20x the default.
+source "$CONFIG_DIR/aerospace_lib.sh"
+AEROSPACE_TIMEOUT=1
 for _ in $(seq 1 20); do
-  [ -n "$(aerospace list-workspaces --all 2>/dev/null)" ] && break
+  [ -n "$(aerospace_q list-workspaces --all)" ] && break
   sleep 0.25
 done
+unset AEROSPACE_TIMEOUT
 source "$ITEM_DIR/aerospace.sh"
 source "$ITEM_DIR/front_app.sh"
 

@@ -4,7 +4,7 @@ source "$CONFIG_DIR/colors.sh"
 source "$CONFIG_DIR/aerospace_lib.sh"
 mkdir -p "$STATE_DIR"
 
-[ -z "$FOCUSED_WORKSPACE" ] && FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
+[ -z "$FOCUSED_WORKSPACE" ] && FOCUSED_WORKSPACE=$(aerospace_q list-workspaces --focused)
 
 # Fast path: a workspace switch only moves the highlight — windows don't move, so
 # the per-workspace app icons are unchanged. Highlight the new workspace and
@@ -32,8 +32,8 @@ trap 'rmdir "$LOCK" 2>/dev/null' EXIT
 
 source "$CONFIG_DIR/icon_map.sh"
 
-ALL_WINDOWS=$(aerospace list-windows --all --format '%{app-name}|%{workspace}')
-ALL_WORKSPACES=$(aerospace list-workspaces --all)
+ALL_WINDOWS=$(aerospace_q list-windows --all --format '%{app-name}|%{workspace}')
+ALL_WORKSPACES=$(aerospace_q list-workspaces --all)
 [ -z "$ALL_WORKSPACES" ] && exit 0  # daemon busy mid-switch; leave the bar untouched
 
 # Touch only the label (app icons), never the highlight (owned by the fast path),

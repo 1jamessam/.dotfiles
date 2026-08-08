@@ -5,7 +5,7 @@ mkdir -p "$STATE_DIR"
 rm -f "$STATE_DIR/labels"                  # fresh icon cache on (re)load
 rmdir "$STATE_DIR/icons.lock" 2>/dev/null  # drop any stale lock
 
-ALL_WORKSPACES=$(aerospace list-workspaces --all)
+ALL_WORKSPACES=$(aerospace_q list-workspaces --all)
 
 space=(
   background.color="$BASE"
@@ -69,7 +69,7 @@ sketchybar --add item aerospace_icons left \
 # Seed the initial highlight: the fast path only runs on switch events and the
 # icon path never sets colors, so without this the focused workspace wouldn't be
 # highlighted until the first switch.
-FOCUSED=$(aerospace list-workspaces --focused)
+FOCUSED=$(aerospace_q list-workspaces --focused)
 if [ -n "$FOCUSED" ]; then
   printf '%s' "$FOCUSED" > "$STATE_DIR/focused"
   sketchybar --set space."$FOCUSED" "${aerospace_focused[@]}"
