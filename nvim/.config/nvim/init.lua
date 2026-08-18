@@ -19,6 +19,5 @@ vim.filetype.add({
   },
   filename = {
     sketchybarrc = "bash",
-    bordersrc = "bash",
   },
 })
