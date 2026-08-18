@@ -509,7 +509,7 @@ function icon_map() {
   "LINE")
     icon_result=":line:"
     ;;
-  "YouTube Music")
+  "YouTube Music" | "Kaset")
     icon_result=":youtube_music:"
     ;;
   "ChatGPT")

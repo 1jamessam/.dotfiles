@@ -1,8 +1,8 @@
 #!/bin/bash
 
 music=(
-  script="$PLUGIN_DIR/youtube-music.sh"
-  click_script="curl -s -X POST 0.0.0.0:26538/api/v1/toggle-play && $PLUGIN_DIR/youtube-music.sh"
+  script="$PLUGIN_DIR/kaset.sh"
+  click_script="osascript -e 'tell application \"Kaset\" to playpause' && $PLUGIN_DIR/kaset.sh"
   label.padding_right=8
   label.font.size=17
   label.font.style=Bold
@@ -24,14 +24,14 @@ music=(
 )
 
 music_artwork=(
-  # click_script="curl -s -X POST 0.0.0.0:26538/api/v1/toggle-play && $PLUGIN_DIR/youtube-music.sh"
-  click_script="curl -s -X POST 0.0.0.0:26538/api/v1/toggle-play"
+  click_script="osascript -e 'tell application \"Kaset\" to playpause'"
   label.padding_right=8
   padding_right=16
   display=1
   label=""
-  width=40
-  background.image.scale=0.07
+  # width and background.image.scale are set by kaset.sh, per artwork's real
+  # dimensions; this is just the placeholder slot before the first fetch.
+  width=44
   background.image.corner_radius=8
   background.image.border_color="$TRANSPARENT"
   background.color="$TRANSPARENT"
