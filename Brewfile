@@ -108,6 +108,10 @@ cask "codex"
 # Colemak mod for more comfortable typing (DH variant)
 cask "colemak-dh"
 cask "font-hack-nerd-font"
+# WezTerm's primary font
+cask "font-jetbrains-mono-nerd-font"
+# San Francisco Pro: WezTerm falls back to it for the SF Symbols glyphs
+cask "font-sf-pro"
 cask "font-sketchybar-app-font"
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "gcloud-cli"

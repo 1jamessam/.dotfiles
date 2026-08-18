@@ -6,7 +6,9 @@ function M.apply(config)
   -- config.color_scheme = "Catppuccin Frappe"
   config.color_scheme = "Kanagawa (Gogh)"
   config.native_macos_fullscreen_mode = true
-  config.font = wezterm.font("JetBrainsMono Nerd Font")
+  -- SF Pro is the fallback so the SF Symbols codepoints in the sketchybar
+  -- config render instead of tripping WezTerm's missing-glyph warning.
+  config.font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font", "SF Pro" })
   config.font_size = 12
   config.window_decorations = "RESIZE"
   config.window_background_opacity = 0.90
