@@ -1,7 +1,7 @@
 ---
 model: claude-sonnet-4-6
 description: Generate daily work summary across rentspree org + local Claude sessions, save to Obsidian, post to Slack
-allowed-tools: Bash(gh:*), Bash(mkdir:*), Bash(date:*), Bash(python3:*), Write, mcp__claude_ai_Slack__slack_send_message
+allowed-tools: Bash(gh:*), Bash(git:*), Bash(mkdir:*), Bash(date:*), Bash(python3:*), Write, mcp__claude_ai_Slack__slack_send_message
 ---
 
 Generate a daily work summary for GitHub user `james-rsp` across the entire `rentspree` GitHub org.
@@ -33,13 +33,60 @@ Run these in parallel:
    gh api search/issues --method GET -f q="author:james-rsp org:rentspree is:pr is:merged merged:$D..$D" -f per_page=50 --jq '.items[] | {title, number, html_url, repository_url}'
    ```
 
-3. **Commits pushed on the report date**:
+3. **Commits pushed on the report date** — **two sources, both required**:
+
+   3a. GitHub commit search. **This indexes only each repo's default branch**, so it misses
+   every commit still living on a feature branch — which on a normal working day is most of
+   them. Treat an empty result here as "nothing landed on main", never as "no work happened".
    ```
    H=$(date +%H); if [ "$H" -lt 12 ]; then D=$(date -v-1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi
    gh api search/commits --method GET -f q="author:james-rsp org:rentspree committer-date:$D..$D" -f per_page=50 --jq '.items[] | {message: .commit.message, repo: .repository.full_name, sha: .sha[:7], url: .html_url}'
    ```
 
-4. **Claude sessions active on the report date**: scan the local Claude session logs for every user prompt sent on the report date (the machine's local day, shifted to yesterday when running in the morning — same rule as above), across all projects — including sessions started on earlier days that had activity on that day. Run:
+   3b. Local git scan across every checkout — catches feature-branch work. `--all` covers
+   every ref, not just the currently checked-out branch:
+   ```
+   python3 - <<'PY'
+   import os, glob, subprocess
+   from datetime import datetime, timedelta
+
+   now = datetime.now().astimezone()
+   day_offset = 1 if now.hour < 12 else 0
+   D = (now - timedelta(days=day_offset)).strftime("%Y-%m-%d")
+   nxt = (now - timedelta(days=day_offset-1)).strftime("%Y-%m-%d")
+
+   roots = glob.glob(os.path.expanduser("~/Developer/*/")) + [os.path.expanduser("~/.dotfiles")]
+   for repo in sorted(roots):
+       if not os.path.isdir(os.path.join(repo, ".git")): continue
+       try:
+           out = subprocess.run(
+               ["git", "-C", repo, "log", "--all", "--source", "--author=james-rsp",
+                f"--since={D}T00:00:00", f"--until={nxt}T00:00:00",
+                "--pretty=%h|%ad|%S|%s", "--date=format:%H:%M"],
+               capture_output=True, text=True, timeout=20).stdout.strip()
+       except Exception:
+           continue
+       if not out: continue
+       origin = subprocess.run(["git", "-C", repo, "remote", "get-url", "origin"],
+                               capture_output=True, text=True).stdout.strip()
+       print(f"\n### {os.path.basename(repo.rstrip('/'))}  [{origin}]")
+       print(out)
+   PY
+   ```
+   Output is `sha|HH:MM|ref|subject`. Merge 3a and 3b, de-duplicating by SHA, and strip the
+   `refs/heads/` prefix off the ref for the Branch column.
+   **Check each repo's `origin`**: only `rentspree/*` remotes count as org work — personal
+   remotes belong in the Claude Sessions section, labelled as personal, not in Commits.
+
+4. **PRs reviewed or commented on the report date** — review work is real work and produces
+   no commits of your own. The window is exclusive at the top, so use the day *after* `$D`:
+   ```
+   H=$(date +%H); if [ "$H" -lt 12 ]; then D=$(date -v-1d +%Y-%m-%d); N=$(date -v-1d -v+1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); N=$(date -v+1d +%Y-%m-%d); fi
+   gh api search/issues --method GET -f q="commenter:james-rsp org:rentspree is:pr updated:$D..$N" -f per_page=30 --jq '.items[] | "\(.repository_url|split("/")|last) #\(.number) [\(.state)] \(.title)"'
+   ```
+   Exclude PRs you authored yourself — those belong under PRs Opened / Merged.
+
+5. **Claude sessions active on the report date**: scan the local Claude session logs for every user prompt sent on the report date (the machine's local day, shifted to yesterday when running in the morning — same rule as above), across all projects — including sessions started on earlier days that had activity on that day. Run:
    ```
    python3 - <<'PY'
    import json, os, glob
@@ -116,9 +163,9 @@ Create a markdown report:
 # Daily Work Summary — {YYYY-MM-DD}
 
 ## Commits
-| Repo | SHA | Message |
-|------|-----|---------|
-| ... | ... | ... |
+| Repo | SHA | Branch | Message |
+|------|-----|--------|---------|
+| ... | ... | ... | ... |
 
 ## PRs Opened
 | Repo | # | Title | Status |
@@ -126,6 +173,11 @@ Create a markdown report:
 | ... | ... | ... | ... |
 
 ## PRs Merged
+| Repo | # | Title |
+|------|---|-------|
+| ... | ... | ... |
+
+## PRs Reviewed
 | Repo | # | Title |
 |------|---|-------|
 | ... | ... | ... |
@@ -140,6 +192,11 @@ Create a markdown report:
 ```
 
 If a section has no results, write "No activity" instead of a table. The Claude Sessions section captures work-in-progress that may not have produced a commit or PR yet, so include it even when it overlaps with the GitHub sections.
+
+Before writing "No activity" for Commits, confirm step 3b also came back empty — an empty
+3a alone means nothing merged to main that day, not that nothing was written. If the local
+scan supplied commits the API missed, say so in a one-line note above the Commits table so
+the reader knows why the numbers differ from GitHub's own activity view.
 
 ## Save to Obsidian
 
