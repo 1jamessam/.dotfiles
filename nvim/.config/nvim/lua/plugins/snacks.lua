@@ -79,6 +79,11 @@ end
 local function dock_terminal_bottom()
   vim.schedule(function()
     local cur = vim.api.nvim_get_current_win()
+    -- Suppress Buf/WinEnter while we briefly focus the terminal to re-dock it:
+    -- a Snacks terminal fires `startinsert` on BufEnter (auto_insert), which would
+    -- otherwise leak into the explorer once focus is restored and open it in insert mode.
+    local ei = vim.o.eventignore
+    vim.o.eventignore = "BufEnter,WinEnter"
     for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
       local cfg = vim.api.nvim_win_get_config(win)
       if cfg.relative == "" and vim.bo[vim.api.nvim_win_get_buf(win)].filetype == "snacks_terminal" then
@@ -87,6 +92,7 @@ local function dock_terminal_bottom()
       end
     end
     pcall(vim.api.nvim_set_current_win, cur)
+    vim.o.eventignore = ei
   end)
 end
 
