@@ -15,7 +15,7 @@ end
 -- Dataform
 vim.filetype.add({
   extension = {
-    sqlx = "sql",
+    sqlx = "sqlx",
   },
   filename = {
     sketchybarrc = "bash",

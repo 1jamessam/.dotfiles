@@ -3,7 +3,7 @@
 -- Add any additional autocmds here
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown,sql,Dockerfile",
+  pattern = "markdown,sql,sqlx,Dockerfile",
   callback = function()
     vim.bo.shiftwidth = 4
     vim.bo.tabstop = 4
