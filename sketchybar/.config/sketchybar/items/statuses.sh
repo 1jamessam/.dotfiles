@@ -3,6 +3,14 @@
 WIFI_COLOR="$PEACH"
 SOUND_COLOR="$SAPPHIRE"
 
+battery=(
+  label.drawing=on
+  alias.color="$GREEN"
+  script="$PLUGIN_DIR/battery.sh"
+  icon.padding_left=0
+  label.padding_right=6
+)
+
 wifi=(
   alias.color="$WIFI_COLOR"
   # background.color="$WHITE"
@@ -36,7 +44,7 @@ sound_level=(
 
 sound_icon=(
   icon.drawing=on
-  icon.padding_left=0
+  icon.padding_left=-6
   label.drawing=off
   alias.color="$SOUND_COLOR"
 )
@@ -49,17 +57,16 @@ status_bracket=(
 )
 
 sketchybar \
+  --add alias "Control Center,Battery" right \
+  --rename "Control Center,Battery" battery \
+  --set battery "${battery[@]}" \
+  --subscribe battery system_stats power_source_change
+
+sketchybar \
   --add alias "Control Center,WiFi" right \
   --rename "Control Center,WiFi" wifi \
   --set wifi "${wifi[@]}" \
   --subscribe wifi wifi_change
-
-# sketchybar \
-#   --add alias "TextInputMenuAgent,Item-0" right \
-#   --add event input_change "AppleSelectedInputSourcesChangedNitification" \
-#   --rename "TextInputMenuAgent,Item-0" input_source \
-#   --set input_source "${input_source[@]}" \
-#   --subscribe input_source input_change system_woke
 
 sketchybar \
   --add item sound_level right \
