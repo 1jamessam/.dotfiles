@@ -4,7 +4,7 @@
 -- The `extension` entry short-circuits the lookup; the `filetype` entry is what the
 -- extension resolves to and also covers non-path lookups (statusline, buffer lists).
 return {
-  "echasnovski/mini.icons",
+  "nvim-mini/mini.icons",
   opts = {
     extension = { sqlx = "sqlx" },
     filetype = { sqlx = { glyph = "󰆼", hl = "MiniIconsAzure" } },
