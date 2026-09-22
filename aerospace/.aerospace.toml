@@ -90,10 +90,10 @@ preset = 'qwerty'
 [gaps]
 inner.horizontal = 10
 inner.vertical = 10
-outer.left = 10
-outer.bottom = 5
-outer.top = [{ monitor."built-in" = 10 }, { monitor."main" = 45 }, 50]
-outer.right = 10
+outer.left = 3
+outer.bottom = 4
+outer.top = [{ monitor."built-in" = 8 }, { monitor."main" = 40 }, 50]
+outer.right = 4
 
 [workspace-to-monitor-force-assignment]
 # 1 = ['secondary', 'main']
@@ -234,6 +234,10 @@ run = 'move-node-to-workspace 6'
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.stablyai.orca'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
