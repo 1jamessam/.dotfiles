@@ -13,3 +13,7 @@ vim.keymap.set("n", "<leader>fy", function()
   vim.fn.setreg("+", path, "c")
   vim.notify("Copied: " .. path)
 end, { desc = "Copy file path (relative)" })
+
+vim.keymap.set({ "n", "x" }, "<leader>gR", function()
+  Snacks.gitbrowse({ what = "repo" })
+end, { desc = "Git Browse Repo (open)" })
