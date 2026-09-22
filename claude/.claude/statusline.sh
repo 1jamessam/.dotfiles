@@ -65,7 +65,7 @@ if [ -n "$used" ]; then
   c="$GREEN"
   awk "BEGIN{exit !($used >= 50 && $used < 80)}" && c="$YELLOW"
   awk "BEGIN{exit !($used >= 80)}" && c="$RED"
-  ctx="$(printf '🧠 %b%s%% ctx%b' "$c" "$used" "$RST")"
+  ctx="$(printf '%b%s%% ctx%b' "$c" "$used" "$RST")"
   if [ -n "$used_tok" ] && [ -n "$size_tok" ]; then
     ctx+="$(printf ' %b(%s/%s)%b' "$DIM" "$(abbr "$used_tok")" "$(abbr "$size_tok")" "$RST")"
   fi
