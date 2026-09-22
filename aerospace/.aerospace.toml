@@ -23,6 +23,9 @@ exec-on-workspace-change = [
 # Start AeroSpace at login
 start-at-login = true
 
+# Reload the config automatically when this file changes (since 0.21.0)
+auto-reload-config = true
+
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
@@ -171,9 +174,9 @@ alt-6 = 'workspace 6'
 # alt-8 = 'workspace 8'
 # alt-9 = 'workspace 9'
 
-alt-q = 'exec-and-forget open -a /Applications/Brave\ Browser.app'
+alt-q = 'exec-and-forget open -a "/Applications/Brave Browser.app"'
 alt-w = 'exec-and-forget open -a /Applications/WezTerm.app'
-alt-d = 'exec-and-forget open -a /Applications/Visual\ Studio\ Code.app/'
+alt-d = 'exec-and-forget open -a "/Applications/Visual Studio Code.app"'
 alt-e = 'exec-and-forget open -a /Applications/Claude.app'
 alt-p = 'exec-and-forget open -a /Applications/Postman.app'
 alt-y = 'exec-and-forget open -a /Applications/Kaset.app'
