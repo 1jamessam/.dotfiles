@@ -44,7 +44,10 @@ Run these in parallel:
    ```
 
    3b. Local git scan across every checkout — catches feature-branch work. `--all` covers
-   every ref, not just the currently checked-out branch:
+   every ref, not just the currently checked-out branch. Filter the author by **email**, never
+   by the `james-rsp` name: local commits are authored under two identities — `james-rsp
+   <tanapats@rentspree.com>` and `James <tanapats@rentspree.com>` (the global git config) — and
+   a name filter silently drops every commit made under the `James` one:
    ```
    python3 - <<'PY'
    import os, glob, subprocess
@@ -60,7 +63,7 @@ Run these in parallel:
        if not os.path.isdir(os.path.join(repo, ".git")): continue
        try:
            out = subprocess.run(
-               ["git", "-C", repo, "log", "--all", "--source", "--author=james-rsp",
+               ["git", "-C", repo, "log", "--all", "--source", "--author=tanapats@rentspree.com",
                 f"--since={D}T00:00:00", f"--until={nxt}T00:00:00",
                 "--pretty=%h|%ad|%S|%s", "--date=format:%H:%M"],
                capture_output=True, text=True, timeout=20).stdout.strip()
