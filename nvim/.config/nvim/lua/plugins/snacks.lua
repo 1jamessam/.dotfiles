@@ -141,10 +141,23 @@ return {
         keys = {
           nav_l = {
             "<C-l>",
-            function()
+            ---@param self snacks.win
+            function(self)
               vim.schedule(function()
                 vim.cmd("wincmd p")
                 require("smart-splits").move_cursor_right()
+                -- The float stays drawn, but focus is now the editor window under it, so
+                -- coming back from Claude would type into the hidden editor. Refocus
+                -- lazygit when this Neovim pane regains focus.
+                vim.api.nvim_create_autocmd("FocusGained", {
+                  once = true,
+                  callback = function()
+                    if self:valid() then
+                      vim.api.nvim_set_current_win(self.win)
+                      vim.cmd.startinsert()
+                    end
+                  end,
+                })
               end)
             end,
             desc = "Go to Right Window",
