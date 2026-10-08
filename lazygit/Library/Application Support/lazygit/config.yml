@@ -1,0 +1,5 @@
+git:
+  diffRenderers:
+    - command: delta --dark --paging=never
+    - command: difft --color=always
+      type: extDiff

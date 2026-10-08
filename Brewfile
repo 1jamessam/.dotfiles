@@ -25,6 +25,10 @@ brew "docker-buildx"
 brew "fd"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# Diff that understands syntax
+brew "difftastic"
+# Syntax-highlighting pager for git, diff, and grep output
+brew "git-delta"
 # GNU compiler collection
 brew "gcc"
 # Cryptography and SSL/TLS Toolkit
