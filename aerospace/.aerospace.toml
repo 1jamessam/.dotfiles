@@ -104,8 +104,7 @@ outer.right = 4
 2 = 'main'
 3 = 'main'
 4 = 'main'
-8 = 'main'
-9 = 'main'
+6 = ['secondary', 'main']
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
