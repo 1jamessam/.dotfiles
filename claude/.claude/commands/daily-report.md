@@ -1,7 +1,7 @@
 ---
 model: claude-sonnet-4-6
 description: Generate daily work summary across rentspree org + local Claude sessions, save to Obsidian, post to Slack
-allowed-tools: Bash(gh:*), Bash(git:*), Bash(mkdir:*), Bash(date:*), Bash(python3:*), Write, mcp__claude_ai_Slack__slack_send_message
+allowed-tools: Bash(gh:*), Bash(git:*), Bash(mkdir:*), Bash(date:*), Bash(python3:*), Write, mcp__claude_ai_Slack__slack_send_message, mcp__claude_ai_Google_Calendar__list_events
 ---
 
 Generate a daily work summary for GitHub user `james-rsp` across the entire `rentspree` GitHub org.
@@ -10,11 +10,11 @@ Generate a daily work summary for GitHub user `james-rsp` across the entire `ren
 
 The date to report depends on the local time this command runs:
 
-- **Morning** (before 12:00 local) → report **yesterday's** activity. Running early usually means summing up the previous day's work before it's overwritten by fresh activity.
+- **Morning** (before 12:00 local) → report **yesterday's** activity — except on **Monday**, report the **previous Friday**. Running early usually means summing up the previous day's work before it's overwritten by fresh activity.
 - **Afternoon/evening** (12:00 local or later) → report **today's** activity.
 
 Every command below computes this itself with the snippet
-`H=$(date +%H); if [ "$H" -lt 12 ]; then D=$(date -v-1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi`
+`H=$(date +%H); B=1; [ "$(date +%u)" = 1 ] && B=3; if [ "$H" -lt 12 ]; then D=$(date -v-${B}d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi`
 so `$D` is the report date. Shell state does not persist between tool calls, so each command recomputes it. Use `$D` (not literally "today's date") everywhere — including the report title, filename, and any prose. When you print the header, note which day it is (e.g. "reporting yesterday" when running in the morning).
 
 ## Data Collection
@@ -23,13 +23,13 @@ Run these in parallel:
 
 1. **PRs opened on the report date**:
    ```
-   H=$(date +%H); if [ "$H" -lt 12 ]; then D=$(date -v-1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi
+   H=$(date +%H); B=1; [ "$(date +%u)" = 1 ] && B=3; if [ "$H" -lt 12 ]; then D=$(date -v-${B}d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi
    gh search prs --author james-rsp --owner rentspree --created "$D..$D" --json repository,title,number,state,url --limit 50
    ```
 
 2. **PRs merged on the report date** (may have been opened earlier):
    ```
-   H=$(date +%H); if [ "$H" -lt 12 ]; then D=$(date -v-1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi
+   H=$(date +%H); B=1; [ "$(date +%u)" = 1 ] && B=3; if [ "$H" -lt 12 ]; then D=$(date -v-${B}d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi
    gh api search/issues --method GET -f q="author:james-rsp org:rentspree is:pr is:merged merged:$D..$D" -f per_page=50 --jq '.items[] | {title, number, html_url, repository_url}'
    ```
 
@@ -39,7 +39,7 @@ Run these in parallel:
    every commit still living on a feature branch — which on a normal working day is most of
    them. Treat an empty result here as "nothing landed on main", never as "no work happened".
    ```
-   H=$(date +%H); if [ "$H" -lt 12 ]; then D=$(date -v-1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi
+   H=$(date +%H); B=1; [ "$(date +%u)" = 1 ] && B=3; if [ "$H" -lt 12 ]; then D=$(date -v-${B}d +%Y-%m-%d); else D=$(date +%Y-%m-%d); fi
    gh api search/commits --method GET -f q="author:james-rsp org:rentspree committer-date:$D..$D" -f per_page=50 --jq '.items[] | {message: .commit.message, repo: .repository.full_name, sha: .sha[:7], url: .html_url}'
    ```
 
@@ -54,7 +54,7 @@ Run these in parallel:
    from datetime import datetime, timedelta
 
    now = datetime.now().astimezone()
-   day_offset = 1 if now.hour < 12 else 0
+   day_offset = (3 if now.weekday() == 0 else 1) if now.hour < 12 else 0
    D = (now - timedelta(days=day_offset)).strftime("%Y-%m-%d")
    nxt = (now - timedelta(days=day_offset-1)).strftime("%Y-%m-%d")
 
@@ -84,12 +84,12 @@ Run these in parallel:
 4. **PRs reviewed or commented on the report date** — review work is real work and produces
    no commits of your own. The window is exclusive at the top, so use the day *after* `$D`:
    ```
-   H=$(date +%H); if [ "$H" -lt 12 ]; then D=$(date -v-1d +%Y-%m-%d); N=$(date -v-1d -v+1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); N=$(date -v+1d +%Y-%m-%d); fi
+   H=$(date +%H); B=1; [ "$(date +%u)" = 1 ] && B=3; if [ "$H" -lt 12 ]; then D=$(date -v-${B}d +%Y-%m-%d); N=$(date -v-${B}d -v+1d +%Y-%m-%d); else D=$(date +%Y-%m-%d); N=$(date -v+1d +%Y-%m-%d); fi
    gh api search/issues --method GET -f q="commenter:james-rsp org:rentspree is:pr updated:$D..$N" -f per_page=30 --jq '.items[] | "\(.repository_url|split("/")|last) #\(.number) [\(.state)] \(.title)"'
    ```
    Exclude PRs you authored yourself — those belong under PRs Opened / Merged.
 
-5. **Claude sessions active on the report date**: scan the local Claude session logs for every user prompt sent on the report date (the machine's local day, shifted to yesterday when running in the morning — same rule as above), across all projects — including sessions started on earlier days that had activity on that day. Run:
+5. **Claude sessions active on the report date**: scan the local Claude session logs for every user prompt sent on the report date (the machine's local day, shifted to yesterday (Friday on Mondays) when running in the morning — same rule as above), across all projects — including sessions started on earlier days that had activity on that day. Run:
    ```
    python3 - <<'PY'
    import json, os, glob
@@ -98,10 +98,10 @@ Run these in parallel:
    ROOT = os.path.expanduser("~/.claude/projects")
    # Report-date -> UTC window. Session timestamps are UTC (ISO-8601 Z);
    # derive the window from the machine's local zone so this is not hardcoded.
-   # Morning (before 12:00 local) reports yesterday; afternoon reports today.
+   # Morning (before 12:00 local) reports yesterday (Friday on Mondays); afternoon reports today.
    local_tz = datetime.now().astimezone().tzinfo
    now_local = datetime.now(local_tz)
-   day_offset = 1 if now_local.hour < 12 else 0
+   day_offset = (3 if now_local.weekday() == 0 else 1) if now_local.hour < 12 else 0
    start_local = now_local.replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=day_offset)
    end_local = start_local + timedelta(days=1)
    START, END = start_local.astimezone(timezone.utc), end_local.astimezone(timezone.utc)
@@ -158,6 +158,18 @@ Run these in parallel:
    ```
    Read the grouped prompts and distill each project into 1-2 lines of what was actually accomplished (not a verbatim prompt dump). Project dir names map to repos: strip the `-Users-tanapats-jclocal-Developer-` prefix.
 
+6. **Meetings on the report date**: call `mcp__claude_ai_Google_Calendar__list_events` on the
+   primary calendar with `startTime` = `$D`T00:00:00 and `endTime` = the next day T00:00:00
+   (local offset, e.g. `+07:00` — get it from `date +%z`), `orderBy: "startTime"`, and
+   `eventType: ["DEFAULT", "OUT_OF_OFFICE"]` (leave out focus time and working location).
+   Keep only events your own attendee entry (`self: true`) marks `accepted` or
+   `tentative` — drop declined and unanswered (`needsAction`) invites. Also drop events
+   with `transparency: "transparent"` (shown as free — placeholders like maintenance
+   windows), events where you are the only attendee (personal blocks), and all-day
+   events that aren't out-of-office. List each meeting's start–end
+   time (local, HH:MM), title, and whether you organized it. Never copy meeting
+   descriptions or attendee emails into the report.
+
 ## Format
 
 Create a markdown report:
@@ -190,8 +202,13 @@ Create a markdown report:
 |----------------|---------------|
 | ... | ... |
 
+## Meetings
+| Time | Meeting | Role |
+|------|---------|------|
+| ... | ... | organizer / attendee |
+
 ## Summary
-{2-3 sentences grouping work into themes — e.g., infra, features, bug fixes, reviews. Draw on both the GitHub activity and the Claude sessions.}
+{2-3 sentences grouping work into themes — e.g., infra, features, bug fixes, reviews. Draw on the GitHub activity, the Claude sessions, and meeting load.}
 ```
 
 If a section has no results, write "No activity" instead of a table. The Claude Sessions section captures work-in-progress that may not have produced a commit or PR yet, so include it even when it overlaps with the GitHub sections.

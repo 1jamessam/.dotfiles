@@ -132,6 +132,28 @@ return {
         },
       },
     },
+    -- <C-l> from the lazygit float: term_nav passes the raw key to floats, so lazygit
+    -- swallowed it and you couldn't reach the Claude pane. Drop to the editor window
+    -- underneath first (smart-splits resolves directions from a float unreliably), then
+    -- let smart-splits move right / cross into WezTerm via at_edge as usual.
+    lazygit = {
+      win = {
+        keys = {
+          nav_l = {
+            "<C-l>",
+            function()
+              vim.schedule(function()
+                vim.cmd("wincmd p")
+                require("smart-splits").move_cursor_right()
+              end)
+            end,
+            desc = "Go to Right Window",
+            expr = false, -- deep-merged over terminal.win.keys.nav_l, which sets expr
+            mode = "t",
+          },
+        },
+      },
+    },
     picker = {
       sources = {
         files = {
