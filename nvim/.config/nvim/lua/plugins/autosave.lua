@@ -1,21 +1,11 @@
 return {
-  "Pocco81/auto-save.nvim",
+  "okuuva/auto-save.nvim",
   opts = {
-    -- Keep TextChanged coverage (every edit is eventually saved) but batch rapid
-    -- edits into one write. The default 135ms fires a save on almost every
-    -- keystroke-pause, and each save makes basedpyright re-analyze and pop a
-    -- noice progress toast. 1s collapses a burst of edits into a single save.
+    -- Batch rapid edits into one write: each save makes basedpyright re-analyze
+    -- and pop a noice progress toast. Pinned explicitly (it's also the default).
     debounce_delay = 1000,
     condition = function(buf)
-      local fn = vim.fn
-      local utils = require("auto-save.utils.data")
-
-      -- First check the default conditions
-      if
-        not (
-          fn.getbufvar(buf, "&modifiable") == 1 and utils.not_in(fn.getbufvar(buf, "&filetype"), {})
-        )
-      then
+      if not vim.bo[buf].modifiable then
         return false
       end
 
@@ -39,8 +29,7 @@ return {
       end
 
       -- Exclude by buffer type (claudecode diff buffers use "acwrite")
-      local buftype = fn.getbufvar(buf, "&buftype")
-      if buftype == "acwrite" then
+      if vim.bo[buf].buftype == "acwrite" then
         return false
       end
 
