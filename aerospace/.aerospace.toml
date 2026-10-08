@@ -262,10 +262,6 @@ if.app-id = 'com.sertacozercan.Kaset'
 run = 'move-node-to-workspace 6'
 
 [[on-window-detected]]
-if.app-id = 'org.jeffvli.feishin'
-run = 'move-node-to-workspace 6'
-
-[[on-window-detected]]
 if.app-id = 'com.apple.Safari'
 run = 'move-node-to-workspace 6'
 
