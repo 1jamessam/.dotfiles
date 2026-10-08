@@ -9,9 +9,6 @@ return {
       typescript = { "prettierd" },
       typescriptreact = { "prettierd" },
     },
-    linters_by_ft = {
-      sql = { "sqlfluff" },
-    },
     formatters = {
       stylua = {
         prepend_args = { "--config-path", vim.fn.expand("~/.config/nvim/stylua.toml") },

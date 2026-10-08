@@ -2,46 +2,23 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown,sql,sqlx,Dockerfile",
-  callback = function()
-    vim.bo.shiftwidth = 4
-    vim.bo.tabstop = 4
-    vim.bo.expandtab = true
-  end,
-})
+local indent_by_ft = {
+  markdown = 4,
+  sql = 4,
+  sqlx = 4,
+  dockerfile = 4,
+  corefile = 4,
+  xml = 2,
+}
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "xml",
-  callback = function()
-    vim.bo.shiftwidth = 2
-    vim.bo.tabstop = 2
-    vim.bo.expandtab = true
-  end,
-})
-
-vim.filetype.add({
-  filename = {
-    [".sqlfluff"] = "dosini",
-    ["Corefile"] = "corefile",
-  },
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "corefile",
-  callback = function()
-    vim.bo.shiftwidth = 4
-    vim.bo.tabstop = 4
-    vim.bo.expandtab = true
-  end,
-})
-
--- Prepend a shellcheck directive to new .env files so SC2034 (unused variable)
--- doesn't fire on plain assignments.
-vim.api.nvim_create_autocmd("BufNewFile", {
-  pattern = { "*.env", ".env", ".env.*" },
-  callback = function()
-    vim.api.nvim_buf_set_lines(0, 0, 0, false, { "# shellcheck disable=SC2034", "" })
+  group = vim.api.nvim_create_augroup("user_indent", { clear = true }),
+  pattern = vim.tbl_keys(indent_by_ft),
+  callback = function(args)
+    local width = indent_by_ft[args.match]
+    vim.bo[args.buf].shiftwidth = width
+    vim.bo[args.buf].tabstop = width
+    vim.bo[args.buf].expandtab = true
   end,
 })
 
@@ -61,49 +38,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
-
--- Re-add the :LspStart/:LspStop/:LspRestart wrappers. nvim-lspconfig's own
--- command file self-disables on Nvim 0.12+ (it defers to the native vim.lsp
--- API), so these drive vim.lsp.enable directly.
-local function active_client_names(args)
-  if #args > 0 then
-    return args
-  end
-  return vim
-    .iter(vim.lsp.get_clients())
-    :map(function(client)
-      return client.name
-    end)
-    :totable()
-end
-
-vim.api.nvim_create_user_command("LspStart", function(info)
-  vim.lsp.enable(info.fargs)
-end, { desc = "Enable and launch a language server", nargs = "?" })
-
-vim.api.nvim_create_user_command("LspStop", function(info)
-  for _, name in ipairs(active_client_names(info.fargs)) do
-    vim.lsp.enable(name, false)
-    for _, client in ipairs(vim.lsp.get_clients({ name = name })) do
-      client:stop(true)
-    end
-  end
-end, { desc = "Disable and stop the given client(s)", nargs = "?", bang = true })
-
-vim.api.nvim_create_user_command("LspRestart", function(info)
-  local names = active_client_names(info.fargs)
-  for _, name in ipairs(names) do
-    vim.lsp.enable(name, false)
-    for _, client in ipairs(vim.lsp.get_clients({ name = name })) do
-      client:stop(true)
-    end
-  end
-  vim.defer_fn(function()
-    for _, name in ipairs(names) do
-      vim.lsp.enable(name)
-    end
-  end, 300)
-end, { desc = "Restart the given client(s)", nargs = "?" })
 
 -- trouble.nvim's lualine symbol breadcrumb emits its trailing separator with no
 -- highlight, so that cell falls back to StatusLine (#16161d under kanagawa) and

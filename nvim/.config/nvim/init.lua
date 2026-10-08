@@ -1,6 +1,5 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
-vim.g.tmux_navigator_no_mappings = 1
 
 vim.g.autoformat = false
 vim.o.guifont = "JetbrainsMono Nerd Font:h12"
@@ -12,12 +11,13 @@ if vim.g.neovide then
   vim.g.neovide_remember_window_size = true
 end
 
--- Dataform
 vim.filetype.add({
   extension = {
-    sqlx = "sqlx",
+    sqlx = "sqlx", -- Dataform
   },
   filename = {
     sketchybarrc = "bash",
+    [".sqlfluff"] = "dosini",
+    ["Corefile"] = "corefile",
   },
 })
