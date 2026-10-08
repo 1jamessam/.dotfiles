@@ -17,3 +17,17 @@ end, { desc = "Copy file path (relative)" })
 vim.keymap.set({ "n", "x" }, "<leader>gR", function()
   Snacks.gitbrowse({ what = "repo" })
 end, { desc = "Git Browse Repo (open)" })
+
+vim.keymap.set("n", "<leader>gp", function()
+  vim.system({ "gh", "pr", "view", "--web" }, { text = true }, function(res)
+    if res.code ~= 0 then
+      vim.schedule(function()
+        vim.notify(vim.trim(res.stderr), vim.log.levels.WARN)
+      end)
+    end
+  end)
+end, { desc = "Open PR for current branch" })
+
+vim.keymap.set("n", "<leader>gP", function()
+  Snacks.picker.gh_pr()
+end, { desc = "GitHub Pull Requests (open)" })
