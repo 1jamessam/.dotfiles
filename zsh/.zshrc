@@ -5,14 +5,18 @@
 typeset -U path PATH
 
 # Regenerate a cached init/completion script only when it's missing or older
-# than its source binary, then source it. Avoids a subshell on every startup.
-cache_source() {
+# than its source binary. Avoids a subshell on every startup.
+cache_gen() {
   local cache=$1 bin=$2; shift 2
   local binpath=$(command -v "$bin")
   if [[ -n $binpath && ( ! -f $cache || $cache -ot $binpath ) ]]; then
     "$@" > $cache
   fi
-  [[ -f $cache ]] && source $cache
+}
+# Same, then source it
+cache_source() {
+  cache_gen "$@"
+  [[ -f $1 ]] && source $1
 }
 
 # Homebrew
@@ -35,13 +39,18 @@ source ~/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Zsh
 ## Zsh Completion System — only rebuild dump once per day
-fpath=($HOME/.docker/completions ~/.zfunc $fpath)
+# ~/.zsh/completions holds cached `#compdef` files, autoloaded on first <Tab>
+fpath=($HOME/.docker/completions ~/.zsh/completions $fpath)
 autoload -U compinit
-if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-  compinit
-else
-  compinit -C
-fi
+# Glob qualifiers don't expand inside [[ ]], so match the stale dump via args.
+# touch: compinit only rewrites the dump when fpath changes.
+() {
+  if (( $# )); then
+    compinit && touch $1
+  else
+    compinit -C
+  fi
+} ${ZDOTDIR:-$HOME}/.zcompdump(N.mh+24)
 _comp_options+=(globdots) # with hidden files
 ## Zsh config
 setopt interactivecomments

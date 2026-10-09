@@ -12,5 +12,6 @@ pyenv() {
 
 # UV python
 source "$HOME/.local/bin/env"
-# UV completions — regenerate only when missing or older than the uv binary
-cache_source ~/.zsh/_uv_completion uv uv generate-shell-completion zsh
+# UV completions — regenerate only when missing or older than the uv binary.
+# Lives in fpath (not sourced): the 550KB script cost ~30ms per startup.
+cache_gen ~/.zsh/completions/_uv uv uv generate-shell-completion zsh
