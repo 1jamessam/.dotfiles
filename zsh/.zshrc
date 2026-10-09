@@ -68,13 +68,6 @@ bindkey "^[[B" down-line-or-beginning-search
 
 ###################################################################
 
-# Java
-# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-###################################################################
-
 # Homebrew
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
