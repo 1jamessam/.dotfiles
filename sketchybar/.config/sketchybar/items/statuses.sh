@@ -7,6 +7,7 @@ battery=(
   label.drawing=on
   alias.color="$GREEN"
   script="$PLUGIN_DIR/battery.sh"
+  padding_left=-6
   icon.padding_left=0
   label.padding_right=6
 )
@@ -36,6 +37,7 @@ sound_level=(
   # sound_icon is added after sound_level, which puts the icon to its LEFT, so the
   # number anchors left to stay against the icon rather than drifting toward the date.
   label.align=left
+  padding_left=-6
   label.padding_left=0
   label.padding_right=10
   script="$PLUGIN_DIR/sound.sh"
