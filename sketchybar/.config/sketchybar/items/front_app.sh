@@ -7,7 +7,7 @@ front_app=(
   display=active
   script="$PLUGIN_DIR/front_app.sh"
   background.drawing=off
-  padding_left=4
+  padding_left=0
 )
 chevron=(
   icon=
