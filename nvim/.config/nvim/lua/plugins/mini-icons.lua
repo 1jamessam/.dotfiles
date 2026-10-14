@@ -6,7 +6,11 @@
 return {
   "nvim-mini/mini.icons",
   opts = {
-    extension = { sqlx = "sqlx" },
-    filetype = { sqlx = { glyph = "󰆼", hl = "MiniIconsAzure" } },
+    extension = { sqlx = "sqlx", bru = "bruno" },
+    filetype = {
+      sqlx = { glyph = "󰆼", hl = "MiniIconsAzure" },
+      -- Bruno API client .bru files: dog glyph (Bruno's mascot) in its brand orange.
+      bruno = { glyph = "󰩃", hl = "MiniIconsOrange" },
+    },
   },
 }
