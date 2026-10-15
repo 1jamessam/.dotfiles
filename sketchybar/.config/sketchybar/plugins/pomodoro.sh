@@ -9,6 +9,26 @@ STATE="${TMPDIR:-/tmp}/sketchybar_pomodoro"
 # One line per work session: "<end epoch> <focused seconds> <completed 0|1>".
 # The only record of history; every count and total is derived from it.
 LOG="$HOME/.local/share/sketchybar/pomodoro.log"
+# Focus length picked on the menu slider; also used when left-click starts a session.
+WORK_MIN_FILE="$HOME/.local/share/sketchybar/pomodoro.work_min"
+# The slider only stops at these lengths (ascending); the track runs from the first to the last.
+CHOICES=(15 25 45 60)
+MIN_WORK=${CHOICES[0]} MAX_WORK=${CHOICES[${#CHOICES[@]} - 1]}
+
+nearest_choice() { # $1 = minutes; prints the closest of CHOICES
+  local best=${CHOICES[0]} c
+  for c in "${CHOICES[@]}"; do
+    (((${1} - c) ** 2 < (${1} - best) ** 2)) && best=$c
+  done
+  echo "$best"
+}
+
+# Only the mouse paths need WORK_MIN, so the every-second tick skips this read.
+load_work_min() {
+  read -r WORK_MIN 2>/dev/null <"$WORK_MIN_FILE"
+  # Snap too, so a length saved before the choices changed still lands on one.
+  WORK_MIN=$(nearest_choice "${WORK_MIN:-${POMODORO_WORK_MIN:-25}}")
+}
 
 # State: <phase: idle|work|break> <running: 0|1> <end epoch if running, else seconds left>
 #        <length of the current session in seconds>
@@ -62,33 +82,36 @@ notify() {
 
 close_menu() { sketchybar --set $ITEM popup.drawing=off; }
 
-open_menu() {
-  sketchybar --set pomodoro.stat.today label="$(stat_row Today "$day_start")" \
-    --set pomodoro.stat.week label="$(stat_row 'This week' "$week_start")" \
-    --set $ITEM popup.drawing=on
+# Point the slider knob at WORK_MIN and show it on the Start row.
+show_duration() {
+  sketchybar --set pomodoro.slider slider.percentage=$(((WORK_MIN - MIN_WORK) * 100 / (MAX_WORK - MIN_WORK))) \
+    --set pomodoro.start label="Start ${WORK_MIN} min"
 }
 
-# Hover over the item or its menu: the latest enter/exit writes a fresh token, and a
-# delayed action only fires if no newer hover event replaced that token in the meantime.
-# Entering opens after OPEN_DELAY; leaving closes after a short grace period, so moving
-# from the item into its menu (or between menu rows) doesn't close it.
-OPEN_DELAY=1
-CLOSE_DELAY=0.4
-HOVER="$STATE.hover"
-after_hover() { # $1 = delay, $2 = command; runs it only if hover hasn't changed by then
-  local token="$SENDER $RANDOM$RANDOM"
-  echo "$token" >"$HOVER"
-  (sleep "$1" && [ "$(cat "$HOVER")" = "$token" ] && $2) >/dev/null 2>&1 &
+# Refresh the stats and slider, then show or hide the menu.
+toggle_menu() {
+  load_work_min
+  show_duration
+  sketchybar --set pomodoro.stat.today label="$(stat_row Today "$day_start")" \
+    --set pomodoro.stat.week label="$(stat_row 'This week' "$week_start")" \
+    --set $ITEM popup.drawing=toggle
 }
 
 case "$SENDER:$NAME" in
-mouse.exited.global:*) echo >"$HOVER" && close_menu && exit 0 ;;
-mouse.entered:*) after_hover $OPEN_DELAY open_menu && exit 0 ;;
-mouse.exited:*) after_hover $CLOSE_DELAY close_menu && exit 0 ;;
-mouse.clicked:pomodoro.preset.*)
+mouse.exited.global:*) close_menu && exit 0 ;;
+mouse.clicked:pomodoro.slider)
+  # Map 0-100% onto MIN_WORK..MAX_WORK, then snap to the nearest choice; show_duration
+  # moves the knob onto it.
+  WORK_MIN=$(nearest_choice $((MIN_WORK + ${PERCENTAGE:-0} * (MAX_WORK - MIN_WORK) / 100)))
+  mkdir -p "${WORK_MIN_FILE%/*}" && echo "$WORK_MIN" >"$WORK_MIN_FILE"
+  show_duration
+  exit 0
+  ;;
+mouse.clicked:pomodoro.start)
   close_menu
   log_abandoned
-  start work $((${NAME##*.} * 60))
+  load_work_min
+  start work $((WORK_MIN * 60))
   ;;
 mouse.clicked:pomodoro.reset)
   close_menu
@@ -97,9 +120,11 @@ mouse.clicked:pomodoro.reset)
   ;;
 mouse.clicked:$ITEM)
   if [ "$BUTTON" = "right" ]; then
-    exit 0 # the menu opens on hover now
+    toggle_menu
+    exit 0
   elif [ "$phase" = idle ]; then
-    start work $((${POMODORO_WORK_MIN:-25} * 60))
+    load_work_min
+    start work $((WORK_MIN * 60))
   elif [ "$running" = 1 ]; then
     running=0 value=$((value - now)) # pause: store seconds left
   else
