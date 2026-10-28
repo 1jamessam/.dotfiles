@@ -6,6 +6,28 @@ return {
     -- claudecode still owns the IDE side: the WebSocket server, the lockfile, and
     -- the selection/diff/diagnostics integration all live in Neovim regardless of
     -- where the CLI window is.
+    init = function()
+      -- Hopping in from the Claude pane (<C-h>) fires none of the selection-tracking
+      -- events (CursorMoved/BufEnter/ModeChanged), and the tracker dedupes unchanged
+      -- selections, so Claude never learns the current file until you switch buffers.
+      -- Re-broadcast on FocusGained. Guarded on package.loaded so it never loads the
+      -- plugin by itself.
+      vim.api.nvim_create_autocmd("FocusGained", {
+        callback = function()
+          local sel = package.loaded["claudecode.selection"]
+          if not (sel and sel.state.tracking_enabled and sel.server) then
+            return
+          end
+          -- update_selection() broadcasts only on change; if it didn't, resend as-is.
+          local before = sel.get_latest_selection()
+          sel.update_selection()
+          local latest = sel.get_latest_selection()
+          if latest and latest == before then
+            sel.send_selection_update(latest)
+          end
+        end,
+      })
+    end,
     opts = function()
       -- Drop the cached module so `:Lazy reload claudecode.nvim` picks up edits to
       -- lua/claude_wezterm.lua (a plain require would hand back the stale copy).
