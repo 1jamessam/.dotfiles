@@ -88,7 +88,6 @@ sketchybar --update
 # side sometimes renders empty until `brew services restart sketchybar`.
 (
   sleep 5
-  sketchybar --set battery    alias.name="Control Center,Battery" \
-             --set sound_icon alias.name="Control Center,Sound" \
+  sketchybar --set sound_icon alias.name="Control Center,Sound" \
              --set wifi       alias.name="Control Center,WiFi"
 ) &

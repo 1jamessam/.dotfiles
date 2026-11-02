@@ -5,9 +5,8 @@ SOUND_COLOR="$SAPPHIRE"
 
 battery=(
   label.drawing=on
-  alias.color="$GREEN"
   script="$PLUGIN_DIR/battery.sh"
-  padding_left=-6
+  padding_left=2
   icon.padding_left=0
   label.padding_right=6
 )
@@ -59,8 +58,7 @@ status_bracket=(
 )
 
 sketchybar \
-  --add alias "Control Center,Battery" right \
-  --rename "Control Center,Battery" battery \
+  --add item battery right \
   --set battery "${battery[@]}" \
   --subscribe battery system_stats power_source_change
 
