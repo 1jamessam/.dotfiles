@@ -53,6 +53,8 @@ brew "kubernetes-cli"
 brew "lazygit"
 # Secure hashing function
 brew "libb2"
+# Control and observe media playback from the command-line
+brew "media-control"
 # MCP server for databases
 brew "mcp-toolbox"
 # Run a Kubernetes cluster locally

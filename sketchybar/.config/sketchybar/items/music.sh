@@ -1,8 +1,8 @@
 #!/bin/bash
 
 music=(
-  script="$PLUGIN_DIR/kaset.sh"
-  click_script="osascript -e 'tell application \"Kaset\" to playpause' && $PLUGIN_DIR/kaset.sh"
+  script="$PLUGIN_DIR/now_playing.sh"
+  click_script="media-control toggle-play-pause"
   label.padding_right=8
   label.font.size=17
   label.font.style=Bold
@@ -18,18 +18,17 @@ music=(
   icon.padding_left=36
   icon.padding_right=8
   label.align=left
-  update_freq=30
   label.max_chars=40
   scroll_texts=on
 )
 
 music_artwork=(
-  click_script="osascript -e 'tell application \"Kaset\" to playpause'"
+  click_script="media-control toggle-play-pause"
   label.padding_right=8
   padding_right=16
   display=1
   label=""
-  # width and background.image.scale are set by kaset.sh, per artwork's real
+  # width and background.image.scale are set by now_playing.sh, per artwork's real
   # dimensions; this is just the placeholder slot before the first fetch.
   width=44
   background.image.corner_radius=8
@@ -44,9 +43,15 @@ music_all=(
   background.drawing=on
 )
 
+# Push Now Playing changes instead of polling; the listener replaces any
+# previous instance itself.
+sketchybar --add event now_playing_change
+"$PLUGIN_DIR/now_playing_listener.sh" &
+
 sketchybar \
   --add item music center \
-  --set music "${music[@]}"
+  --set music "${music[@]}" \
+  --subscribe music now_playing_change
 sketchybar \
   --add item music-artwork center \
   --set music-artwork "${music_artwork[@]}"
