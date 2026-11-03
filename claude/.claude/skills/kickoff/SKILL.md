@@ -23,7 +23,7 @@ Call `EnterPlanMode`. Explore the repo the way the project's `CLAUDE.md` says to
 
 - **Goal** — the card's ask, and its acceptance criteria as checkable bullets.
 - **Approach** — the design, the files it touches, and why this way.
-- **Tasks** — an ordered list of **tracer bullets**: each task a thin, independently verifiable slice with its own done-check. Mark any step only the user can do (a grant, a console change, a sign-off) as **human**.
+- **Tasks** — an ordered list of **tracer bullets**: each task a thin, independently verifiable slice with its own done-check. Mark any step only the user can do (a grant, a console change, a sign-off) as **human**. Give each task `Depends on:` (task numbers, or `none`).
 - **Branch** — `<type>/<KEY>-<kebab-title>`, type ∈ `feat|fix|tech|revert`, title from the card summary, ≤ 6 words.
 - **Risks / open questions.**
 
@@ -42,7 +42,7 @@ Leave out your reasoning, the options you rejected and the parts you're unsure o
 > You are reviewing an implementation plan with fresh eyes. Read the plan file and the Jira card below, then check the plan against the actual code in the repo. Report findings only — do not rewrite the plan. For each finding give: the plan section, what is wrong or missing, the evidence (`file:line` or the card's words), and a severity (blocker / should-fix / nit). Check:
 > 1. Every acceptance criterion maps to a task whose done-check would prove it.
 > 2. Every claim the plan makes about the code (a file, function, config, convention) is true in the repo.
-> 3. Each task is a thin slice that can be verified on its own, and the order works.
+> 3. Each task is a thin slice that can be verified on its own, and the order works. Each `Depends on:` is correct and complete.
 > 4. Assumptions the plan relies on but never states, and anything the card asks for that the plan dropped.
 > 5. Conventions in the repo's `CLAUDE.md` / contributor docs the plan would break.
 > If a check passes, say so in one line. End with the count of findings by severity.
@@ -64,7 +64,7 @@ Otherwise `mcp__kanzo__create_project`:
 
 One `mcp__kanzo__create_task` per plan task, in plan order, `project` = the slug:
 - `title`: imperative, short. Prefix with its order (`1. …`) so the board reads in sequence.
-- `description` (Markdown): what to do, the done-check, and `Jira: <card URL>`.
+- `description` (Markdown): what to do, the done-check, `Depends on:`, and `Jira: <card URL>`.
 - `human: true` for the human tasks.
 - `tags`: the key, plus one area tag if useful.
 
@@ -89,4 +89,4 @@ git worktree add .claude/worktrees/<KEY-lower> -b <branch> origin/<default-branc
 
 Then `EnterWorktree` with `path` set to that directory. If the branch already exists, stop and ask rather than reuse or reset it.
 
-Run the repo's one-time setup only if the project's `CLAUDE.md` calls for it in a fresh checkout. Then take the first non-human task: `mcp__kanzo__update_task` it to `doing`, and build it. Keep the board current as you go: a comment on what each task changed, `review` when a task is finished or blocked.
+Run the repo's one-time setup only if the project's `CLAUDE.md` calls for it in a fresh checkout. Then take the first non-human task: `mcp__kanzo__update_task` it to `doing`, and build it. Work the tasks in order; skip a human task, but don't start a task that depends on one until the user confirms it is done. Keep the board current as you go: a comment on what each task changed, `review` when a task is finished or blocked.
