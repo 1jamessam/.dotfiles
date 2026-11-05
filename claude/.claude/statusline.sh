@@ -51,6 +51,10 @@ if [ -n "$cwd" ]; then
     "$HOME"/*) d="~${d#"$HOME"}" ;;
   esac
   line1="$(printf '📁 %b%b%s%b' "$B" "$BLUE" "$d" "$RST")"
+  # Git branch (short SHA when detached)
+  br=$(git -C "$cwd" --no-optional-locks branch --show-current 2>/dev/null)
+  [ -z "$br" ] && br=$(git -C "$cwd" --no-optional-locks rev-parse --short HEAD 2>/dev/null)
+  [ -n "$br" ] && line1+="$(printf '  🌿 %b%s%b' "$GREEN" "$br" "$RST")"
 fi
 
 # Model (with effort level alongside)
